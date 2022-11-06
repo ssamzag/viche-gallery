@@ -8,7 +8,7 @@ import java.util.*
 
 @Component
 class FileStore(
-    @Value("\${file.dir}")
+    @Value("\${imageFile.dir}")
     private val fileDir: String
 ) {
     fun fullPath(fileName: String): String {

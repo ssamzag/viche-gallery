@@ -1,5 +1,6 @@
 imageFile:
   dir: /Users/ssamzag/Documents/upload/
+  url: /api/images/
 
 spring:
   h2:

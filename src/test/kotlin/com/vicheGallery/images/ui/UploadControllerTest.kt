@@ -1,4 +1,4 @@
-package com.vicheGallery.images.controller
+package com.vicheGallery.images.ui
 
 import org.junit.jupiter.api.Test
 

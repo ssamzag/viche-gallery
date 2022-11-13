@@ -6,10 +6,11 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
+    kotlin("kapt") version "1.6.21"
 }
 
 group = "com.vicheGallery"
-version = "0.0.1-SNAPSHOT"
+version = "1.5.3.Final"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {
@@ -37,6 +38,11 @@ dependencies {
 //    annotationProcessor("org.project-lombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 //    testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
+
 }
 
 tasks.withType<KotlinCompile> {

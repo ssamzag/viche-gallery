@@ -1,10 +1,12 @@
 package com.vicheGallery.images.domain
 
 import com.vicheGallery.BaseEntity
+import com.vicheGallery.work.domain.Work
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.ManyToOne
 
 @Entity
 class ImageFile(
@@ -13,5 +15,5 @@ class ImageFile(
     val id: Long? = null,
     var storeImageName: String,
     val uploadImageName: String,
-    val uploadBy: String
+    val uploadBy: String,
 ) : BaseEntity()

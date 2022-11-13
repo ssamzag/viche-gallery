@@ -1,4 +1,5 @@
 package com.vicheGallery.work.dto
 
-class Workattachments {
-}
+data class WorkAttachments (
+    val storedName:List<String>
+)

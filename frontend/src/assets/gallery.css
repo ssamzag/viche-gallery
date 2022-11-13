@@ -1,0 +1,403 @@
+
+.gallery-container .gallery {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.gallery-container .gallery .project {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 50%;
+    position: relative;
+    background: url(https://www.artstation.com//assets/placeholders/asset/small_square-63fe1b6933170dad054a48dc3c8b51af.png);
+    background-size: cover;
+    /*width: 33.33333333%*/
+    width: 50%
+}
+
+@media (min-width: 640px) {
+    .gallery-container .gallery .project {
+        width: 33.33333333%
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-container .gallery .project {
+        width:25%;
+    }
+}
+
+@media (min-width: 992px) {
+    .gallery-container .gallery .project {
+
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery-container .gallery .project {
+
+    }
+}
+
+@media (min-width: 1440px) {
+    .gallery-container .gallery .project {
+        /*width: 14.285714286%*/
+    }
+}
+
+@media (min-width: 1680px) {
+    .gallery-container .gallery .project {
+        width: 12.5%
+    }
+}
+
+@media (min-width: 1920px) {
+    .gallery-container .gallery .project {
+        width: 11.11111111111111%
+    }
+}
+
+@media (min-width: 2200px) {
+    .gallery-container .gallery .project {
+        width: 10%
+    }
+}
+
+@media (min-width: 2560px) {
+    .gallery-container .gallery .project {
+        width: 8.33333333333333%
+    }
+}
+
+@media (min-width: 3000px) {
+    .gallery-container .gallery .project {
+        width: 7.14285714285714%
+    }
+}
+
+.gallery-container .gallery .project:before {
+    content: "";
+    display: block;
+    margin-top: 100%
+}
+
+@media (min-width: 640px) {
+    .gallery-container .gallery .project.artist-profile {
+        /* width:33.333333%; */
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-container .gallery .project.artist-profile {
+        /* width:25%; */
+    }
+}
+
+@media (min-width: 992px) {
+    .gallery-container .gallery .project.artist-profile {
+        /* width:25%; */
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery-container .gallery .project.artist-profile {
+        /* width:20%; */
+    }
+}
+
+@media (min-width: 1680px) {
+    .gallery-container .gallery .project.artist-profile {
+        width: 16.666667%
+    }
+}
+
+@media (min-width: 1920px) {
+    .gallery-container .gallery .project.artist-profile {
+        width: 14.285714286%
+    }
+}
+
+@media (min-width: 2200px) {
+    .gallery-container .gallery .project.artist-profile {
+        width: 12.5%
+    }
+}
+
+@media (min-width: 2560px) {
+    .gallery-container .gallery .project.artist-profile {
+        width: 10%
+    }
+}
+
+@media (min-width: 3000px) {
+    .gallery-container .gallery .project.artist-profile {
+        width: 8.33333333333333%
+    }
+}
+
+.gallery-container .gallery .project.artist-profile.small {
+    width: 33.33333333%
+}
+
+@media (min-width: 640px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 25%
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 25%
+    }
+}
+
+@media (min-width: 992px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 20%
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 16.666667%
+    }
+}
+
+@media (min-width: 1440px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 14.285714286%
+    }
+}
+
+@media (min-width: 1680px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 12.5%
+    }
+}
+
+@media (min-width: 1920px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 11.11111111111111%
+    }
+}
+
+@media (min-width: 2200px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 10%
+    }
+}
+
+@media (min-width: 2560px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 8.33333333333333%
+    }
+}
+
+@media (min-width: 3000px) {
+    .gallery-container .gallery .project.artist-profile.small {
+        width: 7.14285714285714%
+    }
+}
+
+.gallery-container .gallery .project > a.project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    overflow: hidden
+}
+
+.gallery-container .gallery .project > a.project-image .overlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://www.artstation.com/assets/overlay-no-triangle-39cb8cfe20675f526dac0c58c5044a70.png);
+    background-position: 100% 100%;
+    z-index: 3;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    transform: translateZ(0) scale(1, 1);
+    opacity: 0;
+    -webkit-transition: opacity ease-in-out .25s;
+    transition: opacity ease-in-out .25s
+}
+
+@media (min-width: 992px) {
+    .gallery-container .gallery .project > a.project-image .overlay {
+        display: block
+    }
+}
+
+.gallery-container .gallery .project > a.project-image .overlay.visible {
+    opacity: 1
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info {
+    margin: 15px;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    -webkit-font-smoothing: antialiased
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info img.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: left
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info .title {
+    line-height: 21px;
+    font-size: 18px;
+    margin-left: 50px;
+    font-weight: 300
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info .name {
+    line-height: 19px;
+    font-size: 12px;
+    margin-left: 50px
+}
+
+
+.gallery-container .gallery .project > a.project-image .overlay-category:hover {
+    background: rgba(0, 0, 0, .8)
+}
+
+.gallery-container .gallery .project > a.project-image .overlay-category-name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.15;
+    padding: 10px 15px;
+    text-transform: uppercase
+}
+
+.gallery-container .gallery .project > a.project-image img.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1
+}
+
+@media (min-width: 1200px) {
+    .gallery-container .gallery .project > a.project-image img.image {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translateZ(0) scale(1, 1);
+        transform: translateZ(0) scale(1, 1)
+    }
+}
+
+.gallery-container .gallery .project > a.project-image:hover .overlay {
+    opacity: 1
+}
+
+.gallery-container .gallery .project.small > a .overlay .info img.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: left
+}
+
+.gallery-container .gallery .project.small > a .overlay .info .title {
+    line-height: 16px;
+    font-size: 14px;
+    margin-left: 40px;
+    font-weight: 400
+}
+
+.gallery-container .gallery .project.small > a .overlay .info .name {
+    line-height: 14px;
+    font-size: 10px;
+    margin-left: 40px;
+    font-weight: 400
+}
+
+.gallery-container .gallery .project.small > a .overlay .info.without-avatar .title {
+    margin-left: 0
+}
+
+.gallery-container .gallery .project.small > a .overlay .info.without-avatar .name {
+    margin-left: 0
+}
+
+.more-artwork h4 {
+    padding: 0 0 1em;
+    margin: 0;
+    color: #f0f0f0
+}
+
+.gallery-container .gallery .icons-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #bbb;
+    font-size: 0;
+    cursor: pointer;
+    z-index: 3;
+    letter-spacing: 0
+}
+
+.gallery-container .gallery .icons-list li {
+    line-height: 1;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    max-height: 24px;
+    font-size: 14px;
+    background-color: rgba(34, 34, 34, .8)
+}
+
+.gallery-container .gallery .remove {
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    color: #bbb;
+    z-index: 4
+}
+
+.gallery-container .gallery .remove:hover, .gallery-container .gallery .remove:active {
+    color: #a2a2a2
+}
+
+.gallery-container .gallery .project .project-image .overlay {
+    padding-top: 100%;
+    height: 0 !important
+}
+
+.gallery-container .gallery-projects .project {
+    background-size: 100% auto;
+    background-repeat: no-repeat
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info {
+    margin: 15px;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    -webkit-font-smoothing: antialiased
+}
+
+.gallery-container .gallery .project > a.project-image .overlay .info .title {
+    line-height: 21px;
+    font-size: 18px;
+    color: #fff;
+    margin-left: 50px;
+    font-weight: 300
+}

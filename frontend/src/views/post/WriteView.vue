@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import axios from "axios";
+import {useRouter} from "vue-router";
 
 const title = ref("")
 const content = ref("")
+const router = useRouter();
 
 const write = () => {
   axios.post('/api/posts', {
     title: title.value,
     content: content.value
   })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .then((response) => router.replace(response.headers.location))
+      .catch(error => console.log(error))
 }
 
 
@@ -23,14 +21,19 @@ const write = () => {
 
 <template>
   <div>
-    <el-input v-model="title" placeholder="제목을 입력해 주세요" />
-  </div>
-  <div class ="mt-2">
-    <el-input v-model="content" type="textarea" rows="15"/>
+    <input v-model="title" placeholder="제목을 입력해 주세요"/>
   </div>
   <div class="mt-2">
-    <el-button type="info" @click="write()">글 작성하기</el-button>
+    <QuillEditor v-model:content="content"
+                 contentType="html"
+                 theme="snow"
+                 toolbar="essential"
+                 style="height:500px"/>
   </div>
+  <div class="mt-2">
+    <b-button @click="write()">글 작성하기</b-button>
+  </div>
+
 </template>
 
 <style>

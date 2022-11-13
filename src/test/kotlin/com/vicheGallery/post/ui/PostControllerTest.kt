@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @SpringBootTest
 @AutoConfigureMockMvc
 internal class PostControllerTest(private var mockMvc: MockMvc) {
-
     @Test
     @DisplayName("포스트 작성시 제목이 비었으면 에러가 발생")
     fun titleEmptyError() {

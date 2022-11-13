@@ -2,24 +2,18 @@
 
 import Header from "@/components/Header.vue"
 import Content from "@/components/Content.vue"
+import 'filepond/dist/filepond.min.css';
 
 </script>
 
 <template>
-
   <Header/>
   <Content/>
 </template>
 
 <style>
-body {
-  font-family: "나눔고딕", "nanum-gothic", serif;
+#app {
+  font-family: "나눔고딕", "nanum-gothic", sans-serif;
 }
 
-/*body {*/
-/*  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,*/
-/*  "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",*/
-/*  "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",*/
-/*  sans-serif;*/
-/*}*/
 </style>

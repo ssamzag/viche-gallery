@@ -5,6 +5,9 @@ import PostListView from "../views/post/ListView.vue";
 import PostReadView from "../views/post/ReadView.vue";
 import WorkListView from "../views/work/ListView.vue";
 import AboutView from "../views/about/AboutView.vue";
+import WorkWriteView from "../views/work/WriteView.vue";
+import WorkTestView from "../views/work/TestView.vue";
+import WorkReadView from "../views/work/ListView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,7 +26,6 @@ const router = createRouter({
       path: "/post",
       name: "list",
       component: PostListView
-
     },
     {
       path: "/post/:postId",
@@ -36,13 +38,22 @@ const router = createRouter({
       name: "worklist",
       component: WorkListView,
       props: true
-    }
-    ,
+    },
     {
       path: "/about",
       name: "about",
       component: AboutView,
       props: true
+    },
+    {
+      path: "/work/write",
+      name: "workWrite",
+      component: WorkWriteView
+    },
+    {
+      path: "/work/test",
+      name: "test",
+      component: WorkTestView
     }
   ],
 });

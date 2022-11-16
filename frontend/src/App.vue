@@ -1,8 +1,6 @@
-<script lang="ts" setup>
-
+<script setup lang="ts" >
 import Header from "@/components/Header.vue"
 import Content from "@/components/Content.vue"
-import 'filepond/dist/filepond.min.css';
 
 </script>
 

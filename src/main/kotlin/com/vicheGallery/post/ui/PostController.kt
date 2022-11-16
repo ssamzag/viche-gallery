@@ -1,9 +1,12 @@
 package com.vicheGallery.post.ui
 
+import com.vicheGallery.auth.domain.AuthenticationPrincipal
+import com.vicheGallery.auth.domain.LoginUser
 import com.vicheGallery.post.dto.PostRequest
 import com.vicheGallery.post.dto.PostResponse
 import com.vicheGallery.post.application.PostService
 import com.vicheGallery.post.dto.PostRead
+import com.vicheGallery.post.dto.PostsResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,9 +21,18 @@ import javax.validation.Valid
 @RequestMapping("/posts")
 class PostController (val postService: PostService) {
     @PostMapping
-    fun createPost(@RequestBody @Valid request: PostRequest): ResponseEntity<PostResponse> {
+    fun createPost(
+        @RequestBody @Valid request: PostRequest,
+        @AuthenticationPrincipal user: LoginUser): ResponseEntity<String> {
         val id = postService.write(request)
-        return ResponseEntity.created(URI.create("/post/${id}")).build()
+        return ResponseEntity.ok().body("/post/${id}")
+    }
+
+
+    @GetMapping
+    fun getPosts() : ResponseEntity<PostsResponse> {
+        return ResponseEntity.ok()
+            .body(postService.findAllDesc())
     }
 
     @GetMapping("/{postId}")

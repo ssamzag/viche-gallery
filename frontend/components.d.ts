@@ -7,14 +7,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BAlert: typeof import('bootstrap-vue-3')['BAlert']
     BButton: typeof import('bootstrap-vue-3')['BButton']
     BCard: typeof import('bootstrap-vue-3')['BCard']
     BCardBody: typeof import('bootstrap-vue-3')['BCardBody']
     BCardFooter: typeof import('bootstrap-vue-3')['BCardFooter']
-    BCardGrou: typeof import('bootstrap-vue-3')['BCardGrou']
     BCardGroup: typeof import('bootstrap-vue-3')['BCardGroup']
     BCardImg: typeof import('bootstrap-vue-3')['BCardImg']
-    BCardSubTitle: typeof import('bootstrap-vue-3')['BCardSubTitle']
     BCardText: typeof import('bootstrap-vue-3')['BCardText']
     BCardTitle: typeof import('bootstrap-vue-3')['BCardTitle']
     BCarousel: typeof import('bootstrap-vue-3')['BCarousel']
@@ -24,12 +23,11 @@ declare module '@vue/runtime-core' {
     BContainer: typeof import('bootstrap-vue-3')['BContainer']
     BDropdownDivider: typeof import('bootstrap-vue-3')['BDropdownDivider']
     BDropdownItem: typeof import('bootstrap-vue-3')['BDropdownItem']
-    BFormFile: typeof import('bootstrap-vue-3')['BFormFile']
     BFormInput: typeof import('bootstrap-vue-3')['BFormInput']
+    BFormInvalidFeedback: typeof import('bootstrap-vue-3')['BFormInvalidFeedback']
     BFormTags: typeof import('bootstrap-vue-3')['BFormTags']
-    BIcon: typeof import('bootstrap-vue-3')['BIcon']
+    BFormText: typeof import('bootstrap-vue-3')['BFormText']
     BImg: typeof import('bootstrap-vue-3')['BImg']
-    BImgLazy: typeof import('bootstrap-vue-3')['BImgLazy']
     BListGroup: typeof import('bootstrap-vue-3')['BListGroup']
     BListGroupItem: typeof import('bootstrap-vue-3')['BListGroupItem']
     BNav: typeof import('bootstrap-vue-3')['BNav']
@@ -50,5 +48,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     T: typeof import('./src/components/tiptap/T.vue')['default']
+    Title: typeof import('./src/components/Title.vue')['default']
   }
 }

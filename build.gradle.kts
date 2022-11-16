@@ -43,6 +43,9 @@ dependencies {
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
     kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 
+    // jwt
+    implementation ("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("mysql:mysql-connector-java")
 }
 
 tasks.withType<KotlinCompile> {

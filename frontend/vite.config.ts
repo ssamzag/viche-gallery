@@ -25,7 +25,6 @@ export default defineConfig({
                 target: "http://localhost:8080",
                 rewrite: (path) => path.replace(/^\/api/, "")
             }
-
         }
     }
 });

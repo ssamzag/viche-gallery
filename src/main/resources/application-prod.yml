@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/viche_gallery?useSSL=false&useUnicode=true&characterEncoding=euckr&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: viche
+    password: qlcp0826!
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: validate
+
+imageFile:
+  dir: /upload/images/
+  url: /api/images/

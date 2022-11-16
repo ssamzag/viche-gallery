@@ -9,9 +9,12 @@ data class PostRequest(
     @field: NotBlank(message="타이틀을 입력하세요.")
     var title: String,
     @field: NotBlank(message = "내용을 입력하세요.")
-    var content: String
+    var content: String,
+    val attachments: List<String>?
 ) {
     fun toPost(): Post {
-        return Post(title = title, content = content)
+        val post = Post(title = title, content = content)
+        post.setAttachments(attachments)
+        return post
     }
 }

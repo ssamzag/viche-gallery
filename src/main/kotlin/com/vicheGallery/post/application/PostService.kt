@@ -3,6 +3,10 @@ package com.vicheGallery.post.application
 import com.vicheGallery.post.dto.PostRequest
 import com.vicheGallery.post.domain.PostRepository
 import com.vicheGallery.post.dto.PostRead
+import com.vicheGallery.post.dto.PostResponse
+import com.vicheGallery.post.dto.PostsResponse
+import com.vicheGallery.work.dto.WorkReadResponse
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -11,6 +15,7 @@ import java.lang.IllegalArgumentException
 @Service
 @Transactional(readOnly = true)
 class PostService(val postRepository: PostRepository) {
+    @Transactional(readOnly = false)
     fun write(postRequest: PostRequest): Long? {
         val post = postRepository.save(postRequest.toPost())
         return post.id
@@ -26,6 +31,13 @@ class PostService(val postRepository: PostRepository) {
             createdDate = post.createdDate,
             modifiedData = post.modifiedDate
         )
+    }
 
+    fun findAllDesc(): PostsResponse {
+        return PostsResponse(
+            postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
+            .map {
+                PostResponse(it.id, it.title, it.content, it.createdDate, it.firstFile())
+            })
     }
 }

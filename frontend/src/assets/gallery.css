@@ -27,13 +27,12 @@
 
 @media (min-width: 768px) {
     .gallery-container .gallery .project {
-        width:25%;
     }
 }
 
 @media (min-width: 992px) {
     .gallery-container .gallery .project {
-
+        width:25%;
     }
 }
 

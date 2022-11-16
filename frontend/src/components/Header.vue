@@ -1,44 +1,59 @@
 <template>
 
-  <div class="maru-font">
-    <b-navbar toggleable="md"
-              variant="white"
-              dark="false"
-              fixed="top"
-              class="my-0"
-              style="margin-left:12px">
-      <b-navbar-brand href="/">
-        <span style="font-size:25px">V I C H E</span>
-      </b-navbar-brand>
+  <b-navbar toggleable="md"
+            variant="white"
+            dark="false"
+            fixed="top"
+            class="maru-font my-0"
+            style="margin-left:12px">
+    <b-navbar-brand to="/">
+      <span style="font-size:25px; letter-spacing: 6px">VICHE</span>
+    </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="">
-          <b-nav-item href="/work">W O R K S</b-nav-item>
-          <b-nav-item href="/post">P O S T</b-nav-item>
-          <b-nav-item href="/about">I N T R O D U C E</b-nav-item>
-        </b-navbar-nav>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav class="" style="letter-spacing: 5px">
+        <b-nav-item to="/work">WORKS</b-nav-item>
+        <b-nav-item to="/post">POST</b-nav-item>
+        <b-nav-item to="/about">INTRODUCE</b-nav-item>
+      </b-navbar-nav>
 
-        <b-navbar-nav class="ms-auto">
-          <b-nav-item-dropdown text="d" right>
-            <template #button-content>
-              <font-awesome-icon icon="fa-solid fa-user"/>
-            </template>
-            <b-dropdown-item href="/work/write">글쓰기</b-dropdown-item>
-            <b-dropdown-item href="#">LOGIN</b-dropdown-item>
-            <b-dropdown-item href="#">WRITE</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+      <b-navbar-nav class="ms-auto">
+        <div>
+          <b-nav-item @click="login">
+            <font-awesome-icon icon="fa-solid fa-user"/>
+          </b-nav-item>
+        </div>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+  <b-container :toast="{root: true}" fluid="sm" position="position-fixed"></b-container>
+
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import {useRouter} from "vue-router";
 
+document.addEventListener("click", () => {
+  document.getElementById("nav-collapse").classList.remove("show")
+})
+let router = useRouter();
+
+const login = () => {
+  let token = localStorage.getItem("token");
+  if (token) {
+    localStorage.setItem("token", "");
+    alert("로그아웃 됨")
+    router.replace("/")
+    return
+  }
+
+  router.replace("/login")
+}
 </script>
 
 <style>
+
 .maru-font {
   font-family: 'MaruBuri-Regular', sans-serif;
 }

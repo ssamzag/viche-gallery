@@ -1,5 +1,7 @@
 package com.vicheGallery.work.ui
 
+import com.vicheGallery.auth.domain.AuthenticationPrincipal
+import com.vicheGallery.auth.domain.LoginUser
 import com.vicheGallery.work.dto.WorkWriteRequest
 import com.vicheGallery.work.application.WorkService
 import com.vicheGallery.work.dto.WorkReadResponse
@@ -19,7 +21,10 @@ class WorkController(
     val workService: WorkService
 ) {
     @PostMapping
-    fun write(@RequestBody workWriteRequest: WorkWriteRequest): ResponseEntity<WorkWriteResponse> {
+    fun write(
+        @RequestBody workWriteRequest: WorkWriteRequest,
+        @AuthenticationPrincipal loginUser: LoginUser
+    ): ResponseEntity<WorkWriteResponse> {
         val created = workService.create(workWriteRequest);
         return ResponseEntity.created(URI.create("/work/" + created.id))
             .body(created)

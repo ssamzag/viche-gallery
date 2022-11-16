@@ -1,5 +1,7 @@
 package com.vicheGallery.images.ui
 
+import com.vicheGallery.auth.domain.AuthenticationPrincipal
+import com.vicheGallery.auth.domain.LoginUser
 import com.vicheGallery.images.application.UploadService
 import com.vicheGallery.images.domain.FileStore
 import com.vicheGallery.images.domain.ImageFile
@@ -17,18 +19,16 @@ import reactor.util.annotation.Nullable
 @RestController
 @RequestMapping("/images")
 class UploadController(
-    @Autowired private val fileStore: FileStore,
     @Autowired private val uploadService: UploadService
 ) {
-
     @PostMapping("/upload")
-    fun upload(@ModelAttribute uploadForm: UploadForm): ResponseEntity<List<UploadFile?>> {
-        var storeFiles: List<UploadFile?>
-
+    fun upload(
+        @ModelAttribute uploadForm: UploadForm,
+        @AuthenticationPrincipal loginUser: LoginUser
+    ): ResponseEntity<List<UploadFile?>> {
         return try {
-            storeFiles = fileStore.storeFiles(uploadForm.multipartFiles)
-            uploadService.save(storeFiles);
-            ResponseEntity.ok().body(storeFiles)
+            ResponseEntity.ok()
+                .body(uploadService.save(uploadForm))
         } catch (e: FileSizeLimitExceededException) {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null)
         }
@@ -36,10 +36,9 @@ class UploadController(
 
     @GetMapping("/{filename}")
     fun downloadImage(@PathVariable filename: String): ResponseEntity<UrlResource> {
-        val urlResource = UrlResource("file:" + fileStore.fullPath(filename))
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-            .body(urlResource)
+            .body(uploadService.downloadImage(filename))
     }
 
     @GetMapping("/list")

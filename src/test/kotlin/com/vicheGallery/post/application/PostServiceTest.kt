@@ -27,7 +27,7 @@ internal class PostServiceTest(
     @Test
     @DisplayName("글 작성")
     fun writeTest() {
-        val write = postService.write(PostRequest("제목", "내용"))
+        val write = postService.write(PostRequest("제목", "내용", null))
         val post = postRepository.findById(write!!).get()
 
         assertThat(post.title).isEqualTo("제목")
@@ -37,7 +37,7 @@ internal class PostServiceTest(
     @Test
     @DisplayName("포스트 글을 조회한다")
     fun readTest() {
-        val write = postService.write(PostRequest("title", "content"))
+        val write = postService.write(PostRequest("title", "content", null))
 
         val findByPostId = postService.findByPostId(write!!)
 

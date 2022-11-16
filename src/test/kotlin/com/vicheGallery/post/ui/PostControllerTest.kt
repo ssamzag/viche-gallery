@@ -29,7 +29,7 @@ internal class PostControllerTest(private var mockMvc: MockMvc) {
         mockMvc.perform(
             post("/posts")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Gson().toJson(PostRequest("", "내용임") ))
+                .content(Gson().toJson(PostRequest("", "내용임", null) ))
         )
             .andExpect(status().isBadRequest)
             .andExpect(jsonPath("$.code").value(400))
@@ -45,7 +45,7 @@ internal class PostControllerTest(private var mockMvc: MockMvc) {
         mockMvc.perform(
             post("/posts")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Gson().toJson(PostRequest("제목", "")))
+                .content(Gson().toJson(PostRequest("제목", "", null)))
         )
             .andExpect(status().isBadRequest)
             .andExpect(jsonPath("$.code").value(400))
@@ -58,7 +58,7 @@ internal class PostControllerTest(private var mockMvc: MockMvc) {
     @Test
     @DisplayName("포스트를 작성하면 id 값을 반환한다")
     fun createPost() {
-        val content: String = jacksonObjectMapper().writeValueAsString(PostRequest("hi", "why"))
+        val content: String = jacksonObjectMapper().writeValueAsString(PostRequest("hi", "why", null))
 
         mockMvc.perform(
             post("/posts")

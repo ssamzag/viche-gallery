@@ -12,7 +12,6 @@ const file = ref()
 const quill = ref()
 
 const write = () => {
-  alert();
   axios.post('/api/posts', {
         title: title.value,
         content: content.value,

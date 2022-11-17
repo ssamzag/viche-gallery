@@ -10,10 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import KakaoLogin from 'vue3-kakao-login'
 import {BToastPlugin} from 'bootstrap-vue-3'
-
-import vue3GoogleLogin from 'vue3-google-login'
 
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
@@ -32,15 +29,6 @@ app.use(VueEasyLightbox)
 app.use(BootstrapVue3)
 app.use(store)
 app.use(BToastPlugin)
-
-app.use(KakaoLogin, {apiKey : "javascript key"})
-
-const clientId = "149959106613-aobfaeltked69ejhppv7d3h5nmmv3b1d"
-
-app.use(vue3GoogleLogin, {
-    clientId: clientId,
-    scope: "email"
-})
 
 app.config.globalProperties.$token = ""
 

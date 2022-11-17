@@ -4,7 +4,7 @@ import {ref} from "vue";
 const store = createStore ({
     state: { // [변수들의 집합]
         accessToken: null,
-        login: false
+        login: !!localStorage.getItem('token')
     },
     getters: { // [state의 변수들을 get 호출]
         accessToken(state) {

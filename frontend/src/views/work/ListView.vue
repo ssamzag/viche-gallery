@@ -5,7 +5,7 @@ import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {useRouter} from "vue-router";
 
-const posts = ref([])
+const works = ref([])
 const imgsRef = ref([])
 let index = 0;
 
@@ -24,7 +24,12 @@ const showImg = (index) => {
 }
 
 onMounted(() => {
+  getList()
+})
+
+const getList = () => {
   axios.get(`/api/works`).then(response => {
+    works.value = []
     response.data
         .forEach((r) => {
           r.attachments = r.attachments
@@ -33,17 +38,29 @@ onMounted(() => {
               .forEach(src => imgsRef.value
                   .push({title: r.title, src: src}))
 
-          posts.value.push(r)
+          works.value.push(r)
           r.imageStartIndex = index
           index += r.attachments.length
         })
   })
-})
+}
 
-const deleteWork = () => {
-  const result = confirm("삭제 하시겠습니까?")
+const deleteWork = (id) => {
+  const result = confirm(id + "삭제 하시겠습니까?")
   if (result) {
-    router.go()
+    axios.delete(`/api/works/${id}`,
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then((res) => {
+          console.log(res)
+          getList()
+          //router.go()
+        })
+        .catch(() => alert("삭제 실패"))
+
   }
 }
 const deleteToggle = inject('login')
@@ -55,34 +72,34 @@ const deleteButton = () => {
 </script>
 
 <template>
-  <b-button @click="deleteButton">hh</b-button>
   <b-col>
     <b-row>
-      <Title title="WORKS" subTitle="illustration works of VICHE." :button="{url:'/work/write',text:'write'}"></Title>
+      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'Write'}" :delete="{click: deleteButton, text:'Delete'}"></Title>
     </b-row>
     <b-row>
       <div class="gallery-container" style="display: block;">
         <div class="gallery">
-          <div v-for="post in posts" class="project artist-profile" style="position:relative">
-            <a @click="showImg(post.imageStartIndex)" class="project-image" target="_self">
+          <div v-for="work in works" class="project artist-profile" style="position:relative">
+            <a @click="showImg(work.imageStartIndex)" class="project-image" target="_self">
+              <ul class="icons-list" v-if="deleteToggle">
+                <li>
+                  <b-button @click.stop="deleteWork(work.workId)">삭제</b-button>
+                </li>
+              </ul>
               <ul class="icons-list">
-                <li v-if="post.attachments.length > 1">
+                <li v-if="work.attachments.length > 1">
                   <font-awesome-icon icon="images" size="xs"/>
                 </li>
               </ul>
-             <ul class="icons-list" v-if="deleteToggle">
-                <li>
-                  <b-button @click.stop="deleteWork">삭제</b-button>
-                </li>
-              </ul>
+
               <div class="overlay">
                 <div class="info">
                   <img alt="Viche" class="avatar" height="40" src="/api/images/SCR-20221107-v15.png">
-                  <div class="title">{{ post.title }}</div>
+                  <div class="title">{{ work.title }}</div>
                   <div class="name">Viche</div>
                 </div>
               </div>
-              <img alt="blueberry sisters" class="image" :src="post.attachments[0]"
+              <img alt="blueberry sisters" class="image" :src="work.attachments[0]"
                    style="width:100%; height:100%; object-fit:cover;">
             </a>
           </div>

@@ -10,12 +10,15 @@
             </h1>
             <p class="title-p color-dark">{{ props.subTitle }}</p>
           </div>
-          <div style="float:right" v-if="props.button && token">
-            <b-button :to="props.button.url" squared variant="outline-secondary"
+          <div style="float:right" v-if="store.state.login">
+            <b-button v-if="props.write" :to="props.write.url" squared variant="outline-secondary"
                       style="float:right; font-size: 13px; margin-left:10px">
-              {{ props.button.text }}
+              {{ props.write.text }}
             </b-button>
-            <!--            <b-button squared variant="light" style="float:right; margin-left:10px">WRITE</b-button>-->
+            <b-button v-if="props.delete" @click="props.delete.click" squared variant="outline-secondary"
+                      style="float:right; font-size: 13px; margin-left:10px">
+              {{ props.delete.text }}
+            </b-button>
           </div>
         </div>
       </div>
@@ -24,6 +27,9 @@
 </template>
 
 <script setup type="ts">
+import {useStore} from "vuex";
+
+const store = useStore();
 const props = defineProps({
   title: {
     type: String,
@@ -33,13 +39,16 @@ const props = defineProps({
     type: String,
     require: true
   },
-  button: {
+  write: {
     type: Object,
     required: false
   },
+  delete: {
+    click: Object,
+    required: false
+  }
 })
 
-const token = localStorage.getItem("token")
 </script>
 
 <style>

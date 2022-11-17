@@ -31,6 +31,7 @@ class WorkService(
     fun read(id: Long): WorkReadResponse {
         val persistWork = workRepository.findById(id).get()
         return WorkReadResponse(
+            persistWork.id,
             persistWork.title,
             persistWork.content,
             persistWork.getStoredNames()
@@ -40,7 +41,11 @@ class WorkService(
     fun findAll(): List<WorkReadResponse>? {
         return workRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
             .map {
-                WorkReadResponse(it.title, it.content, it.getStoredNames())
+                WorkReadResponse(it.id, it.title, it.content, it.getStoredNames())
             }
+    }
+
+    fun delete(id: Long) {
+        workRepository.deleteById(id)
     }
 }

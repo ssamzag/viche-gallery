@@ -2,12 +2,13 @@
 </script>
 
 <template>
-  <b-col style="max-width: 1000px" >
+
+  <b-col  >
     <b-row>
       <Title title="INTRODUCE" sub-title="About Illustrator VICHE"></Title>
     </b-row>
-    <b-row>
-      <b-container class="text-center" fluid="sm" style="color:#495057;">
+    <b-row style="max-width: 1000px; margin: auto;">
+      <b-container class="text-center" fluid="sm" style="color:#495057; ">
         <b-row class="my-3" align-h="center">
           <b-col cols="">
             <a class="navbar-brand" href="https://www.youtube.com/channel/UCmF76cRFXJ2l_re7bt5S8qg" target="_blank">

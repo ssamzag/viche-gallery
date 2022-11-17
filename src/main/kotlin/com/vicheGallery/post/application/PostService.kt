@@ -5,7 +5,6 @@ import com.vicheGallery.post.domain.PostRepository
 import com.vicheGallery.post.dto.PostRead
 import com.vicheGallery.post.dto.PostResponse
 import com.vicheGallery.post.dto.PostsResponse
-import com.vicheGallery.work.dto.WorkReadResponse
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -21,7 +20,7 @@ class PostService(val postRepository: PostRepository) {
         return post.id
     }
 
-    fun findByPostId(postId: Long): PostRead {
+    fun findByPostIdOrThrow(postId: Long): PostRead {
         val post = postRepository.findByIdOrNull(postId)
             ?: throw IllegalArgumentException("존재하지 않는 글입니다.")
 

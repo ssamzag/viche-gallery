@@ -39,7 +39,7 @@ internal class PostServiceTest(
     fun readTest() {
         val write = postService.write(PostRequest("title", "content", null))
 
-        val findByPostId = postService.findByPostId(write!!)
+        val findByPostId = postService.findByPostIdOrThrow(write!!)
 
         assertThat(findByPostId).isNotNull
         assertThat(findByPostId.title).isEqualTo("title")
@@ -49,7 +49,7 @@ internal class PostServiceTest(
     @Test
     @DisplayName("없는 글 조회시 예외 발생")
     fun readErrorTest() {
-        assertThatThrownBy { postService.findByPostId(1L) }.hasMessage("존재하지 않는 글입니다.")
+        assertThatThrownBy { postService.findByPostIdOrThrow(1L) }.hasMessage("존재하지 않는 글입니다.")
     }
 
 }

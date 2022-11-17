@@ -23,6 +23,7 @@ declare module '@vue/runtime-core' {
     BContainer: typeof import('bootstrap-vue-3')['BContainer']
     BDropdownDivider: typeof import('bootstrap-vue-3')['BDropdownDivider']
     BDropdownItem: typeof import('bootstrap-vue-3')['BDropdownItem']
+    BForm: typeof import('bootstrap-vue-3')['BForm']
     BFormInput: typeof import('bootstrap-vue-3')['BFormInput']
     BFormInvalidFeedback: typeof import('bootstrap-vue-3')['BFormInvalidFeedback']
     BFormTags: typeof import('bootstrap-vue-3')['BFormTags']

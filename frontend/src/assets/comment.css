@@ -1,0 +1,236 @@
+.comments {
+    margin-bottom: 40px;
+}
+.comments {
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e6e6e6;
+}
+.comments .comment-list {
+    font-size: 15px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.comments .comment-list {
+    font-size: 15px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+.comments .comment-list ul li {
+    padding: 30px 0 25px;
+    border-top: 1px solid #e6e6e6;
+    position: relative;
+    min-height: 48px;
+}
+.comments .comment-list ul li .author-meta {
+    position: absolute;
+    overflow: hidden;
+    top: 30px;
+    height: 48px;
+    left: 0;
+    right: 0;
+    padding: 4px 0 0 60px;
+}
+.comments .comment-list ul li .author-meta .avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+img, fieldset {
+    border: none;
+    vertical-align: top;
+}
+.comments .comment-list ul li .author-meta .nickname {
+    float: left;
+    font-size: 0.775em;
+    line-height: 20px;
+}
+.comments .comment-list ul li .author-meta span {
+    display: inline-block;
+}
+.comments .comment-list ul li .author-meta .date {
+    float: left;
+    margin-left: 10px;
+    font-size: 0.7em;
+    color: #999;
+    line-height: 20px;
+}
+.comments .comment-list ul li .author-meta span {
+    display: inline-block;
+}
+.comments .comment-list ul li .author-meta span {
+    display: inline-block;
+}
+.comments .comment-list ul li .control {
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+.comments .comment-list ul li .control a {
+    margin: 0 2px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #999;
+}
+.screen_out {
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+ul li {
+    list-style: none;
+}
+.comments .comment-form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    resize: none;
+    box-sizing: border-box;
+}
+.comments .comment-form input[type=text], .comments .comment-form input[type=password], .comments .comment-form textarea {
+    border: 1px solid #e6e6e6;
+    font-size: 0.875em;
+    line-height: 1.25;
+    color: #666;
+}
+input, select, textarea, button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 100%;
+    border-radius: 0;
+}
+.comments .comment-form .submit {
+    margin-bottom: 10px;
+    text-align: right;
+}
+input, select, textarea, button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 100%;
+    border-radius: 0;
+}
+.comments .comment-list ul li p {
+    position: relative;
+    margin: 29px 0 0 60px;
+    font-size: 0.875em;
+    line-height: 1.5714;
+    color: #666;
+}
+.post-meta span:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 9px;
+    margin: 0 9px;
+    background-color: #b3b3b3;
+    vertical-align: middle;
+}
+.post-meta {
+    margin: 18px 0 -2px;
+    font-size: 1em;
+    color: #b2b2b2;
+}
+.post-meta a {
+    text-decoration: none;
+    color: #d4bca7;
+}
+.post-meta span:first-child:before {
+    content: none;
+}
+.comments .comment-list ul li .author-meta a {
+    text-decoration: none;
+    color: #000;
+}
+.comments .comment-list {
+    font-size: 15px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+.comments .comment-list ul {
+    margin: 0;
+    padding: 0;
+}
+
+.comments .comment-form .field {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.screen_out {
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+label {
+    cursor: default;
+}
+.comments .comment-form .field div {
+    margin:0;
+    padding:0;
+}
+.comments .comment-form .field .secret label:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 9px;
+    border: 1px solid #e1e1e1;
+    vertical-align: middle;
+    background-color: #fff;
+}
+.comments .comment-form .field .secret {
+    float: right;
+}
+.comments .comment-form .field .secret label {
+    font-size: 0.875em;
+    line-height: 40px;
+    color: #666;
+    outline: none;
+    cursor: pointer;
+}
+.comments .comment-form .field .secret input {
+    display: none;
+}
+input, select, textarea, button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 100%;
+    border-radius: 0;
+}
+.comments .comment-form input[type=text], .comments .comment-form input[type=password] {
+    width: 120px;
+    height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.comments .comment-form input[type=text], .comments .comment-form input[type=password], .comments .comment-form textarea {
+    border: 1px solid #e6e6e6;
+    font-size: 0.875em;
+    line-height: 1.25;
+    color: #666;
+}
+.comments .comment-list ul li .author-meta .date:before, .comments .comment-list ul li .author-meta .date a:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 9px;
+    margin-right: 10px;
+    background-color: #b2b2b2;
+}

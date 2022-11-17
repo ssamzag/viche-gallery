@@ -2,14 +2,12 @@
 </script>
 
 <template>
-  <b-col>
+  <b-col style="max-width: 1000px" >
     <b-row>
       <Title title="INTRODUCE" sub-title="About Illustrator VICHE"></Title>
     </b-row>
     <b-row>
-
-
-      <b-container class="text-center" fluid="sm" style="color:#495057;" >
+      <b-container class="text-center" fluid="sm" style="color:#495057;">
         <b-row class="my-3" align-h="center">
           <b-col cols="">
             <a class="navbar-brand" href="https://www.youtube.com/channel/UCmF76cRFXJ2l_re7bt5S8qg" target="_blank">
@@ -71,7 +69,6 @@
             </b-carousel>
           </b-col>
         </b-row>
-
       </b-container>
     </b-row>
   </b-col>

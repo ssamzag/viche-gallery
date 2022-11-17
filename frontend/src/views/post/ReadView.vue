@@ -64,7 +64,7 @@ const moveToList = function () {
       <div class="content " v-html="post.content" style="max-width:1000px;">
       </div>
     </b-row>
-    <b-row class="my-3">
+    <b-row class="my-3" style="max-width:1000px;">
       <b-col>
         <div class="d-flex justify-content-end" style="position: relative; float:left; margin-left:0">
           <b-button squared variant="outline-secondary" @click="moveToList()">목록</b-button>

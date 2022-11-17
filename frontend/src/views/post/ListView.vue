@@ -35,7 +35,7 @@ const read = (id) => {
 <template>
   <b-col>
     <b-row>
-      <Title title="POST" subTitle="Work Diary, Daily Life, Etc." :write="{url:'/post/write',text:'write'}"></Title>
+      <Title title="POST" subTitle="Work Diary, Daily Life, Etc." :write="{url:'/post/write',text:'WRITE'}"></Title>
     </b-row>
     <b-row>
       <b-card-group columns>

@@ -46,7 +46,7 @@ const getList = () => {
 }
 
 const deleteWork = (id) => {
-  const result = confirm(id + "삭제 하시겠습니까?")
+  const result = confirm("삭제 하실라우?")
   if (result) {
     axios.delete(`/api/works/${id}`,
         {
@@ -74,24 +74,25 @@ const deleteButton = () => {
 <template>
   <b-col>
     <b-row>
-      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'Write'}" :delete="{click: deleteButton, text:'Delete'}"></Title>
+      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'WRITE'}" :delete="{click: deleteButton, text:'DELETE'}"></Title>
     </b-row>
     <b-row>
       <div class="gallery-container" style="display: block;">
         <div class="gallery">
           <div v-for="work in works" class="project artist-profile" style="position:relative">
             <a @click="showImg(work.imageStartIndex)" class="project-image" target="_self">
-              <ul class="icons-list" v-if="deleteToggle">
-                <li>
-                  <b-button @click.stop="deleteWork(work.workId)">삭제</b-button>
-                </li>
+              <ul class="icons-list"
+                  v-if="deleteToggle" style="z-index: 4">
+                  <b-button style="font-size:12px"
+                            squared
+                      variant="danger"
+                      @click.stop="deleteWork(work.workId)">DEL</b-button>
               </ul>
               <ul class="icons-list">
                 <li v-if="work.attachments.length > 1">
                   <font-awesome-icon icon="images" size="xs"/>
                 </li>
               </ul>
-
               <div class="overlay">
                 <div class="info">
                   <img alt="Viche" class="avatar" height="40" src="/api/images/SCR-20221107-v15.png">

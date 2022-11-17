@@ -19,9 +19,14 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ms-auto">
-        <div>
+        <div v-if="!store.state.login">
           <b-nav-item @click="login">
             <font-awesome-icon icon="fa-solid fa-user"/>
+          </b-nav-item>
+        </div>
+        <div v-else>
+          <b-nav-item @click="logout">
+            Logout
           </b-nav-item>
         </div>
       </b-navbar-nav>
@@ -33,22 +38,28 @@
 
 <script setup>
 import {useRouter} from "vue-router";
+import {useStore} from "vuex";
 
 document.addEventListener("click", () => {
   document.getElementById("nav-collapse").classList.remove("show")
 })
 let router = useRouter();
-
+const store = useStore();
 const login = () => {
-  let token = localStorage.getItem("token");
-  if (token) {
-    localStorage.setItem("token", "");
-    alert("로그아웃 됨")
-    router.replace("/")
+  router.replace("/login")
+}
+
+const logout = () => {
+  const isLogout = confirm("로그아웃 하쉴?")
+
+  if (!isLogout) {
     return
   }
 
-  router.replace("/login")
+  localStorage.setItem("token", "");
+  store.commit("logout")
+  router.replace("/")
+
 }
 </script>
 

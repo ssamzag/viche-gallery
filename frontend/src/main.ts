@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import {createApp, ref} from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store"
@@ -20,6 +20,7 @@ import "@noonnu/maruburi-regular"
 import '@kfonts/nanum-gothic'
 import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css'
 import './assets/gallery.css'
+import type {Ref, UnwrapRef} from "@vue/reactivity";
 
 library.add(fab, fas)
 
@@ -30,9 +31,10 @@ app.use(BootstrapVue3)
 app.use(store)
 app.use(BToastPlugin)
 
-app.config.globalProperties.$token = ""
+
+app.provide('login', ref(false))
 
 app.component('QuillEditor', QuillEditor)
-app.component('font-awesome-icon', FontAwesomeIcon)
 
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount("#app");

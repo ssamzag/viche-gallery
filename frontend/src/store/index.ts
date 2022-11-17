@@ -1,8 +1,10 @@
 import { createStore } from 'vuex';
+import {ref} from "vue";
 
 const store = createStore ({
     state: { // [변수들의 집합]
-        accessToken: null
+        accessToken: null,
+        login: false
     },
     getters: { // [state의 변수들을 get 호출]
         accessToken(state) {
@@ -10,7 +12,12 @@ const store = createStore ({
         }
     },
     mutations: { // [변수들을 조작하는 함수들]
-
+        login(state) {
+            state.login = true
+        },
+        logout(state) {
+            state.login = false
+        }
     },
     actions: { // [비동기 처리를 하는 함수들]
         // async [LOGIN]({ commit, dispatch }, loginInfo) {
@@ -20,9 +27,7 @@ const store = createStore ({
         //         dispatch(FETCH_MEMBER)
         //     })
         // }
-        login: () => {
-            alert("login")
-        }
+
     },
 });
 

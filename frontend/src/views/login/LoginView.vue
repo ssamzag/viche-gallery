@@ -1,6 +1,6 @@
 <script setup type="ts">
 import axios from "axios";
-import {ref} from "vue";
+import {inject, ref} from "vue";
 import {useRouter} from "vue-router";
 import { useStore, mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -17,10 +17,11 @@ const login = () => {
           const token =  req.data.accessToken
           localStorage.setItem('token', token)
           store.state.accessToken = token
+          store.commit("login")
           router.replace("/")
         }
       })
-      .catch(error => alert("아이디 암호 확인"))
+      .catch(error => console.log(error))
 }
 
 </script>

@@ -1,8 +1,9 @@
 <script setup type="ts">
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, onMounted, ref, inject} from "vue";
 import axios from "axios";
 import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {useRouter} from "vue-router";
 
 const posts = ref([])
 const imgsRef = ref([])
@@ -15,6 +16,7 @@ const indexRef = ref(0) // default 0
 const onShow = () => visibleRef.value = true
 const onHide = () => visibleRef.value = false
 const onMoveDisable = () => moveRef.value = false
+const router = useRouter()
 
 const showImg = (index) => {
   indexRef.value = index
@@ -38,10 +40,22 @@ onMounted(() => {
   })
 })
 
+const deleteWork = () => {
+  const result = confirm("삭제 하시겠습니까?")
+  if (result) {
+    router.go()
+  }
+}
+const deleteToggle = inject('login')
+
+const deleteButton = () => {
+  deleteToggle.value = !deleteToggle.value
+}
 
 </script>
 
 <template>
+  <b-button @click="deleteButton">hh</b-button>
   <b-col>
     <b-row>
       <Title title="WORKS" subTitle="illustration works of VICHE." :button="{url:'/work/write',text:'write'}"></Title>
@@ -49,11 +63,16 @@ onMounted(() => {
     <b-row>
       <div class="gallery-container" style="display: block;">
         <div class="gallery">
-          <div v-for="post in posts" class="project artist-profile">
+          <div v-for="post in posts" class="project artist-profile" style="position:relative">
             <a @click="showImg(post.imageStartIndex)" class="project-image" target="_self">
               <ul class="icons-list">
                 <li v-if="post.attachments.length > 1">
                   <font-awesome-icon icon="images" size="xs"/>
+                </li>
+              </ul>
+             <ul class="icons-list" v-if="deleteToggle">
+                <li>
+                  <b-button @click.stop="deleteWork">삭제</b-button>
                 </li>
               </ul>
               <div class="overlay">

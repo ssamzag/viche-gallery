@@ -2,7 +2,7 @@
 import axios from "axios";
 import {inject, ref} from "vue";
 import {useRouter} from "vue-router";
-import { useStore, mapActions, mapGetters, mapMutations } from 'vuex'
+import {useStore, mapActions, mapGetters, mapMutations} from 'vuex'
 
 const userid = ref("")
 const password = ref("")
@@ -13,13 +13,12 @@ const login = () => {
   axios.post("/api/auth/login/token",
       {userid: userid.value, password: password.value})
       .then((req) => {
-        if (req.status === 200) {
-          const token =  req.data.accessToken
-          localStorage.setItem('token', token)
-          store.state.accessToken = token
-          store.commit("login")
-          router.replace("/")
+        if (req.status !== 200) {
+          return
         }
+        localStorage.setItem('token', req.data.accessToken)
+        store.commit("login")
+        router.replace(sessionStorage.getItem("currentUrl"))
       })
       .catch(error => console.log(error))
 }

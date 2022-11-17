@@ -74,6 +74,9 @@ router.beforeEach((to, from, next) => {
         next('/')
         return
     }
+    if (to.path !== '/login') {
+        sessionStorage.setItem("currentUrl", to.path)
+    }
     next()
 })
 

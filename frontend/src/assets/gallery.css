@@ -13,7 +13,7 @@
     flex: 0 0 auto;
     width: 50%;
     position: relative;
-    background: url(https://www.artstation.com//assets/placeholders/asset/small_square-63fe1b6933170dad054a48dc3c8b51af.png);
+    background: url("/api/images/non_image.png");
     background-size: cover;
     /*width: 33.33333333%*/
     width: 50%

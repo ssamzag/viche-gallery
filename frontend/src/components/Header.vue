@@ -58,8 +58,6 @@ const logout = () => {
 
   localStorage.setItem("token", "");
   store.commit("logout")
-  router.replace("/")
-
 }
 </script>
 

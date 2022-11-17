@@ -7,7 +7,7 @@
     <b-row>
       <Title title="INTRODUCE" sub-title="About Illustrator VICHE"></Title>
     </b-row>
-    <b-row style="max-width: 1000px; margin: auto;">
+    <b-row style="max-width: 1130px; margin: auto;">
       <b-container class="text-center" fluid="sm" style="color:#495057; ">
         <b-row class="my-3" align-h="center">
           <b-col cols="">

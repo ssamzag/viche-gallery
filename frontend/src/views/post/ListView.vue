@@ -27,7 +27,7 @@ onMounted(() => {
 })
 
 const read = (id) => {
-  router.replace("/post/" + id)
+  router.push("/post/" + id)
 }
 
 </script>

@@ -20,7 +20,7 @@
 
       <b-navbar-nav class="ms-auto">
         <div v-if="!store.state.login">
-          <b-nav-item @click="login">
+          <b-nav-item to="/login">
             <font-awesome-icon icon="fa-solid fa-user"/>
           </b-nav-item>
         </div>
@@ -45,17 +45,8 @@ document.addEventListener("click", () => {
 })
 let router = useRouter();
 const store = useStore();
-const login = () => {
-  router.replace("/login")
-}
 
 const logout = () => {
-  const isLogout = confirm("로그아웃 하쉴?")
-
-  if (!isLogout) {
-    return
-  }
-
   localStorage.setItem("token", "");
   store.commit("logout")
 }

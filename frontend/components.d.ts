@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     BTab: typeof import('bootstrap-vue-3')['BTab']
     BTabs: typeof import('bootstrap-vue-3')['BTabs']
     Content: typeof import('./src/components/Content.vue')['default']
+    Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     MenuBar: typeof import('./src/components/tiptap/MenuBar.vue')['default']
     MenuItem: typeof import('./src/components/tiptap/MenuItem.vue')['default']

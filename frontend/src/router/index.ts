@@ -65,6 +65,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
     const token = localStorage.getItem("token")
     if (to.meta.auth && !token) {
         next('/login')
@@ -74,9 +75,13 @@ router.beforeEach((to, from, next) => {
         next('/')
         return
     }
+    if (!sessionStorage.getItem("currentUrl")) {
+        sessionStorage.setItem("currentUrl", "/")
+    }
     if (to.path !== '/login') {
         sessionStorage.setItem("currentUrl", to.path)
     }
+
     next()
 })
 

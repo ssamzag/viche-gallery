@@ -2,7 +2,7 @@
   <footer id="footer">
     <p class="copyright">
       DESIGN BY <a href="#">MINHO</a>
-      <a href="https://github.com/ssamzag/viche-gallery/license/license.md" > (LICENSE)</a>
+      <a href="https://github.com/ssamzag/viche-gallery/blob/main/licenses/licenses.md" > (LICENSE)</a>
     </p>
     <p class="copyright">
       COPYRIGHT 2021. VICHE ALL RIGHTS RESERVED.

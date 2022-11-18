@@ -48,11 +48,22 @@ const read = (id) => {
             class="small"
             body-border-variant="white"
             @click="read(post.id)"
+            style="margin-top: 0.75rem; margin-bottom: 0"
         >
           <b-row>
             <b-col align-self="center" class="p-0">
-              <h6>{{ post.title }}</h6>
-              <b-card-text class="small text-muted">비체•{{ post.createdDate.substring(0, 10) }}</b-card-text>
+              <h6 class="ellipsis" style="font-size: 15px">{{ post.title }}</h6>
+              <b-card-text class="small text-muted">
+                <div class="author-meta" style="font-size:16px">
+                  <span class="nickname">
+                    VICHE
+                  </span>
+                  <span class="date">
+                      {{ post.createdDate.substring(0, 10) }}
+                    </span>
+                </div>
+<!--                비체•{{ post.createdDate.substring(0, 10) }}-->
+              </b-card-text>
             </b-col>
           </b-row>
 
@@ -66,5 +77,47 @@ const read = (id) => {
 </template>
 
 <style>
+.ellipsis {
+  width:300px;
+  display:block;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
 
+.author-meta .date {
+  float: left;
+  margin-left: 10px;
+  font-size: 0.7em;
+  color: #999;
+  line-height: 20px;
+}
+.author-meta .nickname {
+  float: left;
+  font-size: 0.775em;
+  line-height: 20px;
+}
+.author-meta span {
+  display: inline-block;
+}
+.post-meta span:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 9px;
+  margin: 0 9px;
+  background-color: #b3b3b3;
+  vertical-align: middle;
+}
+.post-meta span:first-child:before {
+  content: none;
+}
+.author-meta .date:before, .author-meta .date a:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 9px;
+  margin-right: 10px;
+  background-color: #b2b2b2;
+}
 </style>

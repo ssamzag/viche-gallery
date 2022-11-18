@@ -119,6 +119,7 @@ const moveToList = function () {
     </b-row>
     <b-row>
       <div class="comments">
+        <h2>댓글<span class="count"><span id="commentCount58_0">0</span></span></h2>
         <div class="comment-list">
           <ul v-for="com in comments">
             <li id="comment14349589">
@@ -209,4 +210,5 @@ const moveToList = function () {
   white-space: break-spaces;
   line-height: 1.5;
 }
+
 </style>

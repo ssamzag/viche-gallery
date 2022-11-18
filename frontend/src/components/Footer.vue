@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer">
+  <footer id="footer" class="mx-4">
     <p class="copyright">
       DESIGN BY <a href="mailto:alsgh0345@gmail.com">MINHO</a>
       <a href="https://github.com/ssamzag/viche-gallery/blob/main/licenses/licenses.md" target="_blank"> (LICENSE)</a>
@@ -16,16 +16,16 @@
 
 <style>
 #footer {
-  padding: 18px 0;
-  background-color: #f0f0f0;
+  /*border-top: 1px solid #e6e6e6;*/
+  padding: 18px 0 18px 0;
+  background-color: #FFFFFF;
   display:block;
 }
 
 #footer .copyright {
-  text-align: center;
   font-size: 0.75em;
   color: #999;
-  margin:auto
+  margin-bottom: 3px
 }
 #footer a {
   text-decoration: none;

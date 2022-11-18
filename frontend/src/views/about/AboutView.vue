@@ -7,8 +7,8 @@
     <b-row>
       <Title title="INTRODUCE" sub-title="About Illustrator VICHE"></Title>
     </b-row>
-    <b-row style="max-width: 1130px; margin: auto;">
-      <b-container class="text-center" fluid="sm" style="color:#495057; ">
+    <b-row style="max-width: 1130px; ">
+      <b-container class="text-center" style="color:#495057; ">
         <b-row class="my-3" align-h="center">
           <b-col cols="">
             <a class="navbar-brand" href="https://www.youtube.com/channel/UCmF76cRFXJ2l_re7bt5S8qg" target="_blank">

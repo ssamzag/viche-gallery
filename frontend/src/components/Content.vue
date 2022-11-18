@@ -1,8 +1,6 @@
 <template>
-  <div style="padding-top:80px; margin-bottom: 20px">
-    <div class="mx-4" style="display:flex;">
+  <div class="mx-4"  style="padding-top:80px; display:flex;">
       <RouterView/>
-    </div>
   </div>
 </template>
 

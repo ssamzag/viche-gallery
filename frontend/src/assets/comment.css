@@ -4,7 +4,7 @@
 .comments {
     max-width: 860px;
     margin: 0 auto;
-    border-bottom: 1px solid #e6e6e6;
+
 }
 .comments .comment-list {
     font-size: 15px;
@@ -66,9 +66,6 @@ img, fieldset {
     font-size: 0.7em;
     color: #999;
     line-height: 20px;
-}
-.comments .comment-list ul li .author-meta span {
-    display: inline-block;
 }
 .comments .comment-list ul li .author-meta span {
     display: inline-block;
@@ -233,4 +230,15 @@ input, select, textarea, button {
     height: 9px;
     margin-right: 10px;
     background-color: #b2b2b2;
+}
+
+.comments h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.comments h2 .count {
+    margin-left: 4px;
+    color: #d4bca7;
 }

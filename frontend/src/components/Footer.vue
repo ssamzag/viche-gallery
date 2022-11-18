@@ -5,7 +5,7 @@
       <a href="https://github.com/ssamzag/viche-gallery/blob/main/licenses/licenses.md" target="_blank"> (LICENSE)</a>
     </p>
     <p class="copyright">
-      COPYRIGHT 2021. VICHE ALL RIGHTS RESERVED.
+      COPYRIGHT 2022. VICHE ALL RIGHTS RESERVED.
     </p>
 
   </footer>

@@ -1,7 +1,7 @@
 
 #vicheGallery
 ##Dependency License Report
-_2022-11-18 09:23:25 KST_
+_2022-11-18 11:43:39 KST_
 ## Apache License, Version 2.0
 
 **1** **Group:** `com.fasterxml.jackson.module` **Name:** `jackson-module-kotlin` **Version:** `2.13.4` 
@@ -83,4 +83,17 @@ _2022-11-18 09:23:25 KST_
 
 **14** **Group:** `mysql` **Name:** `mysql-connector-java` **Version:** `8.0.31` 
 
+## 네이버 나눔글꼴
+> https://help.naver.com/service/30016/contents/18088?osType=PC&lang=ko
 
+## BootstrapVue3
+> https://github.com/bootstrap-vue/bootstrap-vue/blob/master/LICENSE
+
+## vue-quill
+> https://github.com/CroudTech/vue-quill/blob/master/LICENSE
+
+## Font-Awesome
+> https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt
+
+## vue-easy-lightbox
+> https://github.com/XiongAmao/vue-easy-lightbox/blob/main/LICENSE

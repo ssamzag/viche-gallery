@@ -24,7 +24,9 @@ configurations {
 }
 
 licenseReport {
+
     outputDir = "$projectDir/licenses"
+    projects =  arrayOf(project) + project.allprojects
     renderers = arrayOf(InventoryMarkdownReportRenderer())
     filters = arrayOf(LicenseBundleNormalizer(), ExcludeTransitiveDependenciesFilter())
 }

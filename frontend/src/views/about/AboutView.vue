@@ -3,7 +3,7 @@
 
 <template>
 
-  <b-col  >
+  <b-col>
     <b-row>
       <Title title="INTRODUCE" sub-title="About Illustrator VICHE"></Title>
     </b-row>
@@ -43,14 +43,15 @@
                 :interval="5000"
                 no-touch="false"
                 class="carousel-fade">
+<!--              <b-carousel-slide-->
+<!--                  class="image-box"-->
+<!--                  active-->
+<!--                  img-src="/api/images/685a257.jpeg">-->
+<!--                &lt;!&ndash;          <h1>안녕하세요!</h1>&ndash;&gt;-->
+<!--                &lt;!&ndash;          <p>Some more detailed description or whatever content.</p>&ndash;&gt;-->
+<!--              </b-carousel-slide>-->
               <b-carousel-slide
-                  class="image-box"
                   active
-                  img-src="/api/images/685a257.jpeg">
-                <!--          <h1>안녕하세요!</h1>-->
-                <!--          <p>Some more detailed description or whatever content.</p>-->
-              </b-carousel-slide>
-              <b-carousel-slide
                   class="image-box"
                   img-src="/api/images/SCR-20221106-1sj.jpeg">
                 <!--          <h1>안녕하세요!</h1>-->

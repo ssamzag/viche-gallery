@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-top:80px">
+  <div style="padding-top:80px; margin-bottom: 20px">
     <div class="mx-4" style="display:flex;">
       <RouterView/>
     </div>

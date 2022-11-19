@@ -9,8 +9,6 @@ import com.vicheGallery.comment.dto.CommentsResponse
 import com.vicheGallery.post.application.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 import javax.servlet.http.HttpServletRequest
 
 
@@ -37,7 +35,7 @@ class CommentService(
                 content = req.content,
                 password = req.password,
                 nickname = req.nickname,
-                ip = RemoteAddr().etRemoteAddr(httpServletRequest)
+                ip = RemoteAddr().getClientIp(httpServletRequest)
             )
         )
     }

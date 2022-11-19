@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest
 
 
 class RemoteAddr {
-    fun etRemoteAddr(request: HttpServletRequest): String? {
-        var ip: String? = null
-        ip = request.getHeader("X-Forwarded-For")
+    fun getClientIp(request: HttpServletRequest): String? {
+        var ip = request.getHeader("x-original-forwarded-for")
+
         if (ip.isNullOrEmpty() || "unknown".equals(ip, ignoreCase = true)) {
             ip = request.getHeader("Proxy-Client-IP")
         }

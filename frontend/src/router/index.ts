@@ -9,6 +9,7 @@ import WorkWriteView from "../views/work/WriteView.vue";
 import WorkTestView from "../views/work/TestView.vue";
 import WorkReadView from "../views/work/ListView.vue";
 import LoginView from "../views/login/LoginView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,12 +17,13 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: AboutView,
+            component: WorkListView,
         },
         {
             path: "/post/write",
             name: "write",
-            component: PostWriteView
+            component: PostWriteView,
+            meta: {auth: true}
         },
         {
             path: "/post",
@@ -60,6 +62,11 @@ const router = createRouter({
             name: "login",
             component: LoginView,
             meta: {login: true}
+        },
+        {
+            path: "/:pathMatch(.*)*",
+            name: "notFound",
+            component: NotFoundView
         }
     ],
 });
@@ -84,5 +91,6 @@ router.beforeEach((to, from, next) => {
 
     next()
 })
+
 
 export default router;

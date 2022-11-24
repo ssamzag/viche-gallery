@@ -11,14 +11,22 @@
             <p class="title-p color-dark">{{ props.subTitle }}</p>
           </div>
           <div style="float:right" v-if="store.state.login">
-            <b-button v-if="props.write" :to="props.write.url" squared variant="outline-secondary"
-                      style="float:right; font-size: 13px; margin-left:10px">
-              {{ props.write.text }}
-            </b-button>
-            <b-button v-if="props.delete" @click="props.delete.click" squared variant="outline-secondary"
-                      style="float:right; font-size: 13px; margin-left:10px">
-              {{ props.delete.text }}
-            </b-button>
+            <div class="post-meta">
+              <b-button class="title-h1"
+                        v-if="props.write"
+                        :to="props.write.url"
+                        variant
+                        style="float:right; font-size: 10px;">
+                {{ props.write.text }}
+              </b-button>
+              <b-button class="title-h1"
+                        v-if="props.delete"
+                        @click="props.delete.click"
+                        variant
+                        style="float:right; font-size:10px; color:#d4bca7">
+                {{ props.delete.text }}
+              </b-button>
+            </div>
           </div>
         </div>
       </div>

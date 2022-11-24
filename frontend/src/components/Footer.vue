@@ -1,13 +1,15 @@
 <template>
   <footer id="footer" class="mx-4">
-    <p class="copyright">
-      DESIGN BY <a href="mailto:alsgh0345@gmail.com">MINHO</a>
-      <a href="https://github.com/ssamzag/viche-gallery/blob/main/licenses/licenses.md" target="_blank"> (LICENSE)</a>
-    </p>
+
     <p class="copyright">
       COPYRIGHT 2022. VICHE ALL RIGHTS RESERVED.
     </p>
-
+    <p class="copyright">
+      WEB DEV & DESIGNED BY <a href="mailto:alsgh0345@gmail.com">MINHO</a>
+    </p>
+    <p class="copyright">
+      <a href="https://github.com/ssamzag/viche-gallery/blob/main/licenses/licenses.md" target="_blank">The MIT License</a>
+    </p>
   </footer>
 </template>
 

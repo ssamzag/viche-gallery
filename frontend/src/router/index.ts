@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import PostWriteView from "../views/post/WriteView.vue";
 import PostListView from "../views/post/ListView.vue";
 import PostReadView from "../views/post/ReadView.vue";
@@ -7,7 +6,6 @@ import WorkListView from "../views/work/ListView.vue";
 import AboutView from "../views/about/AboutView.vue";
 import WorkWriteView from "../views/work/WriteView.vue";
 import WorkTestView from "../views/work/TestView.vue";
-import WorkReadView from "../views/work/ListView.vue";
 import LoginView from "../views/login/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
@@ -17,7 +15,7 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: WorkListView,
+            component: AboutView,
         },
         {
             path: "/post/write",
@@ -72,7 +70,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
     const token = localStorage.getItem("token")
     if (to.meta.auth && !token) {
         next('/login')

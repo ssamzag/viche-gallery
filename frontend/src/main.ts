@@ -2,6 +2,7 @@ import {createApp, ref} from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store"
+import axios from "@/api/axios"
 
 import BootstrapVue3 from 'bootstrap-vue-3'
 import { QuillEditor } from '@vueup/vue-quill'

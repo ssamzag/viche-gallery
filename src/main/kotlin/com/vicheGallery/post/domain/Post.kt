@@ -32,14 +32,12 @@ class Post (
 
         this.attachments = PostAttachments(
             attachments.map { m ->
-                PostAttachment(
-                    post = this,
-                    storedName = m
-                )
+                PostAttachment(post = this, storedName = m)
             }.toList()
         )
     }
     fun firstFile(): String? {
         return attachments?.firstFile()
     }
+
 }

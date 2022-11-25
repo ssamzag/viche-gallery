@@ -5,3 +5,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PostRepository : JpaRepository<Post, Long>
+{
+    override fun deleteById(id: Long)
+}

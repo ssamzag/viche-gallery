@@ -26,12 +26,7 @@ class UploadController(
         @ModelAttribute uploadForm: UploadForm,
         @AuthenticationPrincipal loginUser: LoginUser
     ): ResponseEntity<List<UploadFile?>> {
-        return try {
-            ResponseEntity.ok()
-                .body(uploadService.save(uploadForm))
-        } catch (e: FileSizeLimitExceededException) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null)
-        }
+        return ResponseEntity.ok().body(uploadService.save(uploadForm))
     }
 
     @GetMapping("/{filename}")
@@ -39,6 +34,13 @@ class UploadController(
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
             .body(uploadService.downloadImage(filename))
+    }
+
+    @GetMapping("/thumbnail/{filename}")
+    fun downloadThumbnailImage(@PathVariable filename: String): ResponseEntity<UrlResource> {
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+            .body(uploadService.downloadThumbnailImage(filename))
     }
 
     @GetMapping("/list")

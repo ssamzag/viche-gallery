@@ -26,13 +26,21 @@ configurations {
 licenseReport {
 
     outputDir = "$projectDir/licenses"
-    projects =  arrayOf(project) + project.allprojects
+    projects = arrayOf(project) + project.allprojects
     renderers = arrayOf(InventoryMarkdownReportRenderer())
     filters = arrayOf(LicenseBundleNormalizer(), ExcludeTransitiveDependenciesFilter())
 }
 
 repositories {
     mavenCentral()
+    google()
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
 }
 
 dependencies {
@@ -47,7 +55,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("com.google.code.gson:gson:2.10")
     runtimeOnly("com.h2database:h2")
-//    annotationProcessor("org.project-lombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 //    testImplementation("org.springframework.security:spring-security-test")
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
@@ -56,8 +63,18 @@ dependencies {
     kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 
     // jwt
-    implementation ("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     implementation("mysql:mysql-connector-java")
+
+    //devtools
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly("org.springframework.boot:spring-boot-devtools")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
+
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
 }
 
 tasks.withType<KotlinCompile> {

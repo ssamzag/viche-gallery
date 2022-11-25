@@ -59,7 +59,6 @@ const handleFileUpload = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
         storedFiles = ref([]);
         [...response.data].forEach(res => {
           storedFiles.value.push(res.storeFileName)

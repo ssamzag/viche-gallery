@@ -3,6 +3,7 @@ package com.vicheGallery.comment.domain
 import com.vicheGallery.BaseEntity
 import io.lettuce.core.dynamic.annotation.CommandNaming.Strategy
 import java.sql.Blob
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -16,6 +17,7 @@ class Comment(
     val content: String,
     val userId: Long?,
     var nickname: String?,
+    @Column(length = 256)
     val password: String?,
     val ip: String?
 ) : BaseEntity() {

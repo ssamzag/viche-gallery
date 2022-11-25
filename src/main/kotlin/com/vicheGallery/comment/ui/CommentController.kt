@@ -1,6 +1,7 @@
 package com.vicheGallery.comment.ui
 
 import com.vicheGallery.comment.application.CommentService
+import com.vicheGallery.comment.domain.CommentRepository
 import com.vicheGallery.comment.dto.CommentRequest
 import com.vicheGallery.comment.dto.CommentsResponse
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,6 +29,11 @@ class CommentController(
     @GetMapping("/{postId}")
     fun read(@PathVariable postId: Long) : ResponseEntity<CommentsResponse> {
         return ResponseEntity.ok().body(CommentService.findByPostId(postId))
+    }
 
+    @DeleteMapping("/{commentId}")
+    fun delete(@PathVariable commentId: Long, @RequestParam password: String): ResponseEntity<Any> {
+        CommentService.delete(commentId, password);
+        return ResponseEntity.noContent().build()
     }
 }

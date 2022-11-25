@@ -26,11 +26,22 @@ class UploadService(
 
     private fun toImageFileList(storeFiles: List<UploadFile?>): List<ImageFile> {
         return storeFiles.map { s ->
-            ImageFile(storeImageName = s!!.storeFileName, uploadImageName = s.uploadFileName!!, uploadBy = "")
+            ImageFile(
+                storeImageName = s!!.storeFileName,
+                uploadImageName = s.uploadFileName!!,
+                uploadBy = "")
         }.toList()
     }
 
     fun downloadImage(filename: String): UrlResource {
-        return UrlResource("file:" + fileStore.fullPath(filename))
+        return UrlResource("file:" + fileStore.storeFullPath(filename))
+    }
+
+    fun downloadThumbnailImage(filename: String): UrlResource {
+        if (!fileStore.mediumFileExists(filename)) {
+            fileStore.storeMediumFile(filename)
+        }
+
+        return UrlResource("file:" + fileStore.mediumFullPath(filename))
     }
 }

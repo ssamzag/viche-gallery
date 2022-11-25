@@ -1,18 +1,29 @@
 package com.vicheGallery.images.domain
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.lang.IllegalArgumentException
 import java.util.*
 
 @Component
 class FileStore(
-    @Value("\${imageFile.dir}")
-    private val fileDir: String
+    @Value("\${imageFile.dir.original}")
+    private val storeFileDir: String,
+    @Value("\${imageFile.dir.thumbnailMedium}")
+    private val mediumFileDir: String,
+    @Value("\${imageFile.dir.thumbnailSmall}")
+    private val smallFileDir: String,
+    @Autowired private val resizeImage: ResizeImage
 ) {
-    fun fullPath(fileName: String): String {
-        return fileDir + fileName
+    fun storeFullPath(fileName: String): String {
+        return storeFileDir + fileName
+    }
+
+    fun mediumFullPath(fileName: String): String {
+        return mediumFileDir + fileName
     }
 
     fun storeFiles(multipartFiles: List<MultipartFile>): List<UploadFile?> {
@@ -21,25 +32,37 @@ class FileStore(
 
     fun storeFile(multipartFile: MultipartFile): UploadFile? {
         if (multipartFile.isEmpty) {
-            return null
+            throw IllegalArgumentException("파일이 존재하지 않습니다.")
         }
+        val originalFilename = multipartFile.originalFilename!!
+        val storeFileName = createNewFileName(originalFilename)
 
-        val originalFilename = multipartFile.originalFilename
-        val storeFileName = createStoreFileName(originalFilename)
-
-        multipartFile.transferTo(File(fullPath(storeFileName)))
+        multipartFile.transferTo(File(storeFullPath(storeFileName)))
 
         return UploadFile(originalFilename, storeFileName)
     }
 
-    private fun createStoreFileName(originalFilename: String?): String {
+    fun storeMediumFile(storeFilename: String) {
+        resizeImage.imageResize(
+            storeFullPath(storeFilename),
+            extractExt(storeFilename),
+            mediumFullPath(storeFilename),
+        )
+    }
+
+    private fun createNewFileName(originalFilename: String): String {
         return UUID.randomUUID()
             .toString()
             .substring(0, 7) + "." + extractExt(originalFilename)
     }
 
-    private fun extractExt(originalFilename: String?): String? {
-        val pos = originalFilename?.lastIndexOf(".")
-        return originalFilename?.substring(pos!! + 1)
+    private fun extractExt(originalFilename: String): String {
+        val pos = originalFilename.lastIndexOf(".")
+        return originalFilename.substring(pos + 1)
     }
+
+    fun mediumFileExists(filename: String): Boolean {
+        return File(mediumFullPath(filename)).exists()
+    }
+
 }

@@ -76,6 +76,25 @@ const handleFileUpload = () => {
         alert("업로드 실패")
       })
 }
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{'list': 'ordered'}, {'list': 'bullet'}],
+  [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+  [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+  [{'direction': 'rtl'}],                         // text direction
+
+  [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+  [{'header': [1, 2, 3, 4, 5, 6, false]}],
+
+  [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+  [{'font': []}],
+  [{'align': []}],
+  ['video', 'link'],
+
+  ['clean']                                         // remove formatting button
+];
 </script>
 
 <template>
@@ -91,7 +110,7 @@ const handleFileUpload = () => {
                      ref="quill"
                      contentType="html"
                      theme="snow"
-                     toolbar="essential"
+                     :toolbar="toolbarOptions"
                      style="height:500px"/>
       </div>
     </b-row>
@@ -99,7 +118,7 @@ const handleFileUpload = () => {
       <input multiple ref="file" v-on:change="handleFileUpload" type="file">
     </b-row>
     <b-row style="position: relative; float:right">
-      <div class="" >
+      <div class="">
         <b-button squared variant="outline-secondary" @click="write()">글 작성하기</b-button>
       </div>
     </b-row>

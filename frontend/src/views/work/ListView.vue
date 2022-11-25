@@ -1,9 +1,11 @@
 <script setup type="ts">
-import {defineComponent, onMounted, ref, inject} from "vue";
+import {defineComponent, onMounted, ref, inject, computed} from "vue";
 import axios from "axios";
 import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {useRouter} from "vue-router";
+import api from "@/api";
+import {mapGetters, useStore} from "vuex";
 
 const works = ref([])
 const imgsRef = ref([])
@@ -27,40 +29,34 @@ onMounted(() => {
   getList()
 })
 
-const getList = () => {
-  axios.get(`/api/works`).then(response => {
-    works.value = []
-    response.data
-        .forEach((r) => {
-          r.attachments = r.attachments
-              .map(fileName => '/api/images/' + fileName)
-          r.attachments
-              .forEach(src => imgsRef.value
-                  .push({title: r.title, src: src}))
+const store = useStore();
+computed(() => store.state.login)
 
-          works.value.push(r)
-          r.imageStartIndex = index
-          index += r.attachments.length
-        })
-  })
+const getList = () => {
+  api.get(`/api/works`)
+      .then(response => {
+        works.value = []
+        response.data
+            .forEach((r) => {
+              // r.attachments = r.attachments.map(fileName => '/api/images/' + fileName)
+              r.attachments.forEach(src =>
+                  imgsRef.value.push({title: r.title, src: "/api/images/" + src}))
+
+              works.value.push(r)
+              r.imageStartIndex = index
+              index += r.attachments.length
+            })
+      })
 }
 
 const deleteWork = (id) => {
   const result = confirm("삭제 하실라우?")
   if (result) {
-    axios.delete(`/api/works/${id}`,
-        {
-          headers: {
-            authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
+    api.delete(`/api/works/${id}`)
         .then((res) => {
-          console.log(res)
           getList()
-          //router.go()
         })
         .catch(() => alert("삭제 실패"))
-
   }
 }
 const deleteToggle = inject('login')
@@ -74,7 +70,8 @@ const deleteButton = () => {
 <template>
   <b-col>
     <b-row>
-      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'WRITE'}" :delete="{click: deleteButton, text:'DELETE'}"></Title>
+      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'WRITE'}"
+             :delete="{click: deleteButton, text:'DELETE'}"></Title>
     </b-row>
     <b-row>
       <div class="gallery-container" style="display: block;">
@@ -83,10 +80,11 @@ const deleteButton = () => {
             <a @click="showImg(work.imageStartIndex)" class="project-image" target="_self">
               <ul class="icons-list"
                   v-if="deleteToggle" style="z-index: 4">
-                  <b-button style="font-size:12px"
-                            squared
-                      variant="danger"
-                      @click.stop="deleteWork(work.workId)">DEL</b-button>
+                <b-button style="font-size:12px"
+                          squared
+                          variant="danger"
+                          @click.stop="deleteWork(work.workId)">DEL
+                </b-button>
               </ul>
               <ul class="icons-list">
                 <li v-if="work.attachments.length > 1">
@@ -100,7 +98,7 @@ const deleteButton = () => {
                   <div class="name">Viche</div>
                 </div>
               </div>
-              <img alt="blueberry sisters" class="image" :src="work.attachments[0]"
+              <img alt="blueberry sisters" class="image" :src="'/api/images/thumbnail/' + work.attachments[0]"
                    style="width:100%; height:100%; object-fit:cover;">
             </a>
           </div>

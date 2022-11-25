@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
 import org.springframework.transaction.annotation.Transactional
 
+//엔그라인더
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest
 @Transactional
@@ -29,7 +30,6 @@ internal class PostServiceTest(
     fun writeTest() {
         val write = postService.write(PostRequest("제목", "내용", null))
         val post = postRepository.findById(write!!).get()
-
         assertThat(post.title).isEqualTo("제목")
         assertThat(post.content).isEqualTo("내용")
     }

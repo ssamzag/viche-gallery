@@ -1,8 +1,8 @@
 <script setup type="ts">
-import axios from "axios";
 import {inject, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore, mapActions, mapGetters, mapMutations} from 'vuex'
+import AuthService from "@/api/modules/auth";
 
 const userid = ref("")
 const password = ref("")
@@ -10,14 +10,18 @@ const router = useRouter();
 const store = useStore();
 
 const login = () => {
-  axios.post("/api/auth/login/token",
-      {userid: userid.value, password: password.value})
+  AuthService.login({
+    userid: userid.value,
+    password: password.value
+  })
       .then((req) => {
         localStorage.setItem('token', req.data.accessToken)
         store.commit("login")
         router.replace(sessionStorage.getItem("currentUrl"))
       })
-      .catch(error => console.log(error))
+      .catch((error) => {
+        alert("로그인 실패")
+      })
 }
 
 </script>

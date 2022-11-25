@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
-import {ElMessage} from "element-plus";
-import {h, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import axios from "axios";
 
@@ -10,8 +9,6 @@ const router = useRouter()
 
 onMounted(() => {
   axios.get(`/api/posts`).then(response => {
-    console.log(response);
-
     [...response.data.postResponses].forEach(r => posts.value.push(r))
   })
 
@@ -43,7 +40,7 @@ const read = (id) => {
             toggleable="md"
             border-variant="white" bg-variant="white" text-variant="dark"
             v-for="post in posts"
-            :img-src="'/api/images/' + post.thumbnailFile"
+            :img-src="'/api/images/thumbnail/' + post.thumbnailFile"
             img-alt="Image"
             class="small"
             body-border-variant="white"

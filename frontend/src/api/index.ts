@@ -1,12 +1,9 @@
-// import Vue from 'vue'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 
 const ApiService = {
     init() {
-        // Vue.use(VueAxios, axios)
     },
-    get(uri) {
+    get(uri: String) {
         return axios.get(`${uri}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` || '',
@@ -14,24 +11,24 @@ const ApiService = {
             }
         })
     },
-    login(uri, config) {
+    login(uri: string, config: object) {
         return axios.post(`${uri}`, {}, config)
     },
-    post(uri, params) {
+    post(uri: string, params: object) {
         return axios.post(`${uri}`, params, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` || ''
             }
         })
     },
-    update(uri, params) {
+    update(uri: string, params: object) {
         return axios.put(uri, params, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` || ''
             }
         })
     },
-    delete(uri) {
+    delete(uri: string) {
         return axios.delete(uri, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` || ''

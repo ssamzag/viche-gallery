@@ -3,6 +3,7 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
+import api from "@/api";
 
 const router = useRouter()
 
@@ -22,9 +23,17 @@ const post = ref({
 
 const comments = ref([])
 
+const deletePost = () => {
+  api.delete(`/api/posts/${props.postId}`)
+      .then(() => router.replace("/post"))
+      .catch(() => {
+        alert("삭제 실패");
+      })
+
+}
 
 const setPost = () => {
-  axios.get(`/api/posts/${props.postId}`).then(response => {
+  api.get(`/api/posts/${props.postId}`).then(response => {
     post.value.title = response.data.title
     // const clean = sanitizeHtml(response.data.content, {
     //   allowedTags: ['p', 'b', 'i', 'em', 'strong', 'a', 'br', 'li', 'blockquote', 'h1', 'ol',
@@ -40,15 +49,25 @@ const setPost = () => {
 }
 
 const setComments = () => {
-  axios.get(`/api/comment/${props.postId}`)
+  api.get(`/api/comment/${props.postId}`)
       .then(response => {
-        console.log(response.data)
         comments.value = []
         response.data.comments.forEach(r => {
-
           comments.value.push(r)
         })
       })
+}
+
+const deleteComment = (commentId) => {
+  axios.delete(`/api/comment/${commentId}?password=${password.value}`, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }
+  }).then(() => {
+    setComments()
+  }).catch((res) => {
+    alert(res.response.data)
+  })
 }
 
 onMounted(() => {
@@ -97,12 +116,15 @@ const moveToList = function () {
           <b-card-text class="text-muted post-meta">
             <span class="post-meta">비체</span>
             <span class="post-meta">2022-02</span>
-            <span class="post-meta" v-if="store.state.login">
-              <a href="post/modify">수정</a>
-            </span>
-            <span class="post-meta" v-if="store.state.login">
-              <a href="post/delete">삭제</a>
-            </span>
+            <div class="post-meta" v-if="store.state.login">
+              <span>
+                <a href="/post/modify">수정</a>
+              </span>
+                <span>
+                <a href="#" @click="deletePost">삭제</a>
+              </span>
+            </div>
+
           </b-card-text>
         </div>
       </b-col>
@@ -139,7 +161,7 @@ const moveToList = function () {
                   <a href="#" @click="updateComment();">수정</a>
                 </span>
                 <span class="post-meta">
-                  <a href="#" @click="deleteComment();">삭제</a>
+                  <a href="#" @click="deleteComment(com.id);">삭제</a>
                 </span>
               </div>
             </li>

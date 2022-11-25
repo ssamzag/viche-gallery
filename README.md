@@ -1,11 +1,14 @@
 # viche-gallery
-- 일러스트레이터 작가 VICHE 개인 웹사이트
+
+- 일러스트레이터 작가 VICHE 온라인 포트폴리오 웹사이트
+  - https://vichegallery.com/
+
 
 - 진행중인 작업
   - 백엔드
     - [ ] 인증/인가
       - [x] OAuth2 
-      - [ ] 관리자: 글쓰기 & 댓글 수정 / 삭제
+      - [x] 관리자: 글쓰기 & 댓글 수정 / 삭제
       - [ ] 일반회원: 본인 댓글 수정 삭제
     - [x] 로그인 요청
     - [ ] 회원정보
@@ -50,3 +53,7 @@
         - [ ] 댓글 구현
         - [ ] 수정 화면
         - [X] 삭제
+  - 서버
+    - [x] Nginx ReverseProxy
+      - [x] 사용자 Endpoint IP 가져오기 위한 X-Forward-For Header
+      - 

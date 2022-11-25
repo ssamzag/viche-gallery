@@ -1,17 +1,16 @@
 import { createStore } from 'vuex';
-import {ref} from "vue";
 
 const store = createStore ({
-    state: { // [변수들의 집합]
+    state: {
         accessToken: null,
         login: !!localStorage.getItem('token')
     },
-    getters: { // [state의 변수들을 get 호출]
+    getters: {
         accessToken(state) {
             return state.accessToken
         }
     },
-    mutations: { // [변수들을 조작하는 함수들]
+    mutations: {
         login(state) {
             state.login = true
         },

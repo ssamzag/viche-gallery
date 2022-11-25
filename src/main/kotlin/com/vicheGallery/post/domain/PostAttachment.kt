@@ -10,7 +10,9 @@ class PostAttachment(
     val id: Long? = null,
     val storedName: String,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "post_id")
-    val post: Post? = null
-) : BaseEntity()
+    var post: Post?= null
+) : BaseEntity() {
+
+}

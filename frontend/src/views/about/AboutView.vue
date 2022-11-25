@@ -12,27 +12,27 @@
         <b-row class="my-3" align-h="center">
           <b-col cols="">
             <a class="navbar-brand" href="https://www.youtube.com/channel/UCmF76cRFXJ2l_re7bt5S8qg" target="_blank">
-              <font-awesome-icon icon="fa-brands fa-youtube" size="2x"/>
+              <font-awesome-icon class="icon-size" icon="fa-brands fa-youtube"/>
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="https://twitter.com/VICHE_00" target="_blank">
-              <font-awesome-icon icon="fa-brands fa-twitter" size="2x"/>
+              <font-awesome-icon class="icon-size" icon="fa-brands fa-twitter" />
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="https://www.instagram.com/viche_22/" target="_blank">
-              <font-awesome-icon icon="fa-brands fa-instagram" size="2x"/>
+              <font-awesome-icon class="icon-size" icon="fa-brands fa-instagram" />
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="mailto:rhkfdkr@naver.com" target="_blank">
-              <font-awesome-icon icon="fa-solid fa-envelope" size="2x"/>
+              <font-awesome-icon class="icon-size" icon="fa-solid fa-envelope" />
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="" target="_blank">
-              <font-awesome-icon icon="fa-solid fa-comment" size="2x"/>
+              <font-awesome-icon class="icon-size" icon="fa-solid fa-comment" />
             </a>
           </b-col>
         </b-row>
@@ -77,6 +77,9 @@
 </template>
 
 <style>
+.icon-size {
+  font-size: 1.5em
+}
 .image-box {
   height: 100%;
   overflow: hidden;

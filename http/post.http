@@ -1,0 +1,8 @@
+POST {{host}}/posts
+Content-Type: application/json
+Authorization: aaaa
+
+{
+  "title": "제목",
+  "content": "추천메뉴"
+}

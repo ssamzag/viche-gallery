@@ -46,3 +46,5 @@ fronted/.eslintrc.js
 
 ## config
 src/main/resources/config/
+application-local.yml
+data.sql

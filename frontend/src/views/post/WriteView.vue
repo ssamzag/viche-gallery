@@ -98,7 +98,7 @@ const toolbarOptions = [
 </script>
 
 <template>
-  <b-col>
+  <b-col style="max-width:850px">
     <b-row>
       <div>
         <input v-model="title" placeholder="제목을 입력해 주세요" style="width:100%"/>

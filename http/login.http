@@ -1,0 +1,7 @@
+POST {{host}}/auth/login/token
+Content-Type: application/json
+
+{
+  "userid": "test",
+  "password": "1234"
+}

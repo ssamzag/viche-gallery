@@ -5,7 +5,6 @@ import PostReadView from "../views/post/ReadView.vue";
 import WorkListView from "../views/work/ListView.vue";
 import AboutView from "../views/about/AboutView.vue";
 import WorkWriteView from "../views/work/WriteView.vue";
-import WorkTestView from "../views/work/TestView.vue";
 import LoginView from "../views/login/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
@@ -49,11 +48,6 @@ const router = createRouter({
             name: "workWrite",
             component: WorkWriteView,
             meta: {auth: true}
-        },
-        {
-            path: "/work/test",
-            name: "test",
-            component: WorkTestView
         },
         {
             path: "/Login",

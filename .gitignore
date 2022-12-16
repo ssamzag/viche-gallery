@@ -43,3 +43,6 @@ fronted/.eslintrc.js
 
 ## etc
 *.DS_Store
+
+## config
+src/main/resources/config/

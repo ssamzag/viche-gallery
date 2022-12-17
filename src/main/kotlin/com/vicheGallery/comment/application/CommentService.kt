@@ -105,7 +105,7 @@ class CommentService(
 
     private fun validate(comment: Comment, password: String) {
         if (comment.password != this.password.encrypt(password)) {
-            throw IllegalArgumentException("암호가 확인해 주세요.")
+            throw IllegalArgumentException("암호를 확인해 주세요.")
         }
         if (comment.deleted) {
             throw IllegalArgumentException("삭제된 댓글입니다.")

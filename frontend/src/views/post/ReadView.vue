@@ -148,7 +148,6 @@ const insertComment = () => {
     password.value = "";
     setComments()
   }).catch((response) => {
-    console.log(response)
     alert(response.response.data.validation[0].message)
   })
 }
@@ -161,7 +160,12 @@ const updateComment = () => {
     commentModifyModal.value = false
     setComments()
   }).catch((res) => {
-    alert(res.response.data.validation[0].message)
+    if (res.response.data.validation) {
+      alert(res.response.data.validation[0].message)
+      return
+    }
+
+    alert(res.response.data)
   })
 }
 

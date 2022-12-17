@@ -39,7 +39,7 @@ const login = () => {
         </div>
 
         <div class="my-1">
-          <b-form-input type="password" v-model="password" placeholder="Enter your password"></b-form-input>
+          <b-form-input type="password" v-model="password" v-on:keyup.enter="login" placeholder="Enter your password"></b-form-input>
         </div>
         <div class="my-1">
           <b-button @click="login">LOGIN</b-button>

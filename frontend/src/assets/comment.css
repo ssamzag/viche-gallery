@@ -4,7 +4,6 @@
 .comments {
     max-width: 860px;
     margin: 0 auto;
-
 }
 .comments .comment-list {
     font-size: 15px;
@@ -25,13 +24,35 @@ ul {
     margin-bottom: 6px;
     overflow: hidden;
 }
-.comments .comment-list ul li {
+.comments .comment-list ul li.comment {
     padding: 30px 0 25px;
     border-top: 1px solid #e6e6e6;
     position: relative;
     min-height: 48px;
 }
+.comments .comment-list ul ul li.comment {
+    padding: 30px 0 25px;
+    border-top: 1px solid #e6e6e6;
+    position: relative;
+    min-height: 48px;
+}
+
+.comments .comment-list ul ul li{
+    padding: 30px 0 25px;
+    position: relative;
+    min-height: 48px;
+}
+
 .comments .comment-list ul li .author-meta {
+    position: absolute;
+    overflow: hidden;
+    top: 30px;
+    height: 48px;
+    left: 0;
+    right: 0;
+    padding: 4px 0 0 60px;
+}
+.comments .comment-list ul ul li .author-meta {
     position: absolute;
     overflow: hidden;
     top: 30px;
@@ -48,16 +69,34 @@ ul {
     height: 48px;
     border-radius: 50%;
 }
+
+.comments .comment-list ul ul li .author-meta .avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
 img, fieldset {
     border: none;
     vertical-align: top;
 }
-.comments .comment-list ul li .author-meta .nickname {
+.comments .comment-list ul li .author-meta .nickname,
+.comments .comment-list ul ul li .author-meta .nickname{
     float: left;
     font-size: 0.775em;
     line-height: 20px;
+    font-weight: 700;
+    width:100%;
+    height: 100%
 }
+
 .comments .comment-list ul li .author-meta span {
+    display: inline-block;
+}
+.comments .comment-list ul ul li .author-meta span {
     display: inline-block;
 }
 .comments .comment-list ul li .author-meta .date {
@@ -67,12 +106,19 @@ img, fieldset {
     color: #999;
     line-height: 20px;
 }
-.comments .comment-list ul li .author-meta span {
-    display: inline-block;
+.comments .comment-list ul li .comment-meta {
+    position:absolute;
+    padding-top: 30px;
 }
+.comments .comment-list ul li .comment-meta .date {
+    font-size: 0.8em;
+    color: #999;
+    padding-left: 60px;
+}
+
 .comments .comment-list ul li .control {
     position: absolute;
-    top: 10px;
+    top: 14px;
     right: 0;
 }
 .comments .comment-list ul li .control a {
@@ -121,11 +167,11 @@ input, select, textarea, button {
     border-radius: 0;
 }
 .comments .comment-list ul li p {
-    position: relative;
-    margin: 29px 0 0 60px;
+    margin: 70px 0 0 0px;
     font-size: 0.875em;
-    line-height: 1.5714;
+    /*line-height: 1.5714;*/
     color: #666;
+    white-space: pre-wrap;
 }
 .post-meta span:before {
     content: "";
@@ -136,10 +182,23 @@ input, select, textarea, button {
     background-color: #b3b3b3;
     vertical-align: middle;
 }
+.comment-meta span:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 9px;
+    margin: 0 10px;
+    background-color: #b3b3b3;
+    vertical-align: middle;
+}
 .post-meta {
     margin: 18px 0 -2px;
     font-size: 1em;
     color: #b2b2b2;
+}
+span a {
+    text-decoration: none;
+    color: #d4bca7;
 }
 .post-meta a {
     text-decoration: none;
@@ -148,7 +207,14 @@ input, select, textarea, button {
 .post-meta span:first-child:before {
     content: none;
 }
+.comment-meta span:first-child:before {
+    content: none;
+}
 .comments .comment-list ul li .author-meta a {
+    text-decoration: none;
+    color: #000;
+}
+.comments .comment-list ul ul li .author-meta a {
     text-decoration: none;
     color: #000;
 }

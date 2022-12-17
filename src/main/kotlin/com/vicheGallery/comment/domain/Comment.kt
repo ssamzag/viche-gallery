@@ -1,25 +1,39 @@
 package com.vicheGallery.comment.domain
 
 import com.vicheGallery.BaseEntity
-import io.lettuce.core.dynamic.annotation.CommandNaming.Strategy
-import java.sql.Blob
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import org.jetbrains.annotations.NotNull
+import javax.persistence.*
+import javax.validation.constraints.NotBlank
 
 @Entity
 class Comment(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ref_comment_id")
+    val refComment: Comment? = null,
+
+    val replyToNick: String? = null,
+
     val postId: Long,
-    val content: String,
-    val userId: Long?,
+
+    @Lob
+    @NotNull
+    @Column(nullable = false)
+    var content: String,
+    val userId: Long? = null,
+
+    @Column(length = 10, nullable = false)
+    @NotNull
     var nickname: String?,
-    @Column(length = 256)
+
+    @Column(length = 256, nullable = false)
     val password: String?,
+
     val ip: String?
 ) : BaseEntity() {
-
+    fun updateContent(content: String) {
+        this.content = content
+    }
 }

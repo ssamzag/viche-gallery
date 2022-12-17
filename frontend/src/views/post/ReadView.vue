@@ -221,9 +221,9 @@ const closeRemoveModal = (event: any) => {
         <h2 class="title">{{ post.title }}</h2>
         <div class="sub">
           <b-card-text class="text-muted post-meta">
-            <span class="post-meta">비체</span>
-            <span class="post-meta">2022-02</span>
-            <div class="post-meta" v-if="store.state.login">
+            <span>비체</span>
+            <span>2022-02</span>
+            <div class="post-meta" v-if="store.state.login" style="float:right">
               <span>
                 <a href="javascript:void(0)" @click="updatePost">수정</a>
               </span>

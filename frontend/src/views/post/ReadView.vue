@@ -413,10 +413,10 @@ const closeRemoveModal = (event: any) => {
         </div>
         <div class="post-meta">
           <span>
-            <a href="#" @click="deleteComment">삭제하기</a>
+            <a href="javascript:void(0)" @click="deleteComment">삭제하기</a>
           </span>
           <span>
-            <a href="#" @click="commentRemoveModal = false">취소</a>
+            <a href="javascript:void(0)" @click="commentRemoveModal = false">취소</a>
           </span>
         </div>
       </div>

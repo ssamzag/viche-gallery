@@ -17,7 +17,7 @@ const indexRef = ref(0) // default 0
 
 const onShow = () => visibleRef.value = true
 const onHide = () => visibleRef.value = false
-const onMoveDisable = () => moveRef.value = false
+const onMoveDisable = () => moveRef.value = true
 const router = useRouter()
 
 const showImg = (index) => {
@@ -83,7 +83,8 @@ const deleteButton = () => {
                 <b-button style="font-size:12px"
                           squared
                           variant="danger"
-                          @click.stop="deleteWork(work.workId)">DEL
+                          @click.stop="deleteWork(work.workId)">
+                  DEL
                 </b-button>
               </ul>
               <ul class="icons-list">
@@ -113,7 +114,6 @@ const deleteButton = () => {
         :imgs="imgsRef"
         :index="indexRef"
         @hide="onHide"
-        :moveDisabled="onMoveDisable"
     ></vue-easy-lightbox>
   </div>
 </template>

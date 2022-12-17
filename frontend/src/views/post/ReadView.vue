@@ -179,8 +179,7 @@ const deleteComment = () => {
     commentRemoveModal.value = false
     removeCommendId.value = 0
   }).catch((res) => {
-    console.log(res)
-    alert(res.response.data)
+    alert("암호를 확인해 주세요")
   })
 }
 

@@ -32,7 +32,6 @@ const setPost = () => {
 }
 
 const modify = () => {
-  alert(title.value)
   axios.put(`/api/posts/${props.postId}`, {
         title: title.value,
         content: content.value,

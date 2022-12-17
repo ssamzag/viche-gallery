@@ -1,9 +1,7 @@
 package com.vicheGallery.post.domain
 
-import javax.persistence.CascadeType
 import javax.persistence.CascadeType.ALL
 import javax.persistence.Embeddable
-import javax.persistence.FetchType
 import javax.persistence.FetchType.LAZY
 import javax.persistence.OneToMany
 

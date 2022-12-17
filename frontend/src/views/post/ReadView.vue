@@ -67,13 +67,19 @@ const comments = ref([
   }
 ])
 
+const updatePost = () => {
+  router.replace(`/post/modify/${props.postId}`)
+}
 const deletePost = () => {
+  const isDeleted = confirm("삭제 하실라우?")
+  if (!isDeleted) {
+    return
+  }
   api.delete(`/api/posts/${props.postId}`)
       .then(() => router.replace("/post"))
       .catch(() => {
         alert("삭제 실패");
       })
-
 }
 
 const setPost = () => {
@@ -155,7 +161,7 @@ const updateComment = () => {
     commentModifyModal.value = false
     setComments()
   }).catch((res) => {
-    alert(res.response.data)
+    alert(res.response.data.validation[0].message)
   })
 }
 
@@ -169,6 +175,7 @@ const deleteComment = () => {
     commentRemoveModal.value = false
     removeCommendId.value = 0
   }).catch((res) => {
+    console.log(res)
     alert(res.response.data)
   })
 }
@@ -218,7 +225,7 @@ const closeRemoveModal = (event: any) => {
             <span class="post-meta">2022-02</span>
             <div class="post-meta" v-if="store.state.login">
               <span>
-                <a href="/post/modify">수정</a>
+                <a href="javascript:void(0)" @click="updatePost">수정</a>
               </span>
               <span>
                 <a href="javascript:void(0)" @click="deletePost">삭제</a>
@@ -486,6 +493,10 @@ const closeRemoveModal = (event: any) => {
   font-weight: 700;
   padding-right: 4px;
   color: #2761c2
+}
+
+.content p {
+  margin-bottom: 0;
 }
 
 </style>

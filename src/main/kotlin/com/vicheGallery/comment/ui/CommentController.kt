@@ -1,7 +1,6 @@
 package com.vicheGallery.comment.ui
 
 import com.vicheGallery.comment.application.CommentService
-import com.vicheGallery.comment.domain.CommentRepository
 import com.vicheGallery.comment.dto.CommentRequest
 import com.vicheGallery.comment.dto.CommentUpdateRequest
 import com.vicheGallery.comment.dto.CommentsResponse
@@ -50,6 +49,7 @@ class CommentController(
         commentService.update(commentId, request);
         return ResponseEntity.noContent().build()
     }
+
     @DeleteMapping("/{commentId}")
     fun delete(@PathVariable commentId: Long, @RequestParam password: String): ResponseEntity<Any> {
         commentService.delete(commentId, password);

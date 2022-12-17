@@ -2,6 +2,7 @@ package com.vicheGallery.comment.domain
 
 import com.vicheGallery.BaseEntity
 import org.jetbrains.annotations.NotNull
+import org.springframework.objenesis.instantiator.basic.DelegatingToExoticInstantiator
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
@@ -9,7 +10,8 @@ import javax.validation.constraints.NotBlank
 class Comment(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-
+    @Column(nullable = false)
+    var deleted: Boolean = false,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ref_comment_id")
     val refComment: Comment? = null,
@@ -35,5 +37,9 @@ class Comment(
 ) : BaseEntity() {
     fun updateContent(content: String) {
         this.content = content
+    }
+
+    fun delete() {
+        this.deleted = true
     }
 }

@@ -1,30 +1,27 @@
 package com.vicheGallery.post.application
 
 import com.vicheGallery.post.domain.Post
-import com.vicheGallery.post.dto.PostRequest
 import com.vicheGallery.post.domain.PostRepository
-import com.vicheGallery.post.dto.PostRead
-import com.vicheGallery.post.dto.PostResponse
-import com.vicheGallery.post.dto.PostsResponse
+import com.vicheGallery.post.dto.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.lang.IllegalArgumentException
+import kotlin.IllegalArgumentException
 
 @Service
 class PostService(
     @Autowired val postRepository: PostRepository
 ) {
-    @Transactional(readOnly = false)
+    @Transactional
     fun write(postRequest: PostRequest): Long? {
         val post = postRepository.save(postRequest.toPost())
         return post.id
     }
 
+    @Transactional(readOnly = false)
     fun findByPostIdOrThrow(postId: Long): PostRead {
-        val post = postRepository.findByIdOrNull(postId)
+        val post = postRepository.findByIdAndDeletedFalse(postId)
             ?: throw IllegalArgumentException("존재하지 않는 글입니다.")
 
         return PostRead(
@@ -35,9 +32,10 @@ class PostService(
         )
     }
 
+    @Transactional(readOnly = false)
     fun findAllDesc(): PostsResponse {
         return PostsResponse(
-            postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
+            postRepository.findByDeletedFalse(Sort.by(Sort.Direction.DESC, "id"))
                 .map {
                     PostResponse(it.id, it.title, it.content, it.createdDate, it.firstFile())
                 })
@@ -46,8 +44,20 @@ class PostService(
     @Transactional
     fun deletePost(postId: Long) {
         val post: Post = postRepository.findById(postId).get()
-//            ?: throw IllegalArgumentException("존재하지 않는 글입니다.")
+        validate(post)
+        post.delete()
+    }
 
-        postRepository.delete(post)
+    @Transactional
+    fun updatePost(postId: Long, req: UpdateRequest) {
+        val post: Post = postRepository.findById(postId).get()
+        validate(post)
+        post.update(req.title, req.content)
+    }
+
+    fun validate(post: Post) {
+        if (post.deleted!!) {
+            throw IllegalArgumentException("삭제된 글입니다.")
+        }
     }
 }

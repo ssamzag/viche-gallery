@@ -10,8 +10,8 @@ import com.vicheGallery.post.application.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.lang.IllegalArgumentException
 import javax.servlet.http.HttpServletRequest
+import kotlin.IllegalArgumentException
 
 @Service
 class CommentService(
@@ -60,6 +60,7 @@ class CommentService(
         )
     }
 
+    @Transactional(readOnly = false)
     fun findByPostId(postId: Long): CommentsResponse {
         val comments = commentRepositoryImpl.getComments(postId)
         val result: ArrayList<CommentResponse> = ArrayList()
@@ -88,10 +89,11 @@ class CommentService(
         return CommentsResponse(result)
     }
 
+    @Transactional(readOnly = false)
     fun delete(commentId: Long, password: String) {
         val comment = commentRepository.findById(commentId).get()
         validate(comment, password)
-        commentRepository.delete(comment)
+        comment.delete()
     }
 
     @Transactional(readOnly = false)
@@ -101,9 +103,12 @@ class CommentService(
         comment.updateContent(request.content)
     }
 
-    private fun validate(findById: Comment, password: String) {
-        if (findById.password != this.password.encrypt(password)) {
-            throw IllegalArgumentException("암호가 틀렸습니다.")
+    private fun validate(comment: Comment, password: String) {
+        if (comment.password != this.password.encrypt(password)) {
+            throw IllegalArgumentException("암호가 확인해 주세요.")
+        }
+        if (comment.deleted) {
+            throw IllegalArgumentException("삭제된 댓글입니다.")
         }
     }
 

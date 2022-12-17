@@ -12,7 +12,7 @@ class CommentRepositoryImpl (
         return jpaQueryFactory.selectFrom(comment)
             .leftJoin(comment.refComment)
             .fetchJoin()
-            .where(comment.postId.eq(postId))
+            .where(comment.postId.eq(postId), comment.deleted.eq(false))
             .orderBy(
                 comment.refComment.id.asc().nullsFirst(),
                 comment.createdDate.asc())

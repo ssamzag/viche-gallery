@@ -7,6 +7,7 @@ import AboutView from "../views/about/AboutView.vue";
 import WorkWriteView from "../views/work/WriteView.vue";
 import LoginView from "../views/login/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import PostModifyView from "../views/post/ModifyView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,12 @@ const router = createRouter({
             path: "/post/:postId",
             name: "read",
             component: PostReadView,
+            props: true
+        },
+        {
+            path: "/post/modify/:postId",
+            name: "postModify",
+            component: PostModifyView,
             props: true
         },
         {

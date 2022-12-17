@@ -1,26 +1,21 @@
 package com.vicheGallery.post.domain
 
 import com.vicheGallery.BaseEntity
-import com.vicheGallery.images.domain.UploadFile
-import com.vicheGallery.post.dto.PostResponse
-import com.vicheGallery.work.domain.WorkAttachment
-import com.vicheGallery.work.domain.WorkAttachments
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Lob
+import java.time.LocalDateTime
+import javax.persistence.*
 
 @Entity
 class Post (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    val title: String,
+    @field:Column(nullable = false)
+    var deleted: Boolean? = false,
+
+    var title: String,
 
     @Lob
-    val content: String,
+    var content: String,
 
     @Embedded
     var attachments: PostAttachments? = null
@@ -36,8 +31,19 @@ class Post (
             }.toList()
         )
     }
+
     fun firstFile(): String? {
         return attachments?.firstFile()
+    }
+
+    fun delete() {
+        this.deleted = true
+    }
+
+    fun update(title: String, content: String) {
+        this.title = title
+        this.content = content
+        this.modifiedDate = LocalDateTime.now()
     }
 
 }

@@ -42,6 +42,7 @@ declare module '@vue/runtime-core' {
     BRow: typeof import('bootstrap-vue-3')['BRow']
     BTab: typeof import('bootstrap-vue-3')['BTab']
     BTabs: typeof import('bootstrap-vue-3')['BTabs']
+    Comment: typeof import('./src/components/Comment.vue')['default']
     Content: typeof import('./src/components/Content.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']

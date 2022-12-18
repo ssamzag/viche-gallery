@@ -13,6 +13,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {BToastPlugin} from 'bootstrap-vue-3'
 
+import VueGtag from 'vue-gtag-next';
+
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import 'bootstrap/dist/css/bootstrap.css'
@@ -31,7 +33,9 @@ app.use(VueEasyLightbox)
 app.use(BootstrapVue3)
 app.use(store)
 app.use(BToastPlugin)
-
+app.use(VueGtag, {
+    property: { id: 'G-PEYCZQVJPQ' },
+});
 
 app.provide('login', ref(false))
 

@@ -9,15 +9,21 @@ import javax.swing.ImageIcon
 
 @Component
 class ResizeImage {
+    private val newWidth = 600;
+
     fun imageResize(originalFilePath: String, formatName: String, newFileFullPath: String) {
         val file = File(originalFilePath)
         val inputStream = FileInputStream(file)
         val img = ImageIcon(file.toString()).image
-        val resizeWidth = img.getWidth(null) / 3
-        val resizeHeight = img.getHeight(null) / 3
-        val resizedImage = resize(inputStream, resizeWidth, resizeHeight)
+        val newHeight = calculateNewHeight(img.getWidth(null), img.getHeight(null))
+
+        val resizedImage = resize(inputStream, newWidth, newHeight)
 
         ImageIO.write(resizedImage, formatName, File(newFileFullPath))
+    }
+
+    private fun calculateNewHeight(width: Int, height: Int): Int {
+        return height * width / newWidth
     }
 
     private fun resize(inputStream: FileInputStream, width: Int, height: Int): BufferedImage {

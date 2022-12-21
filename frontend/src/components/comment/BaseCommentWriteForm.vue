@@ -93,12 +93,14 @@ const hideCommentWrite = () => {
         <b-button v-if="showCancelButton"
                   squared variant="outline-secondary"
                   @click="hideCommentWrite"
-                  style="font-size:12px" >
+                  style="font-size:12px;"
+        >
           취소
         </b-button>
         <b-button squared variant="outline-secondary"
                   @click="send"
-                  style="font-size:12px">
+                  style="font-size:12px"
+        >
           {{buttonName}}
         </b-button>
 <!--        <b-button squared variant="outline-secondary" @click="props.send" style="font-size:12px">댓글달기</b-button>-->

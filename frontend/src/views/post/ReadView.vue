@@ -106,7 +106,7 @@ const setPost = () => {
     // });
     // post.value.content = clean
     post.value.content = response.data.content
-    post.value.createdDate = getRelativeTime(response.data.createdDate)
+    post.value.createdDate = response.data.createdDate.substring(0, 10).replaceAll("-", ". ")
   })
 }
 
@@ -224,6 +224,10 @@ const replyComment = () => {
   }).catch(() => alert("에러"))
 }
 
+const goPostList = () => {
+  router.push("/post")
+}
+
 const hideReplyModal = () => commentReplyModal.value = false
 const hideModifyModal = () => commentModifyModal.value = false
 </script>
@@ -262,6 +266,13 @@ const hideModifyModal = () => commentModifyModal.value = false
     <b-row>
       <div class="comments" ref="root">
         <h2>댓글<span class="count">{{ commentCount }}</span></h2>
+        <base-comment-write-form @send="insertComment"
+                                 showNicknameInput=true
+                                 v-model:password="commentForm.password"
+                                 v-model:nickname="commentForm.nickname"
+                                 v-model:content="commentForm.content"
+                                 class="py-2"
+        />
         <div class="comment-list">
           <ul v-for="com in comments">
             <base-comment-detail :com="com"
@@ -269,7 +280,7 @@ const hideModifyModal = () => commentModifyModal.value = false
                                  @showReplyModal="showReplyModal"
                                  @showModifyComment="showModifyComment"
                                  @showDeleteModal="showDeleteModal"
-            ></base-comment-detail>
+            />
             <ul v-for="cc in com.child">
               <base-comment-detail-form :com="cc"
                                         @replyComment="replyComment"
@@ -277,16 +288,15 @@ const hideModifyModal = () => commentModifyModal.value = false
                                         @showModifyComment="showModifyComment"
                                         @showDeleteModal="showDeleteModal"
                                         is-reply=true
-              ></base-comment-detail-form>
+              />
             </ul>
           </ul>
         </div>
-        <base-comment-write-form @send="insertComment"
-                                 showNicknameInput=true
-                                 v-model:password="commentForm.password"
-                                 v-model:nickname="commentForm.nickname"
-                                 v-model:content="commentForm.content"
-        ></base-comment-write-form>
+        <b-button squared variant="outline-secondary"
+                  @click="goPostList"
+                  style="font-size:12px">
+          목록
+        </b-button>
       </div>
     </b-row>
   </b-col>

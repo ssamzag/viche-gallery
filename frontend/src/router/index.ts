@@ -35,7 +35,7 @@ const router = createRouter({
             name: "list",
             component: PostListView,
             meta: {
-                title: 'POST'
+                title: 'Post'
             }
         },
         {

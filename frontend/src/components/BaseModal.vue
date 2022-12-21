@@ -8,7 +8,7 @@
         <div class="comment-form">
           <input type="password"
                  ref="commentPasswordInput"
-                 @keyup.enter="deleteComment"
+                 @keyup.enter="confirm"
                  v-model="password"
                  name="password"
                  placeholder="암호"

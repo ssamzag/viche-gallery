@@ -1,49 +1,59 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import axios from "axios";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {useStore} from "vuex";
 import api from "@/api";
+
+import CommentWrite from "@/components/comment/BaseCommentWriteForm.vue";
+import {getRelativeTime} from "@/composables/date";
+import CommentRead from "@/components/comment/BaseCommentDetailForm.vue";
+import TitleComponent from "@/components/TitleComponent.vue";
+import BaseAlert from "@/components/BaseAlert.vue";
+import BaseModal from "@/components/BaseModal.vue";
+import BaseCommentDetail from "@/components/comment/BaseCommentDetailForm.vue";
+import BaseCommentWriteForm from "@/components/comment/BaseCommentWriteForm.vue";
 
 const router = useRouter()
 const commentRemoveModal = ref(false)
 
 const commentModifyModal = ref(false)
-const commentModifyContent = ref("")
 const commentModifyId = ref(0)
-const teleportModifyModal = ref("body")
-const commentModifyPassword = ref("")
+const commentModifyTeleportTo = ref("body")
+const commentModifyContent = ref("")
 
 const commentPasswordInput = ref("")
 const commentCount = ref(0)
 const root = ref<HTMLElement | null>(null);
 const comment = ref("")
-const nickname = ref("")
-const password = ref("")
 const replayPassword = ref("")
 const removeCommendId = ref(0)
 
 const commentReplyTeleportTo = ref("body")
-const commentReplyNickname = ref("")
-const commentReplyPassword = ref("")
-const commentReplyContent = ref("")
 const commentReplyToNick = ref("")
 const commentReplyRefCommentId = ref(0)
 const commentReplyModal = ref(false)
 const commentReply = ref({})
 
-const props = defineProps({
-  postId: {
-    type: [Number, String],
-    require: true
-  }
+const store = useStore()
+const postId = useRoute().params.postId
+
+const replyForm = ref({
+  password: "",
+  content: "",
+  nickname: ""
 })
 
-const store = useStore()
+const commentForm = ref({
+  password: "",
+  content: "",
+  nickname: ""
+})
 
 const post = ref({
   title: "",
-  content: ""
+  content: "",
+  createdDate: "",
 })
 
 const comments = ref([
@@ -68,14 +78,15 @@ const comments = ref([
 ])
 
 const updatePost = () => {
-  router.replace(`/post/modify/${props.postId}`)
+  router.replace(`/post/modify/${postId}`)
 }
+
 const deletePost = () => {
-  const isDeleted = confirm("삭제 하실라우?")
-  if (!isDeleted) {
+  if (!confirm("삭제 하실라우?")) {
     return
   }
-  api.delete(`/api/posts/${props.postId}`)
+
+  api.delete(`/api/posts/${postId}`)
       .then(() => router.replace("/post"))
       .catch(() => {
         alert("삭제 실패");
@@ -83,7 +94,7 @@ const deletePost = () => {
 }
 
 const setPost = () => {
-  api.get(`/api/posts/${props.postId}`).then(response => {
+  api.get(`/api/posts/${postId}`).then(response => {
     post.value.title = response.data.title
     // const clean = sanitizeHtml(response.data.content, {
     //   allowedTags: ['p', 'b', 'i', 'em', 'strong', 'a', 'br', 'li', 'blockquote', 'h1', 'ol',
@@ -95,15 +106,28 @@ const setPost = () => {
     // });
     // post.value.content = clean
     post.value.content = response.data.content
+    post.value.createdDate = getRelativeTime(response.data.createdDate)
   })
 }
 
-const setComments = () => {
-  api.get(`/api/comment/${props.postId}`)
-      .then(response => {
-        comments.value = response.data.comments
-        commentCount.value = comments.value.length
-      })
+const bindComments = async () => {
+  const commentResponse = await getComments()
+
+  comments.value = commentResponse.data.comments
+  commentCount.value = getCommentCount(commentResponse.data.comments)
+}
+
+const getComments = async () => {
+  return await api.get(`/api/comment/${postId}`)
+}
+
+function getCommentCount(comments: any) {
+  return comments.length + getSubCommentCount(comments);
+}
+
+function getSubCommentCount(comments: any) {
+  return comments.map((m: any) => m.child.length)
+      .reduce((a: number, b: number) => a + b, 0);
 }
 
 const showDeleteModal = (commentId: number) => {
@@ -113,10 +137,10 @@ const showDeleteModal = (commentId: number) => {
 
 const showModifyComment = (comment: any) => {
   commentReplyModal.value = false
-  teleportModifyModal.value = `#comment_${comment.id}`
+  commentModifyTeleportTo.value = `#comment_${comment.id}`
   commentModifyId.value = comment.id
   commentModifyModal.value = true
-  commentModifyContent.value = comment.content
+  replyForm.value.content = comment.content
 }
 
 const showReplyModal = (comment: any) => {
@@ -125,40 +149,40 @@ const showReplyModal = (comment: any) => {
   commentReplyRefCommentId.value = comment.refComment == null ? comment.id : comment.refComment.id
   commentReplyToNick.value = comment.nickname
   commentReplyModal.value = true
-  commentReply.value = comment
 }
 
 onMounted(() => {
   setPost()
-  setComments()
+  bindComments()
 })
 
 const insertComment = () => {
-  axios.post(`/api/comment/${props.postId}`, {
-    content: comment.value,
-    nickname: nickname.value,
-    password: password.value
+  axios.post(`/api/comment/${postId}`, {
+    content: commentForm.value.content,
+    nickname: commentForm.value.nickname,
+    password: commentForm.value.password
   }, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token")
     }
-  }).then(response => {
-    comment.value = "";
-    nickname.value = "";
-    password.value = "";
-    setComments()
-  }).catch((response) => {
-    alert(response.response.data.validation[0].message)
+  }).then(res => {
+    bindComments()
+    commentForm.value.password = ""
+    commentForm.value.content = ""
+  }).catch((err) => {
+    alert(err.response.data.validation[0].message)
   })
 }
 
 const updateComment = () => {
   axios.put(`/api/comment/${commentModifyId.value}`, {
-    content: commentModifyContent.value,
-    password: commentModifyPassword.value
+    content: replyForm.value.content,
+    password: replyForm.value.password,
   }).then(() => {
     commentModifyModal.value = false
-    setComments()
+    bindComments()
+    replyForm.value.content = ""
+    replyForm.value.password = ""
   }).catch((res) => {
     if (res.response.data.validation) {
       alert(res.response.data.validation[0].message)
@@ -169,25 +193,25 @@ const updateComment = () => {
   })
 }
 
-const deleteComment = () => {
-  axios.delete(`/api/comment/${removeCommendId.value}?password=${replayPassword.value}`, {
+const deleteComment = (password: string) => {
+  axios.delete(`/api/comment/${removeCommendId.value}?password=${password}`, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token")
     }
   }).then(() => {
-    setComments()
+    bindComments()
     commentRemoveModal.value = false
     removeCommendId.value = 0
-  }).catch((res) => {
+  }).catch(() => {
     alert("암호를 확인해 주세요")
   })
 }
 
 const replyComment = () => {
-  axios.post(`/api/comment/reply/${props.postId}`, {
-    content: commentReplyContent.value,
-    nickname: commentReplyNickname.value,
-    password: commentReplyPassword.value,
+  axios.post(`/api/comment/reply/${postId}`, {
+    content: replyForm.value.content,
+    nickname: replyForm.value.nickname,
+    password: replyForm.value.password,
     refCommentId: commentReplyRefCommentId.value,
     replyToNick: commentReplyToNick.value,
   }, {
@@ -196,44 +220,35 @@ const replyComment = () => {
     }
   }).then(response => {
     commentReplyModal.value = false
-    setComments()
+    bindComments()
   }).catch(() => alert("에러"))
 }
 
-const moveToList = () => {
-  router.push("/post")
-}
-
-const closeRemoveModal = (event: any) => {
-  if (event.target.className != "comment-item") {
-    return
-  }
-  commentRemoveModal.value = false
-}
+const hideReplyModal = () => commentReplyModal.value = false
+const hideModifyModal = () => commentModifyModal.value = false
 </script>
 
 <template>
+  <title-component :title="post.title"></title-component>
   <b-col style="max-width: 1000px;">
     <b-row>
       <b-col>
         <div>
-          <b-card-text class="text-muted">
+          <b-card-text class="category">
             잡담
           </b-card-text>
         </div>
         <h2 class="title">{{ post.title }}</h2>
         <div class="sub">
-          <b-card-text class="text-muted post-meta">
+          <b-card-text class="post-meta">
             <span>비체</span>
-            <span>2022-02</span>
-            <div class="post-meta" v-if="store.state.login" style="float:right">
-              <span>
-                <a href="javascript:void(0)" @click="updatePost">수정</a>
+            <span>{{ post.createdDate }}</span>
+            <span v-if="store.state.login">
+                <a href="#" @click.prevent="updatePost">수정</a>
               </span>
-              <span>
-                <a href="javascript:void(0)" @click="deletePost">삭제</a>
+            <span v-if="store.state.login">
+                <a href="#" @click.prevent="deletePost">삭제</a>
               </span>
-            </div>
           </b-card-text>
         </div>
       </b-col>
@@ -243,197 +258,70 @@ const closeRemoveModal = (event: any) => {
       <div class="content " v-html="post.content" style="max-width:1000px;">
       </div>
     </b-row>
-    <b-row class="my-3" style="max-width:1000px;">
-      <b-col>
 
-      </b-col>
-    </b-row>
     <b-row>
       <div class="comments" ref="root">
-        <h2>댓글<span class="count"><span>{{ commentCount }}</span></span></h2>
+        <h2>댓글<span class="count">{{ commentCount }}</span></h2>
         <div class="comment-list">
           <ul v-for="com in comments">
-            <li :id="'comment_' + com.id"
-                class="comment">
-              <div class="author-meta" style="font-size:18px">
-                <img
-                    src="https://img1.daumcdn.net/thumb/C100x100/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Ftistory_admin%2Fstatic%2Fmanage%2Fimages%2Fr3%2Fdefault_S.png"
-                    class="avatar" alt="">
-                <span class="nickname">
-                  <a href="javascript:void(0)">{{ com.nickname }}</a></span>
-                <!--                <span class="date">-->
-                <!--                  {{com.createdDate.substring(2, 10) + " " + com.createdDate.substring(11, 16)}}-->
-                <!--                </span>-->
-              </div>
-
-              <div class="comment-meta">
-                <span class="date">
-                  {{ com.createdDate.substring(0, 10) + " " + com.createdDate.substring(11, 16) }}
-                </span>
-                <span class="date" style="padding-left: 0px">
-                  <a href="javascript:void(0)" @click="showReplyModal(com)">답글쓰기</a>
-                </span>
-              </div>
-              <p>{{ com.content }}</p>
-              <div class="control post-meta">
-                <span class="post-meta">
-                  <a href="javascript:void(0)" @click="showModifyComment(com);">수정</a>
-                </span>
-                <span class="post-meta">
-                  <a href="javascript:void(0)" @click="showDeleteModal(com.id)">삭제</a>
-                </span>
-              </div>
-            </li>
-            <ul>
-              <li :id="'comment_' + cc.id"
-                  v-for="cc in com.child"
-                  style="padding-left:20px"
-                  class="comment">
-                <div class="author-meta" style="font-size:18px">
-                  <img
-                      src="https://img1.daumcdn.net/thumb/C100x100/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Ftistory_admin%2Fstatic%2Fmanage%2Fimages%2Fr3%2Fdefault_S.png"
-                      class="avatar" alt=""
-                  >
-                  <span class="nickname" style="padding-left:18px; padding-top:0px">
-                  <a href="javascript:void(0)">{{ cc.nickname }}</a></span>
-                  <!--                <span class="date">-->
-                  <!--                  {{com.createdDate.substring(2, 10) + " " + com.createdDate.substring(11, 16)}}-->
-                  <!--                </span>-->
-                </div>
-                <div class="comment-meta">
-                  <span class="date">
-                    {{ cc.createdDate.substring(0, 10) + " " + cc.createdDate.substring(11, 16) }}
-                  </span>
-                  <span class="date" style="padding-left: 0px">
-                    <a href="javascript:void(0)" @click="showReplyModal(cc)">답글쓰기</a>
-                  </span>
-                </div>
-                <p><span class="reply-to">{{ cc.replyToNick }}</span>{{ cc.content }}</p>
-
-                <div class="control post-meta">
-                <span class="post-meta">
-                  <a href="javascript:void(0)" @click="showModifyComment(cc);">수정</a>
-                </span>
-                  <span class="post-meta">
-                  <a href="javascript:void(0)" @click="showDeleteModal(cc.id)">삭제</a>
-                </span>
-                </div>
-              </li>
+            <base-comment-detail :com="com"
+                                 @insertComment="insertComment"
+                                 @showReplyModal="showReplyModal"
+                                 @showModifyComment="showModifyComment"
+                                 @showDeleteModal="showDeleteModal"
+            ></base-comment-detail>
+            <ul v-for="cc in com.child">
+              <base-comment-detail-form :com="cc"
+                                        @replyComment="replyComment"
+                                        @showReplyModal="showReplyModal"
+                                        @showModifyComment="showModifyComment"
+                                        @showDeleteModal="showDeleteModal"
+                                        is-reply=true
+              ></base-comment-detail-form>
             </ul>
-
           </ul>
         </div>
-
-        <form method="post" style="margin: 0">
-          <div class="comment-form">
-            <div class="field">
-              <input type="text" v-model="nickname" name="name" placeholder="이름">
-              <input type="password" v-model="password" name="password" placeholder="암호">
-
-              <!--              <div class="secret">-->
-              <!--                <input type="checkbox" name="secret" id="secret">-->
-              <!--                <label for="secret" tabindex="0">비밀댓글</label>-->
-              <!--              </div>-->
-            </div>
-            <label for="comment" class="screen_out">댓글</label>
-            <textarea id="comment" v-model="comment" name="comment" cols="" rows="4"
-                      placeholder="소중한 댓글을 입력해 주세요."></textarea>
-            <div class="d-flex justify-content-end" style="position: relative; float:left; margin-left:0">
-<!--              <b-button squared variant="outline-secondary" @click="moveToList()" style="font-size:12px">목록</b-button>-->
-            </div>
-            <div class="submit">
-              <b-button squared variant="outline-secondary" @click="insertComment()" style="font-size:12px">댓글달기
-              </b-button>
-            </div>
-          </div>
-        </form>
+        <base-comment-write-form @send="insertComment"
+                                 showNicknameInput=true
+                                 v-model:password="commentForm.password"
+                                 v-model:nickname="commentForm.nickname"
+                                 v-model:content="commentForm.content"
+        ></base-comment-write-form>
       </div>
     </b-row>
   </b-col>
 
   <teleport :to="commentReplyTeleportTo">
-    <form method="post" style="margin: 0" v-if="commentReplyModal">
-      <div class="comment-form" style="padding-top: 10px; ">
-        <div class="field">
-          <input type="text" v-model="commentReplyNickname" name="name" placeholder="이름">
-          <input type="password" v-model="commentReplyPassword" name="password" placeholder="암호">
-
-          <!--              <div class="secret">-->
-          <!--                <input type="checkbox" name="secret" id="secret">-->
-          <!--                <label for="secret" tabindex="0">비밀댓글</label>-->
-          <!--              </div>-->
-        </div>
-        <label for="comment" class="screen_out">댓글</label>
-        <textarea id="comment" v-model="commentReplyContent" name="comment" cols="" rows="4"
-                  placeholder="답변할 댓글을 입력해 주세요."></textarea>
-        <div class="submit">
-          <b-button squared variant="outline-secondary" @click="commentReplyModal = false" style="font-size:12px">
-            취소
-          </b-button>
-          <b-button squared variant="outline-secondary" @click="replyComment" style="font-size:12px">
-            답변하기
-          </b-button>
-        </div>
-      </div>
-    </form>
+    <base-comment-write-form @send="replyComment"
+                             @hideCommentWrite="hideReplyModal"
+                             button-name="댓글답변"
+                             showCancelButton=true
+                             showNicknameInput=true
+                             v-model:nickname="replyForm.nickname"
+                             v-model:content="replyForm.content"
+                             v-model:password="replyForm.password"
+                             v-if="commentReplyModal"
+    />
   </teleport>
 
-  <teleport :to="teleportModifyModal">
-    <form method="post" style="margin: 0" v-if="commentModifyModal">
-      <div class="comment-form" style="padding-top: 10px;">
-        <div class="field">
-          <input type="password" v-model="commentModifyPassword" name="password" placeholder="암호">
-
-          <!--              <div class="secret">-->
-          <!--                <input type="checkbox" name="secret" id="secret">-->
-          <!--                <label for="secret" tabindex="0">비밀댓글</label>-->
-          <!--              </div>-->
-        </div>
-        <label for="comment" class="screen_out">댓글</label>
-        <textarea id="comment" v-model="commentModifyContent" name="comment" cols="" rows="4"
-                  placeholder="수정할 댓글을 입력해 주세요."></textarea>
-        <div class="submit">
-          <b-button squared variant="outline-secondary" @click="commentModifyModal = false" style="font-size:12px">취소
-          </b-button>
-          <b-button squared variant="outline-secondary" @click="updateComment" style="font-size:12px">댓글수정
-          </b-button>
-        </div>
-      </div>
-    </form>
+  <teleport :to="commentModifyTeleportTo">
+    <comment-write @send="updateComment"
+                   @hideCommentWrite="hideModifyModal"
+                   button-name="댓글수정"
+                   showCancelButton=true
+                   v-model:content="replyForm.content"
+                   v-model:password="replyForm.password"
+                   v-if="commentModifyModal"
+    />
   </teleport>
 
-  <teleport to="body">
-    <div v-if="commentRemoveModal" class="modelPopup" @click="closeRemoveModal">
-      <div class="comment-item">
-        <div class="post-meta" style="padding-bottom: 10px">
-          삭제하시겠습니까?<br>
-        </div>
-        <div class="comments">
-
-          <div class="comment-form">
-
-            <input type="password"
-                   ref="commentPasswordInput"
-                   @keyup.enter="deleteComment"
-                   v-model="replayPassword"
-                   name="password"
-                   placeholder="암호"
-                   style="margin-left:5px">
-          </div>
-        </div>
-        <div class="post-meta">
-          <span>
-            <a href="javascript:void(0)" @click="deleteComment">삭제하기</a>
-          </span>
-          <span>
-            <a href="javascript:void(0)" @click="commentRemoveModal = false">취소</a>
-          </span>
-        </div>
-      </div>
-    </div>
+  <teleport to="#app">
+    <base-modal v-model="commentRemoveModal"
+                message="삭제 하시겠습니까?"
+                @confirm="deleteComment"
+                confirmButtonName="삭제"
+    />
   </teleport>
-
-
 </template>
 
 <style>
@@ -500,6 +388,19 @@ const closeRemoveModal = (event: any) => {
 
 .content p {
   margin-bottom: 0;
+}
+
+.category {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.875em;
+  color: #999;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.0666;
 }
 
 </style>

@@ -1,13 +1,27 @@
-<script setup lang="ts" >
-import Header from "@/components/Header.vue"
-import Content from "@/components/Content.vue"
+<script>
+import TheHeader from "@/layout/TheHeader.vue";
+import TheContent from "@/layout/TheContent.vue";
+import TheFooter from "@/layout/TheFooter.vue";
 
+export default {
+  name: 'App',
+  components: {TheFooter, TheContent, TheHeader},
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        const defaultTitle = 'Viche Gallery'
+        document.title = to.meta.title + " - " + defaultTitle|| defaultTitle;
+      }
+    },
+  }
+};
 </script>
 
 <template>
-  <Header/>
-  <Content/>
-  <Footer/>
+    <TheHeader/>
+    <TheContent/>
+    <TheFooter/>
 </template>
 
 <style>

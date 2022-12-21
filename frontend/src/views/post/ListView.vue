@@ -3,6 +3,7 @@
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import axios from "axios";
+import {getRelativeTime} from "@/composables/date";
 
 const posts = ref([])
 const router = useRouter()
@@ -23,9 +24,7 @@ onMounted(() => {
   // post.value.content = clean
 })
 
-const read = (id) => {
-  router.push("/post/" + id)
-}
+const goPostDetailPage = (postId: number) => router.push({name: "PostDetail", params: { postId }})
 
 </script>
 
@@ -44,7 +43,7 @@ const read = (id) => {
             img-alt="Image"
             class="small"
             body-border-variant="white"
-            @click="read(post.id)"
+            @click="goPostDetailPage(post.id)"
             style="margin-top: 0.75rem; margin-bottom: 0"
         >
           <b-row>
@@ -56,10 +55,10 @@ const read = (id) => {
                     VICHE
                   </span>
                   <span class="date">
-                      {{ post.createdDate.substring(0, 10) }}
+                      {{ getRelativeTime(post.createdDate) }}
                     </span>
                 </div>
-<!--                비체•{{ post.createdDate.substring(0, 10) }}-->
+                <!--                비체•{{ post.createdDate.substring(0, 10) }}-->
               </b-card-text>
             </b-col>
           </b-row>
@@ -75,11 +74,11 @@ const read = (id) => {
 
 <style>
 .ellipsis {
-  width:300px;
-  display:block;
+  width: 300px;
+  display: block;
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .author-meta .date {
@@ -89,14 +88,17 @@ const read = (id) => {
   color: #999;
   line-height: 20px;
 }
+
 .author-meta .nickname {
   float: left;
   font-size: 0.775em;
   line-height: 20px;
 }
+
 .author-meta span {
   display: inline-block;
 }
+
 .post-meta span:before {
   content: "";
   display: inline-block;
@@ -106,9 +108,11 @@ const read = (id) => {
   background-color: #b3b3b3;
   vertical-align: middle;
 }
+
 .post-meta span:first-child:before {
   content: none;
 }
+
 .author-meta .date:before, .author-meta .date a:before {
   content: "";
   display: inline-block;

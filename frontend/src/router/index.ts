@@ -8,6 +8,7 @@ import WorkWriteView from "../views/work/WriteView.vue";
 import LoginView from "../views/login/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import PostModifyView from "../views/post/ModifyView.vue";
+import TestView from "../views/test/TestView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,51 +17,83 @@ const router = createRouter({
             path: "/",
             name: "home",
             component: AboutView,
+            meta: {
+                title: 'Home'
+            }
         },
         {
             path: "/post/write",
             name: "write",
             component: PostWriteView,
-            meta: {auth: true}
+            meta: {
+                auth: true,
+                title: 'POST WRITE'
+            }
         },
         {
             path: "/post",
             name: "list",
-            component: PostListView
+            component: PostListView,
+            meta: {
+                title: 'POST'
+            }
         },
         {
             path: "/post/:postId",
-            name: "read",
+            name: "PostDetail",
             component: PostReadView,
-            props: true
+            props: true,
+            meta: {
+                title: ''
+            }
         },
         {
             path: "/post/modify/:postId",
             name: "postModify",
             component: PostModifyView,
-            props: true
+            props: true,
+            meta: {
+                title: 'Post Modify'
+            }
         },
         {
             path: "/work",
             name: "worklist",
             component: WorkListView,
+            meta: {
+                title: 'Works'
+            }
         },
         {
             path: "/about",
             name: "about",
             component: AboutView,
+            meta: {
+                title: 'Introduce'
+            }
         },
         {
             path: "/work/write",
             name: "workWrite",
             component: WorkWriteView,
-            meta: {auth: true}
+            meta: {
+                auth: true,
+                title: "Work Write"
+            }
         },
         {
             path: "/Login",
             name: "login",
             component: LoginView,
-            meta: {login: true}
+            meta: {
+                login: true,
+                title: "Login"
+            }
+        },
+        {
+            path: "/TestView",
+            name: "login",
+            component: TestView
         },
         {
             path: "/:pathMatch(.*)*",
@@ -89,6 +122,5 @@ router.beforeEach((to, from, next) => {
 
     next()
 })
-
 
 export default router;

@@ -17,7 +17,6 @@ const indexRef = ref(0) // default 0
 
 const onShow = () => visibleRef.value = true
 const onHide = () => visibleRef.value = false
-const onMoveDisable = () => moveRef.value = true
 const router = useRouter()
 
 const showImg = (index) => {

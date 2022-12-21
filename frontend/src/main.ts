@@ -13,6 +13,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {BToastPlugin} from 'bootstrap-vue-3'
 
+import titleComponent from '@/components/TitleComponent.vue'
+
 import VueGtag from 'vue-gtag-next';
 
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -40,6 +42,7 @@ app.use(VueGtag, {
 app.provide('login', ref(false))
 
 app.component('QuillEditor', QuillEditor)
-
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('TitleComponent', titleComponent)
+
 app.mount("#app");

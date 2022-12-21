@@ -1,5 +1,20 @@
-<template>
+<script setup>
+import {useRouter} from "vue-router";
+import {useStore} from "vuex";
 
+document.addEventListener("click", () => {
+  document.getElementById("nav-collapse").classList.remove("show")
+})
+let router = useRouter();
+const store = useStore();
+
+const logout = () => {
+  localStorage.setItem("token", "");
+  store.commit("logout")
+}
+</script>
+
+<template>
   <b-navbar toggleable="md"
             variant="white"
             dark="false"
@@ -36,24 +51,7 @@
 
 </template>
 
-<script setup>
-import {useRouter} from "vue-router";
-import {useStore} from "vuex";
-
-document.addEventListener("click", () => {
-  document.getElementById("nav-collapse").classList.remove("show")
-})
-let router = useRouter();
-const store = useStore();
-
-const logout = () => {
-  localStorage.setItem("token", "");
-  store.commit("logout")
-}
-</script>
-
 <style>
-
 .maru-font {
   font-family: 'MaruBuri-Regular', sans-serif;
 }

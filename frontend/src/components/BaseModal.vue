@@ -17,7 +17,7 @@
       </div>
       <div class="post-meta">
           <span>
-            <a href="#" @click="confirm">{{confirmButtonName}}</a>
+            <a href="#" @click.prevent="confirm">{{confirmButtonName}}</a>
           </span>
         <span>
             <a href="#" @click.prevent="$emit('update:modelValue', false)">취소</a>

@@ -1,4 +1,4 @@
-<script setup type="ts">
+<script setup type="ts" xmlns:background_image="http://www.w3.org/1999/xhtml">
 import {defineComponent, onMounted, ref, inject, computed} from "vue";
 import axios from "axios";
 import VueEasyLightbox from "vue-easy-lightbox";
@@ -75,7 +75,8 @@ const deleteButton = () => {
     <b-row>
       <div class="gallery-container" style="display: block;">
         <div class="gallery">
-          <div v-for="work in works" class="project artist-profile" style="position:relative">
+          <div v-for="work in works" class="project artist-profile"
+               :style="{position:'relative', backgroundImage:'url(/api/images/thumbnail/' + `${work.attachments[0]}` + ')'}">
             <a @click="showImg(work.imageStartIndex)" class="project-image" target="_self">
               <ul class="icons-list"
                   v-if="deleteToggle" style="z-index: 4">
@@ -98,8 +99,8 @@ const deleteButton = () => {
                   <div class="name">Viche</div>
                 </div>
               </div>
-              <img alt="blueberry sisters" class="image" :src="'/api/images/thumbnail/' + work.attachments[0]"
-                   style="width:100%; height:100%; object-fit:cover;">
+<!--              <img alt="blueberry sisters" class="image" :src="'/api/images/thumbnail/' + work.attachments[0]"-->
+<!--                   style="width:100%; height:100%; object-fit:cover;">-->
             </a>
           </div>
         </div>

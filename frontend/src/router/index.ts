@@ -82,7 +82,7 @@ const router = createRouter({
             }
         },
         {
-            path: "/Login",
+            path: "/login",
             name: "login",
             component: LoginView,
             meta: {
@@ -92,13 +92,16 @@ const router = createRouter({
         },
         {
             path: "/TestView",
-            name: "login",
+            name: "test",
             component: TestView
         },
         {
             path: "/:pathMatch(.*)*",
             name: "notFound",
-            component: NotFoundView
+            component: NotFoundView,
+            meta: {
+                title: "404 Error"
+            }
         }
     ],
 });

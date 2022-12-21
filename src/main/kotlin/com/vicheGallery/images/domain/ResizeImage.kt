@@ -23,7 +23,7 @@ class ResizeImage {
     }
 
     private fun calculateNewHeight(width: Int, height: Int): Int {
-        return height * width / newWidth
+        return (height.toFloat() / width * newWidth).toInt()
     }
 
     private fun resize(inputStream: FileInputStream, width: Int, height: Int): BufferedImage {

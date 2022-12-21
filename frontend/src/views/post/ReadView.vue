@@ -6,10 +6,7 @@ import {useStore} from "vuex";
 import api from "@/api";
 
 import CommentWrite from "@/components/comment/BaseCommentWriteForm.vue";
-import {getRelativeTime} from "@/composables/date";
-import CommentRead from "@/components/comment/BaseCommentDetailForm.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import BaseAlert from "@/components/BaseAlert.vue";
 import BaseModal from "@/components/BaseModal.vue";
 import BaseCommentDetail from "@/components/comment/BaseCommentDetailForm.vue";
 import BaseCommentWriteForm from "@/components/comment/BaseCommentWriteForm.vue";
@@ -292,6 +289,8 @@ const hideModifyModal = () => commentModifyModal.value = false
             </ul>
           </ul>
         </div>
+
+        <div style="border-top: 1px solid #e6e6e6; position: relative; min-height: 20px;"></div>
         <b-button squared variant="outline-secondary"
                   @click="goPostList"
                   style="font-size:12px">

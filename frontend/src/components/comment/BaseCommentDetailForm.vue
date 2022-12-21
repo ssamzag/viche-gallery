@@ -1,6 +1,7 @@
 <script setup type="ts">
 import {useRouter} from "vue-router";
 import {defineEmits, onMounted, ref} from "vue";
+import {getRelativeTime} from "@/composables/date";
 
 const router = useRouter()
 const emit = defineEmits(["showReplyModal"]);
@@ -28,6 +29,7 @@ const showModifyComment = (comment) => {
 const showReplyModal = (comment) => {
   emit("showReplyModal", comment)
 }
+
 </script>
 
 <template>
@@ -46,7 +48,7 @@ const showReplyModal = (comment) => {
 
     <div class="comment-meta">
                 <span class="date">
-                  {{ props.com.createdDate.substring(0, 10) + " " + props.com.createdDate.substring(11, 16) }}
+                  {{ getRelativeTime(props.com.createdDate) }}
                 </span>
       <span class="date" style="padding-left: 0px">
                   <a href="#" @click.prevent="showReplyModal(props.com)">답글쓰기</a>

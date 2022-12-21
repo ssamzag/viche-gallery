@@ -10,6 +10,9 @@ const units = {
 };
 
 export const getRelativeTime = (d1: string, d2 = new Date()): string => {
+    if (!d1) {
+        return ""
+    }
     const elapsed = new Date(d1).getTime() - d2.getTime();
 
     // "Math.abs" accounts for both "past" & "future" scenarios

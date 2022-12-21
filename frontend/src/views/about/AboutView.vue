@@ -52,7 +52,7 @@
               <b-carousel-slide
                   active
                   class="image-box"
-                  img-src="/api/images/SCR-20221106-1sj.jpeg">
+                  img-src="/api/images/25be5c0.png">
                 <!--          <h1>안녕하세요!</h1>-->
                 <!--          <p>Some more detailed description or whatever content.</p>-->
               </b-carousel-slide>

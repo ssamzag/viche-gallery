@@ -23,6 +23,11 @@ const showImg = (index) => {
   indexRef.value = index
   onShow()
 }
+const props = defineProps({
+  workType: String,
+  pageTitle: String,
+  pageDesc: String
+})
 
 onMounted(() => {
   getList()
@@ -31,21 +36,29 @@ onMounted(() => {
 const store = useStore();
 computed(() => store.state.login)
 
-const getList = () => {
-  api.get(`/api/works`)
-      .then(response => {
-        works.value = []
-        response.data
-            .forEach((r) => {
-              // r.attachments = r.attachments.map(fileName => '/api/images/' + fileName)
-              r.attachments.forEach(src =>
-                  imgsRef.value.push({title: r.title, src: "/api/images/" + src}))
+const buttonsSelected = ref("PORTFOLIO")
+const buttonsOptions = [
+  {text: 'PORTFOLIO', value: 'PORTFOLIO'},
+  {text: 'STUDY', value: 'WORK'}
+]
 
-              works.value.push(r)
-              r.imageStartIndex = index
-              index += r.attachments.length
-            })
+const getList = async () => {
+  const response = await getWorks()
+  response.data
+      .forEach(r => {
+        r.attachments.forEach(src => imgsRef.value.push({title: r.title, src: "/api/images/" + src}))
+        r.imageStartIndex = index
+        index += r.attachments.length
       })
+  works.value = response.data
+}
+
+const getWorks = async () => {
+  try {
+    return await api.get(`/api/works?workType=${buttonsSelected.value}`)
+  } catch (e) {
+    alert(e)
+  }
 }
 
 const deleteWork = (id) => {
@@ -63,14 +76,30 @@ const deleteToggle = inject('login')
 const deleteButton = () => {
   deleteToggle.value = !deleteToggle.value
 }
-
 </script>
 
 <template>
   <b-col>
     <b-row>
-      <Title title="WORKS" subTitle="illustration works of VICHE." :write="{url:'/work/write',text:'WRITE'}"
+      <Title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:'/work/write',text:'WRITE'}"
              :delete="{click: deleteButton, text:'DELETE'}"></Title>
+    </b-row>
+    <b-row>
+      <b-form-radio-group
+          class="sub-radio"
+          v-model="buttonsSelected"
+          :options="buttonsOptions"
+          button-variant="outline-gray"
+          size="sm"
+          name="radios-btn-outline"
+          buttons
+          @change="getList"
+      ></b-form-radio-group>
+    </b-row>
+    <b-row>
+      <b-col>
+        <div class="mb-3 mt-" style="border-top: 1px solid #e6e6e6;position: relative;"></div>
+      </b-col>
     </b-row>
     <b-row>
       <div class="gallery-container" style="display: block;">
@@ -99,8 +128,8 @@ const deleteButton = () => {
                   <div class="name">Viche</div>
                 </div>
               </div>
-<!--              <img alt="blueberry sisters" class="image" :src="'/api/images/thumbnail/' + work.attachments[0]"-->
-<!--                   style="width:100%; height:100%; object-fit:cover;">-->
+              <!--              <img alt="blueberry sisters" class="image" :src="'/api/images/thumbnail/' + work.attachments[0]"-->
+              <!--                   style="width:100%; height:100%; object-fit:cover;">-->
             </a>
           </div>
         </div>
@@ -119,5 +148,23 @@ const deleteButton = () => {
 </template>
 
 <style>
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+  font-weight: bold;
+  border-color:#ffffff !important;
+  padding-left: 0px;
+  font-size: 12px;
+}
+.btn-sm {
+  padding: 0.25rem 10px 0 0 !important;
+  font-size: 12px !important;
+  color: #7a583a !important;
+  letter-spacing: 1px
+}
 
+.form-check-inline {
+  margin-right: 0 !important;
+}
+.form-control-sm {
+  padding: 0 !important;
+}
 </style>

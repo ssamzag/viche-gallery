@@ -146,6 +146,13 @@ img, fieldset {
 ul li {
     list-style: none;
 }
+
+.comments h2 {
+    padding-top:30px;
+    border-bottom: 1px solid #e6e6e6;
+    position: relative;
+    min-height: 60px;
+}
 .comments .comment-form textarea {
     display: block;
     width: 100%;
@@ -271,6 +278,11 @@ label {
     border: 1px solid #e1e1e1;
     vertical-align: middle;
     background-color: #fff;
+}
+.comments .comment-form .field .secret input[type=checkbox]:checked+label:before {
+    background-image: url(https://tistory1.daumcdn.net/tistory/0/pg_Whatever/images/ico_package.png);
+    background-repeat: no-repeat;
+    background-position: -98px -296px;
 }
 .comments .comment-form .field .secret {
     float: right;

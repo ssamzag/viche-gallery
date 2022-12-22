@@ -1,21 +1,27 @@
 package com.vicheGallery.work.application
 
 import com.vicheGallery.work.domain.Work
+import com.vicheGallery.work.domain.WorkType
 import com.vicheGallery.work.dto.WorkReadResponse
 import com.vicheGallery.work.dto.WorkWriteRequest
 import com.vicheGallery.work.dto.WorkWriteResponse
 import com.vicheGallery.work.repository.WorkRepository
-import org.springframework.data.domain.Sort
+import com.vicheGallery.work.repository.WorkRepositoryCustom
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class WorkService(
-    val workRepository: WorkRepository
+    val workRepository: WorkRepository,
+    val workRepositoryCustom: WorkRepositoryCustom
 ) {
+    @Transactional(readOnly = false)
     fun create(request: WorkWriteRequest): WorkWriteResponse {
         val work = Work(
             title = request.title,
-            content = request.content
+            content = request.content,
+            workType = request.workType
         )
         work.setAttachments(request.attachments)
         val persistWork = workRepository.save(work)
@@ -24,6 +30,7 @@ class WorkService(
             persistWork.id,
             persistWork.title,
             persistWork.content,
+            persistWork.workType,
             persistWork.getStoredNames()
         )
     }
@@ -38,14 +45,23 @@ class WorkService(
         )
     }
 
-    fun findAll(): List<WorkReadResponse>? {
-        return workRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
+    fun findByWorkType(workType: WorkType): List<WorkReadResponse>? {
+        return workRepositoryCustom.findByWorkType(workType)
             .map {
                 WorkReadResponse(it.id, it.title, it.content, it.getStoredNames())
             }
     }
 
+    @Transactional(readOnly = false)
     fun delete(id: Long) {
-        workRepository.deleteById(id)
+        val work = workRepository.findById(id).get()
+        validate(work)
+        work.delete()
+    }
+
+    private fun validate(persist: Work) {
+        if (!persist.deleted) {
+            throw IllegalArgumentException("삭제할 수 없습니다.")
+        }
     }
 }

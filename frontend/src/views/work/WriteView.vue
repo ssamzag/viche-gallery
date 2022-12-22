@@ -14,6 +14,7 @@ const write = () => {
   axios.post('/api/works', {
         title: title.value,
         content: content.value,
+        workType: selected.value,
         attachments: storedFiles.value
       },
       {
@@ -21,7 +22,7 @@ const write = () => {
           'Authorization': `Bearer ${localStorage.token}`
         }
       })
-      .then(() => router.replace("/work"))
+      .then(() => router.replace(selected.value === "WORK" ? "/work" : "/portfolio"))
       .catch(error => alert(error.response))
 }
 const file = ref()
@@ -69,6 +70,12 @@ const handleFileUpload = () => {
         alert("업로드 실패")
       })
 }
+
+const selected = ref("WORK")
+const options = [
+  {value: "WORK", text: "WORK"},
+  {value: "PORTFOLIO", text: "PORTFOLIO"},
+]
 </script>
 
 <template>
@@ -76,6 +83,12 @@ const handleFileUpload = () => {
     <b-col>
       <b-row>
         <input multiple ref="file" v-on:change="handleFileUpload" type="file"></b-row>
+      <b-row>
+        <div class="mt-2">
+          <b-form-select v-model="selected" :options="options"></b-form-select>
+
+        </div>
+      </b-row>
       <b-row>
         <div class="mt-2">
           <input v-model="title" placeholder="제목을 입력해 주세요"/>
@@ -88,7 +101,7 @@ const handleFileUpload = () => {
       </b-row>
       <b-row>
         <div class="mt-2">
-          <b-button squared variant="outline-secondary" @click="write()" >작성하기</b-button>
+          <b-button squared variant="outline-secondary" @click="write()">작성하기</b-button>
         </div>
       </b-row>
     </b-col>

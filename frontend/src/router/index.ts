@@ -53,15 +53,24 @@ const router = createRouter({
             component: PostModifyView,
             props: true,
             meta: {
-                title: 'Post Modify'
+                title: 'Post Modify',
+                pageDesc: '',
             }
         },
         {
             path: "/work",
             name: "worklist",
             component: WorkListView,
+            props: {
+                workType: 'WORK',
+                pageTitle: 'works',
+                pageDesc: 'Illustration works of VICHE'
+
+            },
             meta: {
-                title: 'Works'
+                title: 'Works',
+                workType: 'work',
+                keepAlive: false
             }
         },
         {

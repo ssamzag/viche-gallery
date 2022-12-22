@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface WorkRepository : JpaRepository<Work, Long>
+interface WorkRepository : JpaRepository<Work, Long> {
+    fun findByWorkType(id: Long) : List<Work>
+}

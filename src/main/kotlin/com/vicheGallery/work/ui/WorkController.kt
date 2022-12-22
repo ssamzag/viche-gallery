@@ -4,6 +4,8 @@ import com.vicheGallery.auth.domain.AuthenticationPrincipal
 import com.vicheGallery.auth.domain.LoginUser
 import com.vicheGallery.work.dto.WorkWriteRequest
 import com.vicheGallery.work.application.WorkService
+import com.vicheGallery.work.domain.Work
+import com.vicheGallery.work.domain.WorkType
 import com.vicheGallery.work.dto.WorkReadResponse
 import com.vicheGallery.work.dto.WorkWriteResponse
 import org.springframework.http.ResponseEntity
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
@@ -32,8 +35,8 @@ class WorkController(
     }
 
     @GetMapping
-    fun findAll(): ResponseEntity<List<WorkReadResponse>> {
-        val readResponse = workService.findAll()
+    fun findByWorkType(@RequestParam workType: WorkType): ResponseEntity<List<WorkReadResponse>> {
+        val readResponse = workService.findByWorkType(workType)
         return ResponseEntity.ok().body(readResponse)
     }
 

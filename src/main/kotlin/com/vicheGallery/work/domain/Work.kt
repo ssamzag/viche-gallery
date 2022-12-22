@@ -1,18 +1,23 @@
 package com.vicheGallery.work.domain
 
 import com.vicheGallery.work.dto.WorkWriteRequest
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Work(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
+
     val title: String,
+
     val content: String,
+
+    @Enumerated(EnumType.STRING)
+    val workType: WorkType = WorkType.WORK,
+
+    @Column(nullable = false)
+    var deleted: Boolean = false,
+
     @Embedded
     var attachments: WorkAttachments? = null
 ) {
@@ -33,6 +38,10 @@ class Work(
 
     fun getStoredNames() : List<String>? {
         return attachments?.getFileUrl()
+    }
+
+    fun delete() {
+        this.deleted = false
     }
 
     fun toWork(workWriteRequest: WorkWriteRequest): Work {

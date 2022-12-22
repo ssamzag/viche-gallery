@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { defineEmits } from "vue";
+import {defineEmits} from "vue";
 import {ref} from "vue";
 
 const emit = defineEmits(["toggle-drawer", "update:content", "update:password", "update:nickname"]);
@@ -69,23 +69,24 @@ const hideCommentWrite = () => {
                :value="nickname"
                @input="$emit('update:nickname', $event.target.value)"
                name="name"
-               placeholder="이름" >
-        <input type="password"
+               placeholder="이름">
+        <input class="mx-1"
+               type="password"
                :value="password"
                @input="$emit('update:password', $event.target.value)"
                name="password" placeholder="암호">
 
-        <!--              <div class="secret">-->
-        <!--                <input type="checkbox" name="secret" id="secret">-->
-        <!--                <label for="secret" tabindex="0">비밀댓글</label>-->
-        <!--              </div>-->
+<!--        <div class="secret">-->
+<!--          <input type="checkbox" name="secret" id="secret">-->
+<!--          <label for="secret" tabindex="0">비밀댓글</label>-->
+<!--        </div>-->
       </div>
       <label for="comment" class="screen_out">댓글</label>
       <textarea id="comment"
                 :value="content"
                 @input="$emit('update:content', $event.target.value)"
-                 name="comment" cols="" rows="4"
-                placeholder="소중한 댓글을 입력해 주세요."></textarea>
+                name="comment" cols="" rows="4"
+                placeholder="소중한 댓글을 입력해주세요."></textarea>
       <div class="d-flex justify-content-end" style="position: relative; float:left; margin-left:0">
         <!--              <b-button squared variant="outline-secondary" @click="moveToList()" style="font-size:12px">목록</b-button>-->
       </div>
@@ -101,13 +102,17 @@ const hideCommentWrite = () => {
                   @click="send"
                   style="font-size:12px"
         >
-          {{buttonName}}
+          {{ buttonName }}
         </b-button>
-<!--        <b-button squared variant="outline-secondary" @click="props.send" style="font-size:12px">댓글달기</b-button>-->
+        <!--        <b-button squared variant="outline-secondary" @click="props.send" style="font-size:12px">댓글달기</b-button>-->
       </div>
     </div>
   </form>
 </template>
 
 <style>
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: gray;
+  opacity: 0.4; /* Firefox */
+}
 </style>

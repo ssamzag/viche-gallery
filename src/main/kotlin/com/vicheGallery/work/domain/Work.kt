@@ -41,7 +41,7 @@ class Work(
     }
 
     fun delete() {
-        this.deleted = false
+        this.deleted = true
     }
 
     fun toWork(workWriteRequest: WorkWriteRequest): Work {

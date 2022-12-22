@@ -60,7 +60,7 @@ class WorkService(
     }
 
     private fun validate(persist: Work) {
-        if (!persist.deleted) {
+        if (persist.deleted) {
             throw IllegalArgumentException("삭제할 수 없습니다.")
         }
     }

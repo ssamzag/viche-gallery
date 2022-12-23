@@ -4,11 +4,11 @@
 <template>
   <main class="notfound p-5">
     <h1>404</h1>
-    <h5>아무것도 없네요!</h5>
+    <h5 class="mt-3">아무것도 없네요!</h5>
   </main>
 </template>
 
-<style>
+<style scoped>
 .notfound {
   display: flex;
   width: 100%;
@@ -19,4 +19,5 @@
   justify-content: center;
   flex-direction: column;
 }
+
 </style>

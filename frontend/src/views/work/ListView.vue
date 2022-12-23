@@ -121,7 +121,7 @@ const deleteButton = () => {
               </ul>
               <div class="overlay">
                 <div class="info">
-                  <img alt="Viche" class="avatar" height="40" src="/api/images/SCR-20221107-v15.png">
+                  <img alt="Viche" class="avatar" height="40" src="src/assets/apple-icon-180x180.png">
                   <div class="title">{{ work.title }}</div>
                   <div class="name">Viche</div>
                 </div>

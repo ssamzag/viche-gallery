@@ -11,7 +11,7 @@ export default {
       immediate: true,
       handler(to, from) {
         const defaultTitle = 'Viche Gallery'
-        document.title = to.meta.title + " - " + defaultTitle|| defaultTitle;
+        document.title = to.meta.title + " - " + defaultTitle || defaultTitle;
       }
     },
   }

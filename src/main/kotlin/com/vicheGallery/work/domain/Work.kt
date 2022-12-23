@@ -13,7 +13,7 @@ class Work(
     val content: String,
 
     @Enumerated(EnumType.STRING)
-    val workType: WorkType = WorkType.WORK,
+    val workType: WorkType = WorkType.STUDY,
 
     @Column(nullable = false)
     var deleted: Boolean = false,

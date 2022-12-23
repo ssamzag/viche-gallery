@@ -62,14 +62,12 @@ const router = createRouter({
             name: "worklist",
             component: WorkListView,
             props: {
-                workType: 'WORK',
                 pageTitle: 'works',
                 pageDesc: 'Illustration works of VICHE'
 
             },
             meta: {
                 title: 'Works',
-                workType: 'work',
                 keepAlive: false
             }
         },

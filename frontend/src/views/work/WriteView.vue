@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import axios from "axios";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const title = ref("")
-
 const content = ref("")
-const router = useRouter();
-
+const router = useRouter()
+const route = useRoute()
 let storedFiles = ref([""])
 
 const write = () => {
@@ -22,7 +21,7 @@ const write = () => {
           'Authorization': `Bearer ${localStorage.token}`
         }
       })
-      .then(() => router.replace(selected.value === "WORK" ? "/work" : "/portfolio"))
+      .then(() => router.replace({path: "/work"}))
       .catch(error => alert(error.response))
 }
 const file = ref()
@@ -70,11 +69,10 @@ const handleFileUpload = () => {
         alert("업로드 실패")
       })
 }
-
-const selected = ref("WORK")
+const selected = ref(route.query.workType)
 const options = [
-  {value: "WORK", text: "WORK"},
   {value: "PORTFOLIO", text: "PORTFOLIO"},
+  {value: "STUDY", text: "STUDY"},
 ]
 </script>
 
@@ -82,27 +80,37 @@ const options = [
   <div>
     <b-col>
       <b-row>
-        <input multiple ref="file" v-on:change="handleFileUpload" type="file"></b-row>
-      <b-row>
         <div class="mt-2">
           <b-form-select v-model="selected" :options="options"></b-form-select>
+        </div>
+      </b-row>
+      <b-row>
+        <div class="mt-2">
+          <b-form-input v-model="title" placeholder="제목을 입력해주세요"></b-form-input>
 
         </div>
       </b-row>
-      <b-row>
-        <div class="mt-2">
-          <input v-model="title" placeholder="제목을 입력해 주세요"/>
-        </div>
+<!--      <b-row>-->
+<!--        <div class="mt-2">-->
+<!--          <b-form-textarea-->
+<!--              id="textarea"-->
+<!--              v-model="content"-->
+<!--              placeholder="내용을 입력해주세요"-->
+<!--              rows="10"-->
+<!--              no-resize-->
+<!--              max-rows="6"-->
+<!--          ></b-form-textarea>-->
+<!--        </div>-->
+<!--      </b-row>-->
+      <b-row class="mt-2">
+        <b-col>
+          <input multiple ref="file" v-on:change="handleFileUpload" type="file">
+        </b-col>
       </b-row>
       <b-row>
-        <div class="mt-2">
-          <input v-model="content" placeholder="내용을 입력해 주세요"/>
-        </div>
-      </b-row>
-      <b-row>
-        <div class="mt-2">
+        <b-col class="mt-2">
           <b-button squared variant="outline-secondary" @click="write()">작성하기</b-button>
-        </div>
+        </b-col>
       </b-row>
     </b-col>
   </div>

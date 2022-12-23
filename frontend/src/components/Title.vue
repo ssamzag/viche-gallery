@@ -13,8 +13,8 @@
           <div style="float:right" v-if="store.state.login">
             <div class="post-meta">
               <b-button class="title-h1"
-                        v-if="props.write"
-                        :to="props.write.url"
+                        v-if="write"
+                        :to="write.url"
                         variant
                         style="float:right; font-size: 10px;">
                 {{ props.write.text }}

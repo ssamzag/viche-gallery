@@ -1,6 +1,5 @@
 <script setup type="ts" xmlns:background_image="http://www.w3.org/1999/xhtml">
-import {defineComponent, onMounted, ref, inject, computed} from "vue";
-import axios from "axios";
+import {onMounted, ref, inject, computed} from "vue";
 import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {useRouter} from "vue-router";
@@ -8,11 +7,10 @@ import api from "@/api";
 import {mapGetters, useStore} from "vuex";
 
 const works = ref([])
-const imgsRef = ref([])
+const imagesRef = ref([])
 let index = 0;
 
 const visibleRef = ref(false)
-const moveRef = ref(false)
 const indexRef = ref(0) // default 0
 
 const onShow = () => visibleRef.value = true
@@ -39,14 +37,14 @@ computed(() => store.state.login)
 const buttonsSelected = ref("PORTFOLIO")
 const buttonsOptions = [
   {text: 'PORTFOLIO', value: 'PORTFOLIO'},
-  {text: 'STUDY', value: 'WORK'}
+  {text: 'STUDY', value: 'STUDY'}
 ]
 
 const getList = async () => {
   const response = await getWorks()
   response.data
       .forEach(r => {
-        r.attachments.forEach(src => imgsRef.value.push({title: r.title, src: "/api/images/" + src}))
+        r.attachments.forEach(src => imagesRef.value.push({title: r.title, src: "/api/images/" + src}))
         r.imageStartIndex = index
         index += r.attachments.length
       })
@@ -81,7 +79,7 @@ const deleteButton = () => {
 <template>
   <b-col>
     <b-row>
-      <Title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:'/work/write',text:'WRITE'}"
+      <Title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:`/work/write?workType=${buttonsSelected}`,text:'WRITE'}"
              :delete="{click: deleteButton, text:'DELETE'}"></Title>
     </b-row>
     <b-row>
@@ -109,7 +107,7 @@ const deleteButton = () => {
             <a @click="showImg(work.imageStartIndex)" class="project-image" target="_self">
               <ul class="icons-list"
                   v-if="deleteToggle" style="z-index: 4">
-                <b-button style="font-size:12px"
+                <b-button style="font-size:12px; opacity: 0.9"
                           squared
                           variant="danger"
                           @click.stop="deleteWork(work.workId)">
@@ -140,7 +138,7 @@ const deleteButton = () => {
   <div>
     <vue-easy-lightbox
         :visible="visibleRef"
-        :imgs="imgsRef"
+        :imgs="imagesRef"
         :index="indexRef"
         @hide="onHide"
     ></vue-easy-lightbox>
@@ -148,12 +146,13 @@ const deleteButton = () => {
 </template>
 
 <style>
-.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+.sub-radio .btn.active, .btn.show {
   font-weight: bold;
-  border-color:#ffffff !important;
+  border-color: #ffffff !important;
   padding-left: 0px;
   font-size: 12px;
 }
+
 .btn-sm {
   padding: 0.25rem 10px 0 0 !important;
   font-size: 12px !important;
@@ -164,7 +163,21 @@ const deleteButton = () => {
 .form-check-inline {
   margin-right: 0 !important;
 }
+
 .form-control-sm {
   padding: 0 !important;
+}
+
+.vel-img-title {
+  color: #ffffff !important;
+  font-size: 17px !important;
+}
+
+.vel-modal {
+  background: rgba(0,0,0,.8) !important;
+}
+
+.vel-btns-wrapper .btn__next, .vel-btns-wrapper .btn__prev {
+  font-size: 30px !important;
 }
 </style>

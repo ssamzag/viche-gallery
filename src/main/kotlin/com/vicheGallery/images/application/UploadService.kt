@@ -3,9 +3,8 @@ package com.vicheGallery.images.application
 import com.vicheGallery.images.domain.FileStore
 import com.vicheGallery.images.domain.ImageFile
 import com.vicheGallery.images.domain.ImageFileRepository
-import com.vicheGallery.images.domain.UploadFile
+import com.vicheGallery.images.dto.UploadFile
 import com.vicheGallery.images.dto.UploadForm
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.UrlResource
 import org.springframework.stereotype.Service
 

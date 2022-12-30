@@ -5,9 +5,6 @@ import javax.persistence.*
 
 @Entity
 class Work(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     val title: String,
 
     val content: String,
@@ -19,7 +16,10 @@ class Work(
     var deleted: Boolean = false,
 
     @Embedded
-    var attachments: WorkAttachments? = null
+    var attachments: WorkAttachments? = null,
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 ) {
     fun setAttachments(attachments: List<String>?) {
         if (attachments.isNullOrEmpty()) {
@@ -36,7 +36,7 @@ class Work(
         )
     }
 
-    fun getStoredNames() : List<String>? {
+    fun getStoredNames(): List<String>? {
         return attachments?.getFileUrl()
     }
 

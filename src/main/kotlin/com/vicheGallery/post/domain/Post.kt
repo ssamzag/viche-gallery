@@ -5,10 +5,7 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-class Post (
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
+class Post(
     @field:Column(nullable = false)
     var deleted: Boolean? = false,
 
@@ -18,7 +15,10 @@ class Post (
     var content: String,
 
     @Embedded
-    var attachments: PostAttachments? = null
+    var attachments: PostAttachments? = null,
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 ) : BaseEntity() {
     fun setAttachments(attachments: List<String>?) {
         if (attachments.isNullOrEmpty()) {

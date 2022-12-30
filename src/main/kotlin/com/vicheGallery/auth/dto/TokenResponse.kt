@@ -1,3 +1,5 @@
 package com.vicheGallery.auth.dto
 
-data class TokenResponse(val accessToken: String)
+data class TokenResponse(
+    val accessToken: String
+)

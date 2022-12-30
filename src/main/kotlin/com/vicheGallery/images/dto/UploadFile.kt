@@ -1,4 +1,4 @@
-package com.vicheGallery.images.domain
+package com.vicheGallery.images.dto
 
 class UploadFile (
     val uploadFileName:String?,

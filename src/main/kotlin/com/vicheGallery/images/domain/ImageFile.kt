@@ -10,10 +10,13 @@ import javax.persistence.ManyToOne
 
 @Entity
 class ImageFile(
+    var storeImageName: String,
+
+    val uploadImageName: String,
+
+    val uploadBy: String,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    var storeImageName: String,
-    val uploadImageName: String,
-    val uploadBy: String,
+    val id: Long? = null
 ) : BaseEntity()

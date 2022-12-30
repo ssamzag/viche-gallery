@@ -1,6 +1,6 @@
 package com.vicheGallery.images.domain
 
-import org.springframework.beans.factory.annotation.Autowired
+import com.vicheGallery.images.dto.UploadFile
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile

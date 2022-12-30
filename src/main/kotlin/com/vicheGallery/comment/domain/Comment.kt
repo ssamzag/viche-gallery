@@ -8,10 +8,9 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 class Comment(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
     @Column(nullable = false)
     var deleted: Boolean = false,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ref_comment_id")
     val refComment: Comment? = null,
@@ -24,6 +23,7 @@ class Comment(
     @NotNull
     @Column(nullable = false)
     var content: String,
+
     val userId: Long? = null,
 
     @Column(length = 10, nullable = false)
@@ -33,7 +33,10 @@ class Comment(
     @Column(length = 256, nullable = false)
     val password: String?,
 
-    val ip: String?
+    val ip: String?,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
 ) : BaseEntity() {
     fun updateContent(content: String) {
         this.content = content

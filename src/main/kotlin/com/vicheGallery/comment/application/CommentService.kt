@@ -15,10 +15,10 @@ import kotlin.IllegalArgumentException
 
 @Service
 class CommentService(
-    @Autowired val commentRepositoryImpl: CommentRepositoryImpl,
-    @Autowired val commentRepository: CommentRepository,
-    @Autowired val postService: PostService,
-    @Autowired val password: Password
+    private val commentRepositoryImpl: CommentRepositoryImpl,
+    private val commentRepository: CommentRepository,
+    private val postService: PostService,
+    private val password: Password
 ) {
     fun save(
         postId: Long,
@@ -60,7 +60,7 @@ class CommentService(
         )
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun findByPostId(postId: Long): CommentsResponse {
         val comments = commentRepositoryImpl.getComments(postId)
         val result: ArrayList<CommentResponse> = ArrayList()
@@ -89,14 +89,14 @@ class CommentService(
         return CommentsResponse(result)
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun delete(commentId: Long, password: String) {
         val comment = commentRepository.findById(commentId).get()
         validate(comment, password)
         comment.delete()
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun update(commentId: Long, request: CommentUpdateRequest) {
         val comment = commentRepository.findById(commentId).get()
         validate(comment, request.password)

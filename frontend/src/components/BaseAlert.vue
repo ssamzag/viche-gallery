@@ -1,51 +1,46 @@
 <template>
-  <transition name="slide-fade">
-    <div  class="app-alert" v-if="show">
-      <b-alert :variant="alertStyle" :modelValue="show">{{ message }}</b-alert>
-    </div>
-  </transition>
+  <div class="app-alert">
+    <TransitionGroup name="slide">
+
+      <div
+          v-for="({ message, type }, index) in alerts"
+          :key="index"
+          class="alert "
+          :class="typeStyle(type)"
+          role="alert"
+      >
+        {{ message }}
+      </div>
+    </TransitionGroup>
+  </div>
 </template>
 
-<script setup type="ts">
-import {computed} from "vue";
+<script setup>
+import { useAlert } from '@/composables/alert';
 
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false
-  },
-  message: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    default: "error",
-    validator: value => ["success", "error"].includes(value)
-  }
-})
-
-const alertStyle = computed(() => props.type === "error" ? "danger" : "success")
+const { alerts } = useAlert();
+const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-success');
 </script>
 
 <style scoped>
 .app-alert {
   position: fixed;
-  top: 100px;
-  right: 10px
+  top: 10px;
+  right: 10px;
 }
 
-.slide-fade-enter-active {
-  transition: all 0.5s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translatey(-10px);
+.slide-enter-from,
+.slide-leave-to {
   opacity: 0;
+  transform: translateY(-30px);
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateY(0px);
 }
 </style>

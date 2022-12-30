@@ -4,75 +4,53 @@ import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
 import {useStore} from "vuex";
 import api from "@/api";
-
-import CommentWrite from "@/components/comment/BaseCommentWriteForm.vue";
-import TitleComponent from "@/components/TitleComponent.vue";
-import BaseModal from "@/components/BaseModal.vue";
-import BaseCommentDetail from "@/components/comment/BaseCommentDetailForm.vue";
-import BaseCommentWriteForm from "@/components/comment/BaseCommentWriteForm.vue";
+import {useAlert} from '@/composables/alert'
+import BaseTitle from "@/components/BaseTitle.vue";
+import {useUserStore} from "@/stores/user";
+import {useAlertStore} from "@/stores/alert";
 
 const router = useRouter()
+const {vSuccess, vAlert} = useAlertStore()
+
 const commentRemoveModal = ref(false)
 
 const commentModifyModal = ref(false)
 const commentModifyId = ref(0)
 const commentModifyTeleportTo = ref("body")
-const commentModifyContent = ref("")
 
-const commentPasswordInput = ref("")
 const commentCount = ref(0)
 const root = ref<HTMLElement | null>(null);
 const comment = ref("")
-const replayPassword = ref("")
 const removeCommendId = ref(0)
 
 const commentReplyTeleportTo = ref("body")
 const commentReplyToNick = ref("")
 const commentReplyRefCommentId = ref(0)
 const commentReplyModal = ref(false)
-const commentReply = ref({})
 
-const store = useStore()
+const {loginStatus} = useUserStore()
 const postId = useRoute().params.postId
 
 const replyForm = ref({
-  password: "",
   content: "",
+  password: "",
   nickname: ""
 })
 
 const commentForm = ref({
-  password: "",
   content: "",
+  password: "",
   nickname: ""
 })
 
 const post = ref({
   title: "",
   content: "",
-  createdDate: "",
+  createdDate: ""
+
 })
 
-const comments = ref([
-  {
-    id: 0,
-    content: "",
-    replyToNick: "",
-    createdDate: "",
-    nickname: "",
-    child: [{
-      id: 0,
-      content: "",
-      refComment: {
-        id: 0,
-        content: ""
-      },
-      replyToNick: "",
-      createdDate: "",
-      nickname: "",
-    }]
-  }
-])
+const comments = ref([])
 
 const updatePost = () => {
   router.replace(`/post/modify/${postId}`)
@@ -84,9 +62,12 @@ const deletePost = () => {
   }
 
   api.delete(`/api/posts/${postId}`)
-      .then(() => router.replace("/post"))
+      .then(() => {
+        vSuccess("삭제완료")
+        router.replace("/post")
+      })
       .catch(() => {
-        alert("삭제 실패");
+        vAlert("삭제 실패");
       })
 }
 
@@ -200,7 +181,7 @@ const deleteComment = (password: string) => {
     commentRemoveModal.value = false
     removeCommendId.value = 0
   }).catch(() => {
-    alert("암호를 확인해 주세요")
+    vAlert("암호를 확인해 주세요")
   })
 }
 
@@ -231,6 +212,7 @@ const hideModifyModal = () => commentModifyModal.value = false
 
 <template>
   <title-component :title="post.title"></title-component>
+  <base-title title="Post"></base-title>
   <b-col style="max-width: 1000px;">
     <b-row>
       <b-col>
@@ -244,10 +226,10 @@ const hideModifyModal = () => commentModifyModal.value = false
           <b-card-text class="post-meta">
             <span>비체</span>
             <span>{{ post.createdDate }}</span>
-            <span v-if="store.state.login">
+            <span v-if="loginStatus">
                 <a href="#" @click.prevent="updatePost">수정</a>
               </span>
-            <span v-if="store.state.login">
+            <span v-if="loginStatus">
                 <a href="#" @click.prevent="deletePost">삭제</a>
               </span>
           </b-card-text>
@@ -271,15 +253,15 @@ const hideModifyModal = () => commentModifyModal.value = false
                                  class="py-2"
         />
         <div class="comment-list">
-          <ul v-for="com in comments">
-            <base-comment-detail :com="com"
-                                 @insertComment="insertComment"
-                                 @showReplyModal="showReplyModal"
-                                 @showModifyComment="showModifyComment"
-                                 @showDeleteModal="showDeleteModal"
+          <ul v-for="comment in comments">
+            <base-comment-detail-form :com="comment"
+                         @insertComment="insertComment"
+                         @showReplyModal="showReplyModal"
+                         @showModifyComment="showModifyComment"
+                         @showDeleteModal="showDeleteModal"
             />
-            <ul v-for="cc in com.child">
-              <base-comment-detail-form :com="cc"
+            <ul v-for="commentChild in comment.child">
+              <base-comment-detail-form :com="commentChild"
                                         @replyComment="replyComment"
                                         @showReplyModal="showReplyModal"
                                         @showModifyComment="showModifyComment"
@@ -314,13 +296,13 @@ const hideModifyModal = () => commentModifyModal.value = false
   </teleport>
 
   <teleport :to="commentModifyTeleportTo">
-    <comment-write @send="updateComment"
-                   @hideCommentWrite="hideModifyModal"
-                   button-name="댓글수정"
-                   showCancelButton=true
-                   v-model:content="replyForm.content"
-                   v-model:password="replyForm.password"
-                   v-if="commentModifyModal"
+    <base-comment-write-form @send="updateComment"
+                             @hideCommentWrite="hideModifyModal"
+                             button-name="댓글수정"
+                             showCancelButton=true
+                             v-model:content="replyForm.content"
+                             v-model:password="replyForm.password"
+                             v-if="commentModifyModal"
     />
   </teleport>
 

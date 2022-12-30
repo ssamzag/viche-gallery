@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
-@RequestMapping("/works")
 @RestController
+@RequestMapping("/works")
 class WorkController(
-    val workService: WorkService
+    private val workService: WorkService
 ) {
     @PostMapping
     fun write(

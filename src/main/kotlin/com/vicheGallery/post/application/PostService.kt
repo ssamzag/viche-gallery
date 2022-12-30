@@ -11,7 +11,7 @@ import kotlin.IllegalArgumentException
 
 @Service
 class PostService(
-    @Autowired val postRepository: PostRepository
+    private val postRepository: PostRepository
 ) {
     @Transactional
     fun write(postRequest: PostRequest): Long? {
@@ -19,7 +19,7 @@ class PostService(
         return post.id
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun findByPostIdOrThrow(postId: Long): PostRead {
         val post = postRepository.findByIdAndDeletedFalse(postId)
             ?: throw IllegalArgumentException("존재하지 않는 글입니다.")
@@ -32,7 +32,7 @@ class PostService(
         )
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun findAllDesc(): PostsResponse {
         return PostsResponse(
             postRepository.findByDeletedFalse(Sort.by(Sort.Direction.DESC, "id"))

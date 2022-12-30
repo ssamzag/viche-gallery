@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer
 import javax.servlet.http.HttpServletRequest
 
 class AuthenticationPrincipalArgumentResolver(
-    @Autowired val authService: AuthService
+    private val authService: AuthService
 ) : HandlerMethodArgumentResolver {
 
     override fun supportsParameter(parameter: MethodParameter): Boolean {

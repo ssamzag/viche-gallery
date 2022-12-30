@@ -15,7 +15,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/comment")
 class CommentController(
-    @Autowired private val commentService: CommentService,
+    private val commentService: CommentService,
 ) {
     @PostMapping("/{postId}")
     fun write(

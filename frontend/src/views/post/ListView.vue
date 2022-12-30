@@ -31,7 +31,7 @@ const goPostDetailPage = (postId: number) => router.push({name: "PostDetail", pa
 <template>
   <b-col>
     <b-row>
-      <Title title="POST" subTitle="Work Diary, Daily Life, Etc." :write="{url:'/post/write',text:'WRITE'}"></Title>
+      <base-title title="POST" subTitle="Work Diary, Daily Life, Etc." :write="{url:'/post/write',text:'WRITE'}"></base-title>
     </b-row>
     <b-row>
       <b-card-group columns>
@@ -74,8 +74,7 @@ const goPostDetailPage = (postId: number) => router.push({name: "PostDetail", pa
 
 <style>
 .ellipsis {
-  width: 300px;
-  display: block;
+  width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

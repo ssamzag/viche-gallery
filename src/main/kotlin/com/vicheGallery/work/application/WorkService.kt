@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class WorkService(
-    val workRepository: WorkRepository,
-    val workRepositoryCustom: WorkRepositoryCustom
+    private val workRepository: WorkRepository,
+    private val workRepositoryCustom: WorkRepositoryCustom
 ) {
-    @Transactional(readOnly = false)
+    @Transactional
     fun create(request: WorkWriteRequest): WorkWriteResponse {
         val work = Work(
             title = request.title,
@@ -52,7 +52,7 @@ class WorkService(
             }
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     fun delete(id: Long) {
         val work = workRepository.findById(id).get()
         validate(work)

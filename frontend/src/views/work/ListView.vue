@@ -4,7 +4,11 @@ import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {useRouter} from "vue-router";
 import api from "@/api";
-import {mapGetters, useStore} from "vuex";
+import {useStore} from "vuex";
+import BaseTitle from "@/components/BaseTitle.vue";
+import {useAlertStore} from "@/stores/alert";
+
+const {vSuccess, vAlert} = useAlertStore()
 
 const works = ref([])
 const imagesRef = ref([])
@@ -55,7 +59,7 @@ const getWorks = async () => {
   try {
     return await api.get(`/api/works?workType=${buttonsSelected.value}`)
   } catch (e) {
-    alert(e)
+    vAlert(e)
   }
 }
 
@@ -65,8 +69,9 @@ const deleteWork = (id) => {
     api.delete(`/api/works/${id}`)
         .then((res) => {
           getList()
+          vSuccess("삭제완료")
         })
-        .catch(() => alert("삭제 실패"))
+        .catch(() => vAlert("삭제 실패"))
   }
 }
 const deleteToggle = inject('login')
@@ -79,8 +84,8 @@ const deleteButton = () => {
 <template>
   <b-col>
     <b-row>
-      <Title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:`/work/write?workType=${buttonsSelected}`,text:'WRITE'}"
-             :delete="{click: deleteButton, text:'DELETE'}"></Title>
+      <base-title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:`/work/write?workType=${buttonsSelected}`,text:'WRITE'}"
+             :delete="{click: deleteButton, text:'DELETE'}"></base-title>
     </b-row>
     <b-row>
       <b-form-radio-group

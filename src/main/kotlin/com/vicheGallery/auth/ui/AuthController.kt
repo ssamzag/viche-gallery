@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/auth")
 class AuthController(
-    @Autowired
-    val authService: AuthService
+    private val authService: AuthService
 ) {
     @PostMapping("/login/token")
     fun login(@RequestBody request: TokenRequest): ResponseEntity<TokenResponse?>? {

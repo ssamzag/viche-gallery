@@ -10,7 +10,7 @@
             </h1>
             <p class="title-p color-dark">{{ props.subTitle }}</p>
           </div>
-          <div style="float:right" v-if="store.state.login">
+          <div style="float:right" v-if="loginStatus">
             <div class="post-meta">
               <b-button class="title-h1"
                         v-if="write"
@@ -35,9 +35,11 @@
 </template>
 
 <script setup type="ts">
-import {useStore} from "vuex";
+import {useUserStore} from "@/stores/user";
+import {storeToRefs} from "pinia";
 
-const store = useStore();
+const {loginStatus} = storeToRefs(useUserStore())
+
 const props = defineProps({
   title: {
     type: String,

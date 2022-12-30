@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/member")
-class MemberController {
-
+class MemberController(
+    private val memberService: MemberService
+) {
     @GetMapping
-    fun login(@Autowired memberService: MemberService) {
+    fun login() {
 
     }
 }

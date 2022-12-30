@@ -2,12 +2,14 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router";
+import {useAlertStore} from "@/stores/alert";
+
+const router = useRouter();
+const {vSuccess, vAlert} = useAlertStore()
 
 const title = ref("")
 const content = ref("")
-const router = useRouter();
-let storedFiles = ref([""])
-
+let storedFiles = ref([])
 const file = ref()
 const quill = ref()
 
@@ -23,10 +25,11 @@ const write = () => {
         }
       })
       .then((response) => {
+        vSuccess("글쓰기 완료")
         router.replace(response.data)
       })
       .catch(error => {
-        alert(error.response.message)
+        vAlert(error.response.message)
       })
 }
 
@@ -43,7 +46,7 @@ const validateFiles = () => {
 
   if (errors.length > 0) {
     file.value.clear()
-    alert("이미지 파일만 업로드 가능합니다")
+    vAlert("이미지 파일만 업로드 가능합니다")
     throw new Error("이미지 파일 아님")
   }
 }
@@ -63,17 +66,15 @@ const handleFileUpload = () => {
         }
       })
       .then((response) => {
-        storedFiles = ref([]);
         [...response.data].forEach(res => {
           storedFiles.value.push(res.storeFileName)
-          //content.value = `<img class="img-contnet" src="/api/images/${res.storeFileName}"/><br>` + content.value
           const imageHtml = `<img class="img-contnet" src="/api/images/${res.storeFileName}"/>`
           quill.value.setContents(imageHtml + quill.value.getContents())
         })
       })
       .catch(error => {
         file.value = null
-        alert("업로드 실패")
+        vAlert("업로드 실패")
       })
 }
 const toolbarOptions = [

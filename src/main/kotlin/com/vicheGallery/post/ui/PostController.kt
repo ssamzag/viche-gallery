@@ -22,7 +22,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/posts")
 class PostController(
-    @Autowired private val postService: PostService)
+    private val postService: PostService)
 {
     @PostMapping
     fun createPost(

@@ -2,10 +2,11 @@
 import TheHeader from "@/layout/TheHeader.vue";
 import TheContent from "@/layout/TheContent.vue";
 import TheFooter from "@/layout/TheFooter.vue";
+import BaseAlert from "@/components/BaseAlert.vue";
 
 export default {
   name: 'App',
-  components: {TheFooter, TheContent, TheHeader},
+  components: {BaseAlert, TheFooter, TheContent, TheHeader},
   watch: {
     $route: {
       immediate: true,
@@ -16,12 +17,14 @@ export default {
     },
   }
 };
+
 </script>
 
 <template>
-    <TheHeader/>
-    <TheContent/>
-    <TheFooter/>
+  <TheHeader/>
+  <TheContent/>
+  <TheFooter/>
+  <BaseAlert/>
 </template>
 
 <style>

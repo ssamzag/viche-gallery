@@ -3,6 +3,9 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router";
 import api from "@/api";
+import {useAlertStore} from "@/stores/alert";
+
+const {vSuccess, vAlert} = useAlertStore()
 
 const title = ref("")
 const content = ref("")
@@ -43,11 +46,12 @@ const modify = () => {
         }
       })
       .then(() => {
+        vSuccess("수정 완료")
         router.replace(`/post/${props.postId}`)
       })
       .catch(error => {
         console.log(error)
-        alert(error.response.message)
+        vAlert(error.response.message)
       })
 }
 
@@ -64,7 +68,7 @@ const validateFiles = () => {
 
   if (errors.length > 0) {
     file.value.clear()
-    alert("이미지 파일만 업로드 가능합니다")
+    vAlert("이미지 파일만 업로드 가능합니다")
     throw new Error("이미지 파일 아님")
   }
 }
@@ -95,7 +99,7 @@ const handleFileUpload = () => {
       })
       .catch(error => {
         file.value = null
-        alert("업로드 실패")
+        vAlert("업로드 실패")
       })
 }
 const toolbarOptions = [

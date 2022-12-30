@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UploadService(
-    @Autowired val imageFileRepository: ImageFileRepository,
-    @Autowired private val fileStore: FileStore
+    private val imageFileRepository: ImageFileRepository,
+    private val fileStore: FileStore
 ) {
     fun save(uploadForm: UploadForm): List<UploadFile?> {
         val storeFiles: List<UploadFile?> = fileStore.storeFiles(uploadForm.multipartFiles)

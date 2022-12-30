@@ -1,24 +1,22 @@
 <script setup>
 import {useRouter} from "vue-router";
-import {useStore} from "vuex";
+import {useUserStore} from "@/stores/user";
+import {storeToRefs} from "pinia";
 
 document.addEventListener("click", () => {
   document.getElementById("nav-collapse").classList.remove("show")
 })
-let router = useRouter();
-const store = useStore();
+let router = useRouter()
+const userStore = useUserStore()
 
-const logout = () => {
-  localStorage.setItem("token", "");
-  store.commit("logout")
-}
+const {logout} = userStore
+const {loginStatus} = storeToRefs(userStore)
 </script>
 
 <template>
   <b-navbar toggleable="md"
             variant="white"
             dark="false"
-            fixed="top"
             class="maru-font my-0"
             style="margin-left:12px">
     <b-navbar-brand to="/">
@@ -34,7 +32,7 @@ const logout = () => {
       </b-navbar-nav>
 
       <b-navbar-nav class="ms-auto">
-        <div v-if="!store.state.login">
+        <div v-if="!loginStatus">
           <b-nav-item to="/login">
             <font-awesome-icon icon="fa-solid fa-user"/>
           </b-nav-item>

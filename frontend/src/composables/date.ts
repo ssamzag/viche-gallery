@@ -9,7 +9,8 @@ const units = {
     second: 1000
 };
 
-export const getRelativeTime = (d1: string, d2 = new Date()): string => {
+export const getRelativeTime = (d1: string, d2 = new Date()) => {
+
     if (!d1) {
         return ""
     }

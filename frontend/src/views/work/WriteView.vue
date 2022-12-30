@@ -2,11 +2,13 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
+import {useAlertStore} from "@/stores/alert";
 
 const title = ref("")
 const content = ref("")
 const router = useRouter()
 const route = useRoute()
+const {vSuccess, vAlert} = useAlertStore()
 let storedFiles = ref([""])
 
 const write = () => {
@@ -21,8 +23,11 @@ const write = () => {
           'Authorization': `Bearer ${localStorage.token}`
         }
       })
-      .then(() => router.replace({path: "/work"}))
-      .catch(error => alert(error.response))
+      .then(() => {
+        vSuccess("작성 완료")
+        router.replace({path: "/work"})
+      })
+      .catch(error => vAlert(error.response))
 }
 const file = ref()
 const validateFiles = () => {
@@ -38,7 +43,7 @@ const validateFiles = () => {
 
   if (errors.length > 0) {
     file.value.clear()
-    alert("이미지 파일만 업로드 가능합니다")
+    vAlert("이미지 파일만 업로드 가능합니다")
     throw new Error("이미지 파일 아님")
   }
 }
@@ -63,10 +68,11 @@ const handleFileUpload = () => {
         [...response.data].forEach(res => {
           storedFiles.value.push(res.storeFileName)
         })
+        vSuccess("이미지 업로드 성공")
       })
       .catch(error => {
         file.value = null
-        alert("업로드 실패")
+        vAlert("업로드 실패")
       })
 }
 const selected = ref(route.query.workType)

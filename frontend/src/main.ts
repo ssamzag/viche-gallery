@@ -1,20 +1,18 @@
 import {createApp, ref} from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store"
-import axios from "@/api/axios"
-
+import {createPinia} from "pinia"
 import BootstrapVue3 from 'bootstrap-vue-3'
-import { QuillEditor } from '@vueup/vue-quill'
+import globalComponents from "@/plugins/global-components";
+
+import {QuillEditor} from '@vueup/vue-quill'
 import VueEasyLightbox from 'vue-easy-lightbox';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {fab} from '@fortawesome/free-brands-svg-icons'
+
 import {BToastPlugin} from 'bootstrap-vue-3'
-
-import titleComponent from '@/components/TitleComponent.vue'
-
 import VueGtag from 'vue-gtag-next';
 
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -25,7 +23,6 @@ import "@noonnu/maruburi-regular"
 import '@kfonts/nanum-gothic'
 import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css'
 import './assets/gallery.css'
-import type {Ref, UnwrapRef} from "@vue/reactivity";
 
 library.add(fab, fas)
 
@@ -33,16 +30,16 @@ const app = createApp(App);
 app.use(router);
 app.use(VueEasyLightbox)
 app.use(BootstrapVue3)
-app.use(store)
 app.use(BToastPlugin)
+app.use(globalComponents)
+app.use(createPinia())
 app.use(VueGtag, {
-    property: { id: 'G-PEYCZQVJPQ' },
+    property: {id: 'G-PEYCZQVJPQ'},
 });
 
 app.provide('login', ref(false))
 
 app.component('QuillEditor', QuillEditor)
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.component('TitleComponent', titleComponent)
 
 app.mount("#app");

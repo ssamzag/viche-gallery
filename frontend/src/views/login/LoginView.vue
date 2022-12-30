@@ -3,25 +3,43 @@ import {inject, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore, mapActions, mapGetters, mapMutations} from 'vuex'
 import AuthService from "@/api/modules/auth";
+import {useUserStore} from "@/stores/user";
+import {useAlertStore} from "@/stores/alert";
 
 const userid = ref("")
 const password = ref("")
 const router = useRouter();
 const store = useStore();
+const userStore = useUserStore()
+const {vAlert, vSuccess} = useAlertStore()
 
-const login = () => {
-  AuthService.login({
-    userid: userid.value,
-    password: password.value
-  })
-      .then((req) => {
-        localStorage.setItem('token', req.data.accessToken)
-        store.commit("login")
-        router.replace(sessionStorage.getItem("currentUrl"))
-      })
-      .catch((error) => {
-        alert("로그인 실패")
-      })
+const login = async () => {
+  try {
+    await userStore.login(
+        {
+          userid: userid.value,
+          password: password.value
+        }
+    )
+    vSuccess("로그인 성공")
+    await router.replace(sessionStorage.getItem("currentUrl"))
+
+  } catch (e) {
+    vAlert("로그인 실패")
+  }
+  //
+  // AuthService.login({
+  //   userid: userid.value,
+  //   password: password.value
+  // })
+  //     .then((req) => {
+  //       localStorage.setItem('token', req.data.accessToken)
+  //       store.commit("login")
+  //
+  //     })
+  //     .catch((error) => {
+  //
+  //     })
 }
 
 </script>
@@ -39,7 +57,8 @@ const login = () => {
         </div>
 
         <div class="my-1">
-          <b-form-input type="password" v-model="password" v-on:keyup.enter="login" placeholder="Enter your password"></b-form-input>
+          <b-form-input type="password" v-model="password" v-on:keyup.enter="login"
+                        placeholder="Enter your password"></b-form-input>
         </div>
         <div class="my-1">
           <b-button @click="login">LOGIN</b-button>

@@ -19,7 +19,7 @@ import reactor.util.annotation.Nullable
 @RestController
 @RequestMapping("/images")
 class UploadController(
-    @Autowired private val uploadService: UploadService
+    private val uploadService: UploadService
 ) {
     @PostMapping("/upload")
     fun upload(

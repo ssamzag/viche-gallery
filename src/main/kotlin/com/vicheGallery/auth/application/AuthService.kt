@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
-    @Autowired val memberRepository: MemberRepository,
-    @Autowired val jwtTokenProvider: JwtTokenProvider
+    private val memberRepository: MemberRepository,
+    private val jwtTokenProvider: JwtTokenProvider
 ) {
-
     fun login(request: TokenRequest): TokenResponse? {
         val member: Member = memberRepository.findByEmail(request.userid)
             ?: throw AuthorizationException("아이디 암호를 확인해 주세요.")

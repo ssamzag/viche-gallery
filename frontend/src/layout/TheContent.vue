@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4" style="padding-top:80px;">
+  <div class="mx-4 py-3">
       <RouterView/>
   </div>
 </template>

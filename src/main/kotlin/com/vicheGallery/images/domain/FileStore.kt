@@ -16,7 +16,7 @@ class FileStore(
     private val mediumFileDir: String,
     @Value("\${imageFile.dir.thumbnailSmall}")
     private val smallFileDir: String,
-    @Autowired private val resizeImage: ResizeImage
+    private val resizeImage: ResizeImage
 ) {
     fun storeFullPath(fileName: String): String {
         return storeFileDir + fileName

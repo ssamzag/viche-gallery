@@ -10,8 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 class AuthenticationPrincipalConfig(
-    @Autowired
-    val authService: AuthService
+    private val authService: AuthService
 ) : WebMvcConfigurer {
 
     override fun addArgumentResolvers(argumentResolvers: MutableList<HandlerMethodArgumentResolver>) {

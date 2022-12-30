@@ -10,6 +10,7 @@ class WorkAttachment(
     @JoinColumn(name = "work_id")
     val work: Work? = null,
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 )

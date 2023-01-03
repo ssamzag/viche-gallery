@@ -1,5 +1,6 @@
-package com.vicheGallery.post.domain
+package com.vicheGallery.post.repository
 
+import com.vicheGallery.post.domain.Post
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.data.domain.Sort

@@ -36,7 +36,9 @@ class WorkService(
     }
 
     fun read(id: Long): WorkReadResponse {
-        val persistWork = workRepository.findById(id).get()
+        val persistWork = workRepository.findById(id)
+            .orElseThrow(::IllegalStateException)
+
         return WorkReadResponse(
             persistWork.id,
             persistWork.title,
@@ -47,9 +49,7 @@ class WorkService(
 
     fun findByWorkType(workType: WorkType): List<WorkReadResponse>? {
         return workRepositoryCustom.findByWorkType(workType)
-            .map {
-                WorkReadResponse(it.id, it.title, it.content, it.getStoredNames())
-            }
+            .map (WorkReadResponse::of)
     }
 
     @Transactional

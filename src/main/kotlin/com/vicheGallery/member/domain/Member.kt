@@ -7,11 +7,13 @@ import javax.persistence.*
 @Entity
 class Member(
     val email: String,
+
     val password: String,
+
     val nickname: String,
 
     @Enumerated(EnumType.STRING)
-    val ssoType: SsoType,
+    val ssoType: SsoType?,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

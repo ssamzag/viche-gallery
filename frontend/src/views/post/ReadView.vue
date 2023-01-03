@@ -198,6 +198,8 @@ const replyComment = () => {
     }
   }).then(response => {
     commentReplyModal.value = false
+    replyForm.value.content = ""
+    replyForm.value.password = ""
     bindComments()
   }).catch(() => alert("에러"))
 }
@@ -254,14 +256,14 @@ const hideModifyModal = () => commentModifyModal.value = false
         />
         <div class="comment-list">
           <ul v-for="comment in comments">
-            <base-comment-detail-form :com="comment"
+            <base-comment-detail-form :comment="comment"
                          @insertComment="insertComment"
                          @showReplyModal="showReplyModal"
                          @showModifyComment="showModifyComment"
                          @showDeleteModal="showDeleteModal"
             />
             <ul v-for="commentChild in comment.child">
-              <base-comment-detail-form :com="commentChild"
+              <base-comment-detail-form :comment="commentChild"
                                         @replyComment="replyComment"
                                         @showReplyModal="showReplyModal"
                                         @showModifyComment="showModifyComment"

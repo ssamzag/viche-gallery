@@ -1,11 +1,15 @@
-package com.vicheGallery.comment.domain
+package com.vicheGallery.comment.repository
 
+import com.querydsl.core.types.NullExpression
+import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.vicheGallery.comment.domain.Comment
 import com.vicheGallery.comment.domain.QComment.comment
+import com.vicheGallery.comment.dto.CommentResponse
 import org.springframework.stereotype.Repository
 
 @Repository
-class CommentRepositoryImpl (
+class CommentQueryRepository(
     private val jpaQueryFactory: JPAQueryFactory
 ) {
     fun getComments(postId: Long): List<Comment> {
@@ -15,7 +19,8 @@ class CommentRepositoryImpl (
             .where(comment.postId.eq(postId), comment.deleted.eq(false))
             .orderBy(
                 comment.refComment.id.asc().nullsFirst(),
-                comment.createdDate.asc())
+                comment.createdDate.asc()
+            )
             .fetch()
     }
 }

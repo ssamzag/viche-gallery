@@ -34,6 +34,7 @@ class Comment(
     val password: String?,
 
     val ip: String?,
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 

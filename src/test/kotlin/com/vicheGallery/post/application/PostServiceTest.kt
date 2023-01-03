@@ -1,6 +1,6 @@
 package com.vicheGallery.post.application
 
-import com.vicheGallery.post.domain.PostRepository
+import com.vicheGallery.post.repository.PostRepository
 import com.vicheGallery.post.dto.PostRequest
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

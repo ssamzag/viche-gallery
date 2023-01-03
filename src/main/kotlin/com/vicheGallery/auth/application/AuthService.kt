@@ -6,8 +6,7 @@ import com.vicheGallery.auth.dto.TokenResponse
 import com.vicheGallery.auth.exception.AuthorizationException
 import com.vicheGallery.auth.infrastructure.JwtTokenProvider
 import com.vicheGallery.member.domain.Member
-import com.vicheGallery.member.domain.MemberRepository
-import org.springframework.beans.factory.annotation.Autowired
+import com.vicheGallery.member.repository.MemberRepository
 import org.springframework.stereotype.Service
 
 @Service
@@ -28,6 +27,7 @@ class AuthService(
         if (!jwtTokenProvider.validateToken(credentials)) {
             throw AuthorizationException("권한 없음")
         }
+
         val email = jwtTokenProvider.getPayload(credentials)
         val member: Member = memberRepository.findByEmail(email)
             ?: throw RuntimeException()

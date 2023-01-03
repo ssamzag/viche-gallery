@@ -1,6 +1,5 @@
 package com.vicheGallery.work.domain
 
-import org.springframework.beans.factory.annotation.Value
 import javax.persistence.CascadeType
 import javax.persistence.Embeddable
 import javax.persistence.OneToMany
@@ -13,6 +12,14 @@ class WorkAttachments(
     fun getFileUrl() : List<String> {
         return workAttachments.map {
             it.storedName
-        }.toList()
+        }
+    }
+
+    companion object {
+        fun of(attachments: List<String>, work: Work): WorkAttachments {
+            return WorkAttachments(
+                attachments.map { WorkAttachment.of(it, work) }
+            )
+        }
     }
 }

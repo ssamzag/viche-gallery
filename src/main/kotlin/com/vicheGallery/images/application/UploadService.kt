@@ -2,7 +2,7 @@ package com.vicheGallery.images.application
 
 import com.vicheGallery.images.domain.FileStore
 import com.vicheGallery.images.domain.ImageFile
-import com.vicheGallery.images.domain.ImageFileRepository
+import com.vicheGallery.images.repsitory.ImageFileRepository
 import com.vicheGallery.images.dto.UploadFile
 import com.vicheGallery.images.dto.UploadForm
 import org.springframework.core.io.UrlResource
@@ -24,12 +24,7 @@ class UploadService(
     }
 
     private fun toImageFileList(storeFiles: List<UploadFile?>): List<ImageFile> {
-        return storeFiles.map { s ->
-            ImageFile(
-                storeImageName = s!!.storeFileName,
-                uploadImageName = s.uploadFileName!!,
-                uploadBy = "")
-        }.toList()
+        return storeFiles.map(ImageFile::of)
     }
 
     fun downloadImage(filename: String): UrlResource {

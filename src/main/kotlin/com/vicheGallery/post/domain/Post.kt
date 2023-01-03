@@ -26,9 +26,7 @@ class Post(
         }
 
         this.attachments = PostAttachments(
-            attachments.map { m ->
-                PostAttachment(post = this, storedName = m)
-            }.toList()
+            attachments.map { PostAttachment.of(it, this) }
         )
     }
 

@@ -1,13 +1,12 @@
 package com.vicheGallery.comment.application
 
-import com.vicheGallery.RemoteAddr
+import com.vicheGallery.util.RemoteAddr
 import com.vicheGallery.auth.domain.encrypt.Password
 import com.vicheGallery.comment.domain.Comment
-import com.vicheGallery.comment.domain.CommentRepository
-import com.vicheGallery.comment.domain.CommentRepositoryImpl
+import com.vicheGallery.comment.repository.CommentRepository
+import com.vicheGallery.comment.repository.CommentQueryRepository
 import com.vicheGallery.comment.dto.*
 import com.vicheGallery.post.application.PostService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import javax.servlet.http.HttpServletRequest
@@ -15,7 +14,7 @@ import kotlin.IllegalArgumentException
 
 @Service
 class CommentService(
-    private val commentRepositoryImpl: CommentRepositoryImpl,
+    private val commentQueryRepository: CommentQueryRepository,
     private val commentRepository: CommentRepository,
     private val postService: PostService,
     private val password: Password
@@ -26,10 +25,8 @@ class CommentService(
         httpServletRequest: HttpServletRequest
     ): Comment {
         validate(postId)
-
         return commentRepository.save(
             Comment(
-                id = null,
                 postId = postId,
                 content = req.content,
                 password = password.encrypt(req.password),
@@ -61,32 +58,9 @@ class CommentService(
     }
 
     @Transactional
-    fun findByPostId(postId: Long): CommentsResponse {
-        val comments = commentRepositoryImpl.getComments(postId)
-        val result: ArrayList<CommentResponse> = ArrayList()
-        val map = HashMap<Long, CommentResponse>()
-
-        comments.forEach {
-            val commentResponse = CommentResponse(
-                id = it.id!!,
-                content = it.content,
-                isMember = it.userId != null,
-                replyToNick = it.replyToNick,
-                nickname = it.nickname,
-                createdDate = it.createdDate,
-                modifiedDate = it.modifiedDate,
-                refComment = it.refComment
-            )
-            map[commentResponse.id!!] = commentResponse
-
-            if (it.refComment != null) {
-                map[it.refComment.id]?.child?.add(commentResponse)
-                return@forEach
-            }
-            result.add(commentResponse)
-        }
-
-        return CommentsResponse(result)
+    fun findByPostId(postId: Long): CommentsResponse? {
+        val comments = commentQueryRepository.getComments(postId)
+        return CommentsResponse.of(comments)
     }
 
     @Transactional

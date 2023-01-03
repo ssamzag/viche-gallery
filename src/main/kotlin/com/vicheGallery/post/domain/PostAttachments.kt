@@ -7,20 +7,20 @@ import javax.persistence.OneToMany
 
 @Embeddable
 class PostAttachments(
-    @OneToMany(mappedBy = "post", fetch = LAZY, cascade = [ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = [ALL], orphanRemoval = true)
     val attachments: List<PostAttachment>? = null
 ) {
-    fun getFileUrl(): List<String> {
-        return attachments?.map {
-            it.storedName
-        }!!.toList()
-    }
-
     fun firstFile(): String? {
         if (getFileUrl().isNotEmpty()) {
             return getFileUrl()[0]
         }
         return null
+    }
+
+    private fun getFileUrl(): List<String> {
+        return attachments?.map {
+            it.storedName
+        }!!
     }
 
 }

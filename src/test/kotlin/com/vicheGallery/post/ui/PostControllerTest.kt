@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.gson.Gson
 import com.vicheGallery.member.domain.Member
-import com.vicheGallery.member.domain.MemberRepository
+import com.vicheGallery.member.repository.MemberRepository
 import com.vicheGallery.member.domain.SsoType
 import com.vicheGallery.post.application.PostService
 import com.vicheGallery.post.dto.PostRequest
@@ -49,7 +49,7 @@ internal class PostControllerTest(
     @BeforeEach
     fun setup(context: WebApplicationContext) {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build()
-        val member = Member(null, "email", "pw", "test", SsoType.KAKAO)
+        val member = Member("email", "pw", "test", SsoType.KAKAO)
 
         given(memberRepository.save(member)).willReturn(member)
 //        val perform = mockMvc.perform(post("/auth/login/token")

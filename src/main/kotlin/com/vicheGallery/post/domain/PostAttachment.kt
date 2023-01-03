@@ -15,5 +15,13 @@ class PostAttachment(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 ) : BaseEntity() {
+    companion object {
+        fun of(name: String, post: Post): PostAttachment {
+            return PostAttachment(
+                storedName = name,
+                post = post
+            )
+        }
+    }
 
 }

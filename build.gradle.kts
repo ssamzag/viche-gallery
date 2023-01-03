@@ -10,6 +10,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
+    kotlin("plugin.allopen") version "1.6.21"
     kotlin("kapt") version "1.6.21"
 }
 
@@ -24,7 +25,6 @@ configurations {
 }
 
 licenseReport {
-
     outputDir = "$projectDir/licenses"
     projects = arrayOf(project) + project.allprojects
     renderers = arrayOf(InventoryMarkdownReportRenderer())
@@ -73,7 +73,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
 
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 
     implementation("com.querydsl:querydsl-jpa:5.0.0")
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")

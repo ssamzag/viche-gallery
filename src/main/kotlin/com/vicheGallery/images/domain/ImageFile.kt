@@ -1,12 +1,11 @@
 package com.vicheGallery.images.domain
 
 import com.vicheGallery.BaseEntity
-import com.vicheGallery.work.domain.Work
+import com.vicheGallery.images.dto.UploadFile
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.ManyToOne
 
 @Entity
 class ImageFile(
@@ -19,4 +18,14 @@ class ImageFile(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-) : BaseEntity()
+) : BaseEntity() {
+    companion object {
+        fun of(file: UploadFile?): ImageFile {
+            return ImageFile(
+                storeImageName = file!!.storeFileName,
+                uploadImageName = file.uploadFileName!!,
+                uploadBy = ""
+            )
+        }
+    }
+}

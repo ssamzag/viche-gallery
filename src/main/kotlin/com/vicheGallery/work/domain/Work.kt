@@ -26,14 +26,7 @@ class Work(
             return
         }
 
-        this.attachments = WorkAttachments(
-            attachments.map { m ->
-                WorkAttachment(
-                    work = this,
-                    storedName = m
-                )
-            }.toList()
-        )
+        this.attachments = WorkAttachments.of(attachments, this)
     }
 
     fun getStoredNames(): List<String>? {

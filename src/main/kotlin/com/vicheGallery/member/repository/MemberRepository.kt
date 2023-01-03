@@ -1,5 +1,6 @@
-package com.vicheGallery.member.domain
+package com.vicheGallery.member.repository
 
+import com.vicheGallery.member.domain.Member
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

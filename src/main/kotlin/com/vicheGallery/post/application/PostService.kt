@@ -1,9 +1,8 @@
 package com.vicheGallery.post.application
 
 import com.vicheGallery.post.domain.Post
-import com.vicheGallery.post.domain.PostRepository
+import com.vicheGallery.post.repository.PostRepository
 import com.vicheGallery.post.dto.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -36,9 +35,7 @@ class PostService(
     fun findAllDesc(): PostsResponse {
         return PostsResponse(
             postRepository.findByDeletedFalse(Sort.by(Sort.Direction.DESC, "id"))
-                .map {
-                    PostResponse(it.id, it.title, it.content, it.createdDate, it.firstFile())
-                })
+                .map (PostResponse::of))
     }
 
     @Transactional

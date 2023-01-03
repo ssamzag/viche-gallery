@@ -1,5 +1,6 @@
-package com.vicheGallery.comment.domain
+package com.vicheGallery.comment.repository
 
+import com.vicheGallery.comment.domain.Comment
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

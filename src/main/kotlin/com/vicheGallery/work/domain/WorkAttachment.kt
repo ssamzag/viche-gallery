@@ -13,4 +13,14 @@ class WorkAttachment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-)
+) {
+    companion object {
+        fun of(name: String, work: Work) : WorkAttachment{
+            return WorkAttachment(
+                work = work,
+                storedName = name
+            )
+        }
+    }
+
+}

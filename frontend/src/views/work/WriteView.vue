@@ -15,7 +15,7 @@ const write = () => {
   axios.post('/api/works', {
         title: title.value,
         content: content.value,
-        workType: selected.value,
+        workType: workType.value,
         attachments: storedFiles.value
       },
       {
@@ -75,7 +75,7 @@ const handleFileUpload = () => {
         vAlert("업로드 실패")
       })
 }
-const selected = ref(route.query.workType + "")
+const workType = ref(route.query.workType + "")
 const options = [
   {value: "PORTFOLIO", text: "PORTFOLIO"},
   {value: "STUDY", text: "STUDY"},
@@ -87,7 +87,7 @@ const options = [
     <b-col>
       <b-row>
         <div class="mt-2">
-          <b-form-select v-model="selected" :options="options"></b-form-select>
+          <b-form-select v-model="workType" :options="options"></b-form-select>
         </div>
       </b-row>
       <b-row>

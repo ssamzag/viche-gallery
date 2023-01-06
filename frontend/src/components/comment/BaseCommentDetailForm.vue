@@ -10,10 +10,6 @@ const props = defineProps({
   comment: {
     type: Object,
     require: true
-  },
-  postId: {
-    type: [Number, String],
-    require: true
   }
 })
 const comment = ref("")

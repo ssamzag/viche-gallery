@@ -257,10 +257,10 @@ const hideModifyModal = () => commentModifyModal.value = false
         <div class="comment-list">
           <ul v-for="comment in comments">
             <base-comment-detail-form :comment="comment"
-                         @insertComment="insertComment"
-                         @showReplyModal="showReplyModal"
-                         @showModifyComment="showModifyComment"
-                         @showDeleteModal="showDeleteModal"
+                                      @insertComment="insertComment"
+                                      @showReplyModal="showReplyModal"
+                                      @showModifyComment="showModifyComment"
+                                      @showDeleteModal="showDeleteModal"
             />
             <ul v-for="commentChild in comment.child">
               <base-comment-detail-form :comment="commentChild"

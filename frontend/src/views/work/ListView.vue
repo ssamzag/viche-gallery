@@ -35,9 +35,6 @@ onMounted(() => {
   getList()
 })
 
-const store = useStore();
-computed(() => store.state.login)
-
 const buttonsSelected = ref("PORTFOLIO")
 const buttonsOptions = [
   {text: 'PORTFOLIO', value: 'PORTFOLIO'},

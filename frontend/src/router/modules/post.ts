@@ -25,7 +25,6 @@ const postRoutes = [
     path: "/post/:postId",
     name: "PostDetail",
     component: PostReadView,
-    props: true,
     meta: {
       title: ''
     }

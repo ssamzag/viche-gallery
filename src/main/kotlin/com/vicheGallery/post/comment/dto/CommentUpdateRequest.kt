@@ -1,4 +1,4 @@
-package com.vicheGallery.comment.dto
+package com.vicheGallery.post.comment.dto
 
 import javax.validation.constraints.NotBlank
 

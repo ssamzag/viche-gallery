@@ -1,10 +1,10 @@
-package com.vicheGallery.comment.ui
+package com.vicheGallery.post.comment.ui
 
-import com.vicheGallery.comment.application.CommentService
-import com.vicheGallery.comment.dto.CommentRequest
-import com.vicheGallery.comment.dto.CommentUpdateRequest
-import com.vicheGallery.comment.dto.CommentsResponse
-import com.vicheGallery.comment.dto.ReplyCommentRequest
+import com.vicheGallery.post.comment.application.CommentService
+import com.vicheGallery.post.comment.dto.CommentRequest
+import com.vicheGallery.post.comment.dto.CommentUpdateRequest
+import com.vicheGallery.post.comment.dto.CommentsResponse
+import com.vicheGallery.post.comment.dto.ReplyCommentRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -45,7 +45,8 @@ class CommentController(
     @PutMapping("/{commentId}")
     fun update(
         @PathVariable commentId: Long,
-        @RequestBody @Valid request: CommentUpdateRequest): ResponseEntity<Any> {
+        @RequestBody @Valid request: CommentUpdateRequest
+    ): ResponseEntity<Any> {
         commentService.update(commentId, request);
         return ResponseEntity.noContent().build()
     }

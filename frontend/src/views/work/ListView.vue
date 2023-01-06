@@ -4,7 +4,6 @@ import VueEasyLightbox from "vue-easy-lightbox";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {useRouter} from "vue-router";
 import api from "@/api";
-import {useStore} from "vuex";
 import BaseTitle from "@/components/BaseTitle.vue";
 import {useAlertStore} from "@/stores/alert";
 
@@ -124,7 +123,7 @@ const deleteButton = () => {
               </ul>
               <div class="overlay">
                 <div class="info">
-                  <img alt="Viche" class="avatar" height="40" src="src/assets/apple-icon-180x180.png">
+                  <img alt="Viche" class="avatar" height="40" src="/src/assets/apple-icon-180x180.png">
                   <div class="title">{{ work.title }}</div>
                   <div class="name">Viche</div>
                 </div>

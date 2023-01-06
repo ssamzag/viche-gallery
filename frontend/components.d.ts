@@ -7,12 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BAlert: typeof import('bootstrap-vue-3')['BAlert']
     BaseAlert: typeof import('./src/components/BaseAlert.vue')['default']
-    BaseCommentDetail: typeof import('./src/components/comment/BaseCommentDetailForm.vue')['default']
     BaseCommentDetailForm: typeof import('./src/components/comment/BaseCommentDetailForm.vue')['default']
     BaseCommentForm: typeof import('./src/components/comment/BaseCommentForm.vue')['default']
-    BaseCommentWrite: typeof import('./src/components/comment/BaseCommentWriteForm.vue')['default']
     BaseCommentWriteForm: typeof import('./src/components/comment/BaseCommentWriteForm.vue')['default']
     BaseLoading: typeof import('./src/components/BaseLoading.vue')['default']
     BaseModal: typeof import('./src/components/BaseModal.vue')['default']

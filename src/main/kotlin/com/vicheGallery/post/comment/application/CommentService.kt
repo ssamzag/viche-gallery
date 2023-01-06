@@ -1,12 +1,15 @@
-package com.vicheGallery.comment.application
+package com.vicheGallery.post.comment.application
 
 import com.vicheGallery.util.RemoteAddr
 import com.vicheGallery.auth.domain.encrypt.Password
-import com.vicheGallery.comment.domain.Comment
-import com.vicheGallery.comment.repository.CommentRepository
-import com.vicheGallery.comment.repository.CommentQueryRepository
-import com.vicheGallery.comment.dto.*
+import com.vicheGallery.post.comment.domain.Comment
+import com.vicheGallery.post.comment.repository.CommentRepository
+import com.vicheGallery.post.comment.repository.CommentQueryRepository
 import com.vicheGallery.post.application.PostService
+import com.vicheGallery.post.comment.dto.CommentRequest
+import com.vicheGallery.post.comment.dto.CommentUpdateRequest
+import com.vicheGallery.post.comment.dto.CommentsResponse
+import com.vicheGallery.post.comment.dto.ReplyCommentRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import javax.servlet.http.HttpServletRequest

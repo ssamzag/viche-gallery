@@ -5,13 +5,18 @@ import {useRouter} from "vue-router";
 import axios from "axios";
 import {getRelativeTime} from "@/composables/date";
 
-const posts = ref([])
+const posts = ref([
+  {
+    thumbnailFile: "",
+    id: 0,
+    title: "",
+    createdDate: ""
+  }
+])
 const router = useRouter()
 
 onMounted(() => {
-  axios.get(`/api/posts`).then(response => {
-    [...response.data.postResponses].forEach(r => posts.value.push(r))
-  })
+  axios.get(`/api/posts`).then(response => posts.value = response.data.postResponses)
 
   // const clean = sanitizeHtml(response.data.content, {
   //   allowedTags: ['p', 'b', 'i', 'em', 'strong', 'a', 'br', 'li', 'blockquote', 'h1', 'ol',

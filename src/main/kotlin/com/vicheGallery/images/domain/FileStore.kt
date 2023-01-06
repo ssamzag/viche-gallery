@@ -27,7 +27,7 @@ class FileStore(
     }
 
     fun storeFiles(multipartFiles: List<MultipartFile>): List<UploadFile?> {
-        return multipartFiles.map(::storeFile).toList()
+        return multipartFiles.map(::storeFile)
     }
 
     fun storeFile(multipartFile: MultipartFile): UploadFile? {

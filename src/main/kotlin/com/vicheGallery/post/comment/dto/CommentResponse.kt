@@ -1,6 +1,6 @@
-package com.vicheGallery.comment.dto
+package com.vicheGallery.post.comment.dto
 
-import com.vicheGallery.comment.domain.Comment
+import com.vicheGallery.post.comment.domain.Comment
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
 

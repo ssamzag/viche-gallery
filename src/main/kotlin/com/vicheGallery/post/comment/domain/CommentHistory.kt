@@ -1,4 +1,4 @@
-package com.vicheGallery.comment.domain
+package com.vicheGallery.post.comment.domain
 
 class CommentHistory {
 }

@@ -1,6 +1,6 @@
-package com.vicheGallery.comment.dto
+package com.vicheGallery.post.comment.dto
 
-import com.vicheGallery.comment.domain.Comment
+import com.vicheGallery.post.comment.domain.Comment
 
 data class CommentsResponse(
     val comments: List<CommentResponse>

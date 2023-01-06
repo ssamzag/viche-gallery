@@ -50,7 +50,11 @@ const post = ref({
 
 })
 
-const comments = ref([])
+const comments = ref([
+  {
+    child: []
+  }
+])
 
 const updatePost = () => {
   router.replace(`/post/modify/${postId}`)

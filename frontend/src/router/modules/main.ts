@@ -1,10 +1,10 @@
-import AboutView from "@/views/about/AboutView.vue";
+import MainView from "@/views/about/AboutView.vue";
 
 const mainRoutes = [
   {
     path: "/",
     name: "home",
-    component: AboutView,
+    component: MainView,
     meta: {
       title: 'Home'
     }

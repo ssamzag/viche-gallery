@@ -9,7 +9,9 @@ const {vSuccess, vAlert} = useAlertStore()
 
 const title = ref("")
 const content = ref("")
-let storedFiles = ref([])
+let storedFiles = ref([
+  {storeFileName: ""}
+])
 const file = ref()
 const quill = ref()
 
@@ -66,7 +68,8 @@ const handleFileUpload = () => {
         }
       })
       .then((response) => {
-        [...response.data].forEach(res => {
+        [...response.data].forEach((res: any) => {
+          storedFiles.value = []
           storedFiles.value.push(res.storeFileName)
           const imageHtml = `<img class="img-contnet" src="/api/images/${res.storeFileName}"/>`
           quill.value.setContents(imageHtml + quill.value.getContents())

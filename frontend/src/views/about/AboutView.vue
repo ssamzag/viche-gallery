@@ -16,22 +16,22 @@
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="https://twitter.com/VICHE_00" target="_blank">
-              <font-awesome-icon class="icon-size" icon="fa-brands fa-twitter" />
+              <font-awesome-icon class="icon-size" icon="fa-brands fa-twitter"/>
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="https://www.instagram.com/viche_22/" target="_blank">
-              <font-awesome-icon class="icon-size" icon="fa-brands fa-instagram" />
+              <font-awesome-icon class="icon-size" icon="fa-brands fa-instagram"/>
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="mailto:rhkfdkr@naver.com" target="_blank">
-              <font-awesome-icon class="icon-size" icon="fa-solid fa-envelope" />
+              <font-awesome-icon class="icon-size" icon="fa-solid fa-envelope"/>
             </a>
           </b-col>
           <b-col cols="">
             <a class="navbar-brand" href="" target="_blank">
-              <font-awesome-icon class="icon-size" icon="fa-solid fa-comment" />
+              <font-awesome-icon class="icon-size" icon="fa-solid fa-comment"/>
             </a>
           </b-col>
         </b-row>
@@ -42,13 +42,13 @@
                 :interval="5000"
                 no-touch="false"
                 class="carousel-fade">
-<!--              <b-carousel-slide-->
-<!--                  class="image-box"-->
-<!--                  active-->
-<!--                  img-src="/api/images/685a257.jpeg">-->
-<!--                &lt;!&ndash;          <h1>안녕하세요!</h1>&ndash;&gt;-->
-<!--                &lt;!&ndash;          <p>Some more detailed description or whatever content.</p>&ndash;&gt;-->
-<!--              </b-carousel-slide>-->
+              <!--              <b-carousel-slide-->
+              <!--                  class="image-box"-->
+              <!--                  active-->
+              <!--                  img-src="/api/images/685a257.jpeg">-->
+              <!--                &lt;!&ndash;          <h1>안녕하세요!</h1>&ndash;&gt;-->
+              <!--                &lt;!&ndash;          <p>Some more detailed description or whatever content.</p>&ndash;&gt;-->
+              <!--              </b-carousel-slide>-->
               <b-carousel-slide
                   active
                   class="image-box"
@@ -79,6 +79,7 @@
 .icon-size {
   font-size: 1.5em
 }
+
 .image-box {
   height: 100%;
   overflow: hidden;

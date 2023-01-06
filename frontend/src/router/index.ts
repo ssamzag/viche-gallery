@@ -9,36 +9,36 @@ import testRoutes from "@/router/modules/test";
 import mainRoutes from "@/router/modules/main";
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
-        ...authRoutes,
-        ...mainRoutes,
-        ...aboutRoutes,
-        ...postRoutes,
-        ...workRoutes,
-        ...notFoundRoute,
-        ...testRoutes
-    ]
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    ...authRoutes,
+    ...mainRoutes,
+    ...aboutRoutes,
+    ...postRoutes,
+    ...workRoutes,
+    ...notFoundRoute,
+    ...testRoutes
+  ]
 });
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem("token")
-    if (to.meta.auth && !token) {
-        next('/login')
-        return false
-    }
-    if (to.meta.login && token) {
-        next('/')
-        return false
-    }
-    if (!sessionStorage.getItem("currentUrl")) {
-        sessionStorage.setItem("currentUrl", "/")
-    }
-    if (to.path !== '/login') {
-        sessionStorage.setItem("currentUrl", to.path)
-    }
+  const token = localStorage.getItem("token")
+  if (to.meta.auth && !token) {
+    next('/login')
+    return false
+  }
+  if (to.meta.login && token) {
+    next('/')
+    return false
+  }
+  if (!sessionStorage.getItem("currentUrl")) {
+    sessionStorage.setItem("currentUrl", "/")
+  }
+  if (to.path !== '/login') {
+    sessionStorage.setItem("currentUrl", to.path)
+  }
 
-    next()
+  next()
 })
 
 export default router;

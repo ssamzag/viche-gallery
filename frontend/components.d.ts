@@ -36,11 +36,8 @@ declare module '@vue/runtime-core' {
     BNavbarToggle: typeof import('bootstrap-vue-3')['BNavbarToggle']
     BNavItem: typeof import('bootstrap-vue-3')['BNavItem']
     BRow: typeof import('bootstrap-vue-3')['BRow']
-    MenuBar: typeof import('./src/components/tiptap/MenuBar.vue')['default']
-    MenuItem: typeof import('./src/components/tiptap/MenuItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    T: typeof import('./src/components/tiptap/T.vue')['default']
     TitleComponent: typeof import('./src/components/TitleComponent.vue')['default']
   }
 }

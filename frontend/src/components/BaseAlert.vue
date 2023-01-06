@@ -16,9 +16,9 @@
 </template>
 
 <script setup>
-import { useAlert } from '@/composables/alert';
+import {useAlert} from '@/composables/alert';
 
-const { alerts } = useAlert();
+const {alerts} = useAlert();
 const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-success');
 </script>
 
@@ -34,10 +34,12 @@ const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-success');
   opacity: 0;
   transform: translateY(-30px);
 }
+
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.5s ease;
 }
+
 .slide-enter-to,
 .slide-leave-from {
   opacity: 1;

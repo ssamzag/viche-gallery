@@ -248,7 +248,7 @@ const hideModifyModal = () => commentModifyModal.value = false
       <div class="comments" ref="root">
         <h2>댓글<span class="count">{{ commentCount }}</span></h2>
         <base-comment-write-form @send="insertComment"
-                                 showNicknameInput=true
+                                 showNicknameInput="true"
                                  v-model:password="commentForm.password"
                                  v-model:nickname="commentForm.nickname"
                                  v-model:content="commentForm.content"
@@ -288,8 +288,8 @@ const hideModifyModal = () => commentModifyModal.value = false
     <base-comment-write-form @send="replyComment"
                              @hideCommentWrite="hideReplyModal"
                              button-name="댓글답변"
-                             showCancelButton=true
-                             showNicknameInput=true
+                             showCancelButton="true"
+                             showNicknameInput="true"
                              v-model:nickname="replyForm.nickname"
                              v-model:content="replyForm.content"
                              v-model:password="replyForm.password"
@@ -301,7 +301,7 @@ const hideModifyModal = () => commentModifyModal.value = false
     <base-comment-write-form @send="updateComment"
                              @hideCommentWrite="hideModifyModal"
                              button-name="댓글수정"
-                             showCancelButton=true
+                             showCancelButton="true"
                              v-model:content="replyForm.content"
                              v-model:password="replyForm.password"
                              v-if="commentModifyModal"

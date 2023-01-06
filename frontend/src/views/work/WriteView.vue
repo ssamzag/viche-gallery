@@ -96,18 +96,18 @@ const options = [
 
         </div>
       </b-row>
-<!--      <b-row>-->
-<!--        <div class="mt-2">-->
-<!--          <b-form-textarea-->
-<!--              id="textarea"-->
-<!--              v-model="content"-->
-<!--              placeholder="내용을 입력해주세요"-->
-<!--              rows="10"-->
-<!--              no-resize-->
-<!--              max-rows="6"-->
-<!--          ></b-form-textarea>-->
-<!--        </div>-->
-<!--      </b-row>-->
+      <!--      <b-row>-->
+      <!--        <div class="mt-2">-->
+      <!--          <b-form-textarea-->
+      <!--              id="textarea"-->
+      <!--              v-model="content"-->
+      <!--              placeholder="내용을 입력해주세요"-->
+      <!--              rows="10"-->
+      <!--              no-resize-->
+      <!--              max-rows="6"-->
+      <!--          ></b-form-textarea>-->
+      <!--        </div>-->
+      <!--      </b-row>-->
       <b-row class="mt-2">
         <b-col>
           <input multiple ref="file" v-on:change="handleFileUpload" type="file">

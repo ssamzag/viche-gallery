@@ -84,8 +84,9 @@ const deleteButton = () => {
 <template>
   <b-col>
     <b-row>
-      <base-title :title="props.pageTitle" :subTitle="pageDesc" :write="{url:`/work/write?workType=${buttonsSelected}`,text:'WRITE'}"
-             :delete="{click: deleteButton, text:'DELETE'}"></base-title>
+      <base-title :title="props.pageTitle" :subTitle="pageDesc"
+                  :write="{url:`/work/write?workType=${buttonsSelected}`,text:'WRITE'}"
+                  :delete="{click: deleteButton, text:'DELETE'}"></base-title>
     </b-row>
     <b-row>
       <b-form-radio-group
@@ -179,7 +180,7 @@ const deleteButton = () => {
 }
 
 .vel-modal {
-  background: rgba(0,0,0,.8) !important;
+  background: rgba(0, 0, 0, .8) !important;
 }
 
 .vel-btns-wrapper .btn__next, .vel-btns-wrapper .btn__prev {

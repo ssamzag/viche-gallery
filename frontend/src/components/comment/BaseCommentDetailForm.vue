@@ -54,7 +54,8 @@ const showReplyModal = (comment) => {
                   <a href="#" @click.prevent="showReplyModal(props.comment)">답글쓰기</a>
                 </span>
     </div>
-    <p><span v-if="props.comment.replyToNick" class="reply-to">{{ props.comment.replyToNick }}</span> {{ props.comment.content }}
+    <p><span v-if="props.comment.replyToNick" class="reply-to">{{ props.comment.replyToNick }}</span>
+      {{ props.comment.content }}
     </p>
     <div class="control post-meta">
                 <span class="post-meta">

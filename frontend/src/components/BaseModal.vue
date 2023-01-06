@@ -2,7 +2,7 @@
   <div v-if="modelValue" class="modelPopup">
     <div class="comment-item">
       <div class="post-meta" style="padding-bottom: 10px">
-        {{message}}<br>
+        {{ message }}<br>
       </div>
       <div class="comments">
         <div class="comment-form">
@@ -17,7 +17,7 @@
       </div>
       <div class="post-meta">
           <span>
-            <a href="#" @click.prevent="confirm">{{confirmButtonName}}</a>
+            <a href="#" @click.prevent="confirm">{{ confirmButtonName }}</a>
           </span>
         <span>
             <a href="#" @click.prevent="$emit('update:modelValue', false)">취소</a>

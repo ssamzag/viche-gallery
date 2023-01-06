@@ -3,10 +3,6 @@ import {defineEmits} from "vue";
 import {ref} from "vue";
 
 const emit = defineEmits(["toggle-drawer", "update:content", "update:password", "update:nickname"]);
-//
-// const nickname = ref("")
-// const password = ref("")
-// const content = ref("")
 
 const props = defineProps({
   content: String,
@@ -35,14 +31,14 @@ const props = defineProps({
     }
   },
   showCancelButton: {
-    type: Boolean,
+    type: [Boolean, String],
     required: false,
     default() {
       return false
     }
   },
   showNicknameInput: {
-    type: Boolean,
+    type: [Boolean, String],
     required: false,
     default() {
       return false
@@ -74,12 +70,14 @@ const hideCommentWrite = () => {
                type="password"
                :value="password"
                @input="$emit('update:password', $event.target.value)"
-               name="password" placeholder="암호">
+               name="password"
+               autocomplete="on"
+               placeholder="암호">
 
-<!--        <div class="secret">-->
-<!--          <input type="checkbox" name="secret" id="secret">-->
-<!--          <label for="secret" tabindex="0">비밀댓글</label>-->
-<!--        </div>-->
+        <!--        <div class="secret">-->
+        <!--          <input type="checkbox" name="secret" id="secret">-->
+        <!--          <label for="secret" tabindex="0">비밀댓글</label>-->
+        <!--        </div>-->
       </div>
       <label for="comment" class="screen_out">댓글</label>
       <textarea id="comment"

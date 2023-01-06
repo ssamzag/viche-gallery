@@ -24,14 +24,15 @@ onMounted(() => {
   // post.value.content = clean
 })
 
-const goPostDetailPage = (postId: number) => router.push({name: "PostDetail", params: { postId }})
+const goPostDetailPage = (postId: number) => router.push({name: "PostDetail", params: {postId}})
 
 </script>
 
 <template>
   <b-col>
     <b-row>
-      <base-title title="POST" subTitle="Work Diary, Daily Life, Etc." :write="{url:'/post/write',text:'WRITE'}"></base-title>
+      <base-title title="POST" subTitle="Work Diary, Daily Life, Etc."
+                  :write="{url:'/post/write',text:'WRITE'}"></base-title>
     </b-row>
     <b-row>
       <b-card-group columns>

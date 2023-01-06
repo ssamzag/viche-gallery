@@ -10,7 +10,7 @@ export default {
       }
     }
   },
-  render () {
+  render() {
   },
 }
 </script>

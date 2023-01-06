@@ -7,24 +7,24 @@ import {BootstrapVue3Resolver} from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(),
-        vueJsx(),
-        Components({
-            resolvers: [BootstrapVue3Resolver()],
-            dts:true
-        })],
-    resolve: {
-        alias: {
-            "@": fileURLToPath(new URL("./src", import.meta.url)),
-            //'vue-easy-lightbox': 'vue-easy-lightbox/dist/external-css/vue-easy-lightbox.esm.min.js'
-        },
+  plugins: [vue(),
+    vueJsx(),
+    Components({
+      resolvers: [BootstrapVue3Resolver()],
+      dts: true
+    })],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      //'vue-easy-lightbox': 'vue-easy-lightbox/dist/external-css/vue-easy-lightbox.esm.min.js'
     },
-    server: {
-        proxy: {
-            "/api": {
-                target: "http://localhost:8080",
-                rewrite: (path) => path.replace(/^\/api/, "")
-            }
-        }
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:8080",
+        rewrite: (path) => path.replace(/^\/api/, "")
+      }
     }
+  }
 });

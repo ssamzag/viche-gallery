@@ -1,4 +1,3 @@
-
 <template>
   <div class="comments" ref="root">
     <h2>댓글<span class="count"><span>{{ commentCount }}</span></span></h2>

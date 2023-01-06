@@ -75,7 +75,7 @@ const handleFileUpload = () => {
         vAlert("업로드 실패")
       })
 }
-const selected = ref(route.query.workType)
+const selected = ref(route.query.workType + "")
 const options = [
   {value: "PORTFOLIO", text: "PORTFOLIO"},
   {value: "STUDY", text: "STUDY"},

@@ -1,4 +1,4 @@
-package com.vicheGallery.post.comment.domain
+package com.vicheGallery.comment.domain
 
 import com.vicheGallery.BaseEntity
 import org.jetbrains.annotations.NotNull

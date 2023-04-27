@@ -6,7 +6,6 @@ import com.vicheGallery.post.dto.*
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 import kotlin.IllegalArgumentException
 
 @Service
@@ -41,20 +40,20 @@ class PostService(
 
     @Transactional
     fun deletePost(postId: Long) {
-        val post = postRepository.findById(postId)
+        val post: Post = postRepository.findById(postId).get()
         validate(post)
-        post.get().delete()
+        post.delete()
     }
 
     @Transactional
     fun updatePost(postId: Long, req: UpdateRequest) {
-        val post = postRepository.findById(postId)
+        val post: Post = postRepository.findById(postId).get()
         validate(post)
-        post.get().update(req.title, req.content)
+        post.update(req.title, req.content)
     }
 
-    fun validate(post: Optional<Post>) {
-        if (post.isEmpty || post.get().deleted!!) {
+    fun validate(post: Post) {
+        if (post.deleted!!) {
             throw IllegalArgumentException("삭제된 글입니다.")
         }
     }

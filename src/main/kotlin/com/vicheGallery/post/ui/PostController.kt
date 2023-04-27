@@ -7,6 +7,7 @@ import com.vicheGallery.post.application.PostService
 import com.vicheGallery.post.dto.PostRead
 import com.vicheGallery.post.dto.PostsResponse
 import com.vicheGallery.post.dto.UpdateRequest
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping

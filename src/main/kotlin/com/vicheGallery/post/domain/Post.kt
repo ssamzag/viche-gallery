@@ -6,6 +6,9 @@ import javax.persistence.*
 
 @Entity
 class Post(
+    @field:Column(nullable = false)
+    var deleted: Boolean? = false,
+
     var title: String,
 
     @Lob
@@ -13,9 +16,6 @@ class Post(
 
     @Embedded
     var attachments: PostAttachments? = null,
-
-    @field:Column(nullable = false)
-    var deleted: Boolean? = false,
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null

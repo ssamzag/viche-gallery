@@ -13,7 +13,7 @@ class Member(
     val nickname: String,
 
     @Enumerated(EnumType.STRING)
-    val ssoType: SsoType? = null,
+    val ssoType: SsoType?,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

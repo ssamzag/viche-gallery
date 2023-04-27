@@ -1,8 +1,11 @@
-package com.vicheGallery.post.comment.repository
+package com.vicheGallery.comment.repository
 
+import com.querydsl.core.types.NullExpression
+import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.vicheGallery.post.comment.domain.Comment
-import com.vicheGallery.post.comment.domain.QComment.comment
+import com.vicheGallery.comment.domain.Comment
+import com.vicheGallery.comment.domain.QComment.comment
+import com.vicheGallery.comment.dto.CommentResponse
 import org.springframework.stereotype.Repository
 
 @Repository
